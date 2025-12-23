@@ -1,0 +1,400 @@
+{
+  "Domates Çorbası": {
+    "name_en": "Tomato Soup",
+    "kcal": 150,
+    "ingredients": [
+      "Tomato",
+      "Onion",
+      "Garlic",
+      "Olive oil",
+      "Salt"
+    ],
+    "allergens": [
+      "None"
+    ],
+    "recipe": "Cook onion and garlic in olive oil. Add chopped tomatoes and water/stock, simmer 15–20 min. Blend, season with salt. Serve hot.",
+    "co2e_kg_per_serving": 0.3
+  },
+  "Etli Nohut": {
+    "name_en": "Chickpeas with Meat",
+    "kcal": 420,
+    "ingredients": [
+      "Chickpeas",
+      "Beef",
+      "Onion",
+      "Tomato paste",
+      "Oil",
+      "Salt",
+      "Spices"
+    ],
+    "allergens": [
+      "None"
+    ],
+    "recipe": "Soak chickpeas overnight. Sauté onion, add beef cubes, brown. Add tomato paste, chickpeas, water, salt and spices. Simmer until tender.",
+    "co2e_kg_per_serving": 2.5
+  },
+  "Pirinç Pilavı": {
+    "name_en": "Rice Pilaf",
+    "kcal": 280,
+    "ingredients": [
+      "Rice",
+      "Butter",
+      "Water/stock",
+      "Salt"
+    ],
+    "allergens": [
+      "Dairy"
+    ],
+    "recipe": "Rinse rice. Sauté in butter, add water/stock and salt. Cover and cook on low until water absorbed. Rest 10 min and fluff.",
+    "co2e_kg_per_serving": 0.6
+  },
+  "Mercimek Çorbası": {
+    "name_en": "Lentil Soup",
+    "kcal": 180,
+    "ingredients": [
+      "Red lentils",
+      "Onion",
+      "Carrot",
+      "Oil",
+      "Salt",
+      "Spices"
+    ],
+    "allergens": [
+      "None"
+    ],
+    "recipe": "Sauté onion/carrot in oil. Add rinsed lentils and water/stock. Simmer 20–25 min and blend. Season and serve.",
+    "co2e_kg_per_serving": 0.25
+  },
+  "Balık Hamsi": {
+    "name_en": "Anchovy Fish",
+    "kcal": 350,
+    "ingredients": [
+      "Anchovy",
+      "Flour",
+      "Oil",
+      "Salt"
+    ],
+    "allergens": [
+      "Fish",
+      "Gluten"
+    ],
+    "recipe": "Clean anchovies, salt lightly. Coat with flour, fry in hot oil until crisp. Drain and serve.",
+    "co2e_kg_per_serving": 0.8
+  },
+  "Fıstıklı Alman Patates": {
+    "name_en": "German Potato Salad with Pistachio",
+    "kcal": 300,
+    "ingredients": [
+      "Potato",
+      "Onion",
+      "Olive oil",
+      "Vinegar/lemon",
+      "Pistachio",
+      "Salt",
+      "Pepper",
+      "Parsley"
+    ],
+    "allergens": [
+      "Nuts"
+    ],
+    "recipe": "Boil potatoes, slice. Mix dressing (oil + vinegar/lemon + salt/pepper). Toss with onion and potatoes, top with crushed pistachio and parsley.",
+    "co2e_kg_per_serving": 0.4
+  },
+  "Salata Açık Büfe": {
+    "name_en": "Salad Bar",
+    "kcal": 80,
+    "ingredients": [
+      "Mixed salad vegetables"
+    ],
+    "allergens": [
+      "None"
+    ],
+    "recipe": "Choose fresh vegetables, add a light dressing if desired.",
+    "co2e_kg_per_serving": 0.15
+  },
+  "Muz": {
+    "name_en": "Banana",
+    "kcal": 105,
+    "ingredients": [
+      "Banana"
+    ],
+    "allergens": [
+      "None"
+    ],
+    "recipe": "Serve fresh.",
+    "co2e_kg_per_serving": 0.05
+  },
+  "Makarna": {
+    "name_en": "Pasta",
+    "kcal": 320,
+    "ingredients": [
+      "Pasta",
+      "Olive oil or butter",
+      "Salt"
+    ],
+    "allergens": [
+      "Gluten"
+    ],
+    "recipe": "Boil pasta in salted water. Drain and toss with a little oil/butter.",
+    "co2e_kg_per_serving": 0.4
+  },
+  "Tazefasulye": {
+    "name_en": "Green Beans Stew",
+    "kcal": 160,
+    "ingredients": [
+      "Green beans",
+      "Tomato",
+      "Onion",
+      "Olive oil",
+      "Salt"
+    ],
+    "allergens": [
+      "None"
+    ],
+    "recipe": "Sauté onion in olive oil. Add beans and tomatoes, salt, a splash of water. Simmer until tender.",
+    "co2e_kg_per_serving": 0.25
+  },
+  "Kemalpaşa": {
+    "name_en": "Kemalpaşa Dessert",
+    "kcal": 300,
+    "ingredients": [
+      "Kemalpaşa sweets",
+      "Sugar",
+      "Water",
+      "Lemon",
+      "Optional: cream/pistachio"
+    ],
+    "allergens": [
+      "Gluten",
+      "Dairy"
+    ],
+    "recipe": "Boil sugar-water syrup with lemon. Add kemalpaşa pieces, simmer until syrup absorbed. Serve warm, optionally with cream.",
+    "co2e_kg_per_serving": 0.6
+  },
+  "Yoğurt Çorbası": {
+    "name_en": "Yogurt Soup",
+    "kcal": 200,
+    "ingredients": [
+      "Yogurt",
+      "Flour",
+      "Egg",
+      "Water/stock",
+      "Salt",
+      "Mint",
+      "Butter"
+    ],
+    "allergens": [
+      "Dairy",
+      "Gluten",
+      "Egg"
+    ],
+    "recipe": "Whisk yogurt, flour, egg. Slowly temper with warm stock, then cook gently while stirring. Finish with butter-mint sauce.",
+    "co2e_kg_per_serving": 0.35
+  },
+  "Tavuk Şiş": {
+    "name_en": "Chicken Shish",
+    "kcal": 420,
+    "ingredients": [
+      "Chicken",
+      "Yogurt",
+      "Onion/garlic",
+      "Spices",
+      "Oil",
+      "Salt"
+    ],
+    "allergens": [
+      "Dairy"
+    ],
+    "recipe": "Marinate chicken with yogurt, spices, oil and onion/garlic. Skewer and grill/pan-sear until cooked through.",
+    "co2e_kg_per_serving": 0.9
+  },
+  "Bulgur Pilavı": {
+    "name_en": "Bulgur Pilaf",
+    "kcal": 220,
+    "ingredients": [
+      "Bulgur",
+      "Tomato paste",
+      "Oil",
+      "Water/stock",
+      "Salt"
+    ],
+    "allergens": [
+      "Gluten"
+    ],
+    "recipe": "Sauté bulgur with oil and tomato paste. Add water/stock and salt. Cook covered until tender and fluffy.",
+    "co2e_kg_per_serving": 0.3
+  },
+  "Soğan Halkası/Lahana Kavurma": {
+    "name_en": "Onion Rings / Sauteed Cabbage",
+    "kcal": 250,
+    "ingredients": [
+      "Option A: onion rings (onion, flour, oil)",
+      "Option B: cabbage, oil, salt"
+    ],
+    "allergens": [
+      "Gluten"
+    ],
+    "recipe": "Onion rings: slice onion, coat with flour/batter and fry. Cabbage: sauté shredded cabbage with oil and salt until soft.",
+    "co2e_kg_per_serving": 0.35
+  },
+  "Sütlaç": {
+    "name_en": "Rice Pudding",
+    "kcal": 280,
+    "ingredients": [
+      "Milk",
+      "Rice",
+      "Sugar",
+      "Vanilla",
+      "Cinnamon"
+    ],
+    "allergens": [
+      "Dairy"
+    ],
+    "recipe": "Cook rice with water until soft. Add milk and sugar, simmer until creamy. Chill and serve with cinnamon.",
+    "co2e_kg_per_serving": 0.6
+  },
+  "Tel Şehriye Çorbası": {
+    "name_en": "Vermicelli Soup",
+    "kcal": 170,
+    "ingredients": [
+      "Vermicelli",
+      "Butter/oil",
+      "Water/stock",
+      "Salt",
+      "Optional: tomato paste"
+    ],
+    "allergens": [
+      "Gluten",
+      "Dairy"
+    ],
+    "recipe": "Sauté vermicelli in butter/oil until lightly golden. Add stock/water (and tomato paste if used), simmer 10 min. Season.",
+    "co2e_kg_per_serving": 0.3
+  },
+  "İzmir Köfte": {
+    "name_en": "İzmir Meatballs",
+    "kcal": 520,
+    "ingredients": [
+      "Ground beef",
+      "Onion",
+      "Bread crumbs",
+      "Spices",
+      "Potato",
+      "Tomato sauce"
+    ],
+    "allergens": [
+      "Gluten"
+    ],
+    "recipe": "Mix meatball ingredients, form köfte. Arrange with potato slices, cover with tomato sauce, bake until cooked through.",
+    "co2e_kg_per_serving": 3.0
+  },
+  "Soslu Patlıcan": {
+    "name_en": "Eggplant in Tomato Sauce",
+    "kcal": 200,
+    "ingredients": [
+      "Eggplant",
+      "Tomato sauce",
+      "Garlic",
+      "Olive oil",
+      "Salt"
+    ],
+    "allergens": [
+      "None"
+    ],
+    "recipe": "Roast or pan-fry eggplant slices. Simmer with tomato-garlic sauce and olive oil for 10–15 min.",
+    "co2e_kg_per_serving": 0.25
+  },
+  "Mandalina": {
+    "name_en": "Mandarin",
+    "kcal": 47,
+    "ingredients": [
+      "Mandarin"
+    ],
+    "allergens": [
+      "None"
+    ],
+    "recipe": "Serve fresh.",
+    "co2e_kg_per_serving": 0.04
+  },
+  "Beyran Çorbası": {
+    "name_en": "Beyran Soup",
+    "kcal": 450,
+    "ingredients": [
+      "Beef/lamb",
+      "Rice",
+      "Garlic",
+      "Chili pepper",
+      "Stock",
+      "Butter",
+      "Salt"
+    ],
+    "allergens": [
+      "Dairy"
+    ],
+    "recipe": "Cook meat in stock until tender. Add rice and simmer. Finish with garlic-chili butter/oil. Serve hot.",
+    "co2e_kg_per_serving": 2.8
+  },
+  "Tavuk Kanat": {
+    "name_en": "Chicken Wings",
+    "kcal": 550,
+    "ingredients": [
+      "Chicken wings",
+      "Spices",
+      "Oil",
+      "Salt"
+    ],
+    "allergens": [
+      "None"
+    ],
+    "recipe": "Season wings, bake or grill until crisp and cooked through.",
+    "co2e_kg_per_serving": 1.1
+  },
+  "Domates Soslu Makarna": {
+    "name_en": "Pasta with Tomato Sauce",
+    "kcal": 360,
+    "ingredients": [
+      "Pasta",
+      "Tomato sauce",
+      "Garlic",
+      "Olive oil",
+      "Salt"
+    ],
+    "allergens": [
+      "Gluten"
+    ],
+    "recipe": "Cook pasta. Sauté garlic in olive oil, add tomato sauce and simmer 8–10 min. Toss with pasta.",
+    "co2e_kg_per_serving": 0.45
+  },
+  "Kereviz": {
+    "name_en": "Celery Root Dish",
+    "kcal": 180,
+    "ingredients": [
+      "Celery root",
+      "Carrot",
+      "Potato (optional)",
+      "Olive oil",
+      "Lemon",
+      "Salt"
+    ],
+    "allergens": [
+      "None"
+    ],
+    "recipe": "Sauté vegetables in olive oil, add water and lemon. Simmer until tender. Serve warm or chilled.",
+    "co2e_kg_per_serving": 0.25
+  },
+  "Profiterol": {
+    "name_en": "Profiterole",
+    "kcal": 330,
+    "ingredients": [
+      "Choux pastry",
+      "Pastry cream",
+      "Chocolate sauce"
+    ],
+    "allergens": [
+      "Gluten",
+      "Egg",
+      "Dairy"
+    ],
+    "recipe": "Fill choux puffs with pastry cream, top with chocolate sauce.",
+    "co2e_kg_per_serving": 0.7
+  }
+}
