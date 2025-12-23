@@ -1212,5 +1212,491 @@
 
 });
 </script>
+
+<script>
+/* GreenPlate patch: i18n (EN/TR/RU) + CO2e per dish + nicer recipes + chart table */
+(function(){
+  const LANGS = ["en","tr","ru"];
+  const LS_KEY = "greenplate_lang";
+  let lang = (localStorage.getItem(LS_KEY) || "en").toLowerCase();
+  if(!LANGS.includes(lang)) lang="en";
+
+  // Minimal UI translations (main pages + key labels). Missing keys fallback to existing text.
+  const T = {
+    en: {
+      day_pick:"Pick a day",
+      search_ph:"Search dish…",
+      lbl_kcal:"kcal",
+      lbl_co2:"kg CO₂e / serving",
+      lbl_ingredients:"Ingredients",
+      lbl_allergens:"Allergens",
+      lbl_recipe:"Recipe",
+      lbl_steps:"Steps",
+      lbl_time:"Time",
+      lbl_total:"Total",
+      sus_chart_title:"Carbon footprint per dish (selected day)",
+      sus_table_title:"Table (selected day)",
+      tbl_dish:"Dish",
+      tbl_kcal:"kcal",
+      tbl_co2:"kg CO₂e",
+      kpi_dishes:"Dishes",
+      kpi_calories:"Total kcal",
+      kpi_co2:"Total CO₂e"
+    },
+    tr: {
+      day_pick:"Gün seç",
+      search_ph:"Yemek ara…",
+      lbl_kcal:"kalori",
+      lbl_co2:"kg CO₂e / porsiyon",
+      lbl_ingredients:"İçindekiler",
+      lbl_allergens:"Alerjenler",
+      lbl_recipe:"Tarif",
+      lbl_steps:"Adımlar",
+      lbl_time:"Süre",
+      lbl_total:"Toplam",
+      sus_chart_title:"Seçilen gün: yemek başına karbon ayak izi",
+      sus_table_title:"Tablo (seçilen gün)",
+      tbl_dish:"Yemek",
+      tbl_kcal:"kalori",
+      tbl_co2:"kg CO₂e",
+      kpi_dishes:"Yemek sayısı",
+      kpi_calories:"Toplam kalori",
+      kpi_co2:"Toplam CO₂e"
+    },
+    ru: {
+      day_pick:"Выбери день",
+      search_ph:"Поиск блюда…",
+      lbl_kcal:"ккал",
+      lbl_co2:"кг CO₂e / порция",
+      lbl_ingredients:"Ингредиенты",
+      lbl_allergens:"Аллергены",
+      lbl_recipe:"Рецепт",
+      lbl_steps:"Шаги",
+      lbl_time:"Время",
+      lbl_total:"Итого",
+      sus_chart_title:"Углеродный след по блюдам (выбранный день)",
+      sus_table_title:"Таблица (выбранный день)",
+      tbl_dish:"Блюдо",
+      tbl_kcal:"ккал",
+      tbl_co2:"кг CO₂e",
+      kpi_dishes:"Блюд",
+      kpi_calories:"Всего ккал",
+      kpi_co2:"Всего CO₂e"
+    }
+  };
+
+  const WEEKDAY_LABELS = {
+    en: {Monday:"Monday",Tuesday:"Tuesday",Wednesday:"Wednesday",Thursday:"Thursday",Friday:"Friday",Saturday:"Saturday",Sunday:"Sunday"},
+    tr: {Monday:"Pazartesi",Tuesday:"Salı",Wednesday:"Çarşamba",Thursday:"Perşembe",Friday:"Cuma",Saturday:"Cumartesi",Sunday:"Pazar"},
+    ru: {Monday:"Понедельник",Tuesday:"Вторник",Wednesday:"Среда",Thursday:"Четверг",Friday:"Пятница",Saturday:"Суббота",Sunday:"Воскресенье"}
+  };
+
+  // Optional RU dish names (fallback to TR key if not listed)
+  const RU_DISH = {
+    "Domates Çorbası":"Томатный суп",
+    "Mercimek Çorbası":"Чечевичный суп",
+    "Yoğurt Çorbası":"Йогуртовый суп",
+    "Tel Şehriye Çorbası":"Суп с вермишелью",
+    "Beyran Çorbası":"Суп бейран",
+    "Etli Nohut":"Нут с мясом",
+    "Balık Hamsi":"Анчоусы (хамса)",
+    "Tavuk Şiş":"Куриный шашлык",
+    "Tavuk Kanat":"Куриные крылышки",
+    "İzmir Köfte":"Кёфте по-измирски",
+    "Pirinç Pilavı":"Рисовый плов",
+    "Bulgur Pilavı":"Булгур-плов",
+    "Makarna":"Паста",
+    "Domates Soslu Makarna":"Паста в томатном соусе",
+    "Sütlaç":"Сютлач (рисовый пудинг)",
+    "Kemalpaşa":"Десерт Кемальпаша",
+    "Profiterol":"Профитроли",
+    "Muz":"Банан",
+    "Mandalina":"Мандарин",
+    "Salata Açık Büfe":"Салат-бар",
+    "Kereviz":"Блюдо из сельдерея",
+    "Tazefasulye":"Тушёная стручковая фасоль",
+    "Soslu Patlıcan":"Баклажан в соусе",
+    "Fıstıklı Alman Patates":"Картофельный салат с фисташкой",
+    "Soğan Halkası/Lahana Kavurma":"Луковые кольца / тушёная капуста"
+  };
+
+  // Default fallback entries so every menu dish has required fields
+  const FALLBACK = {
+    "Salata Açık Büfe": {kcal:90, co2e:0.15, allergens:["None"], ingredients: {"Mixed greens":"120 g","Seasonal vegetables":"150 g","Olive oil":"10 g","Lemon":"10 g"}, time:"10 min",
+      steps:["Wash and chop vegetables.","Mix with greens.","Dress with olive oil and lemon.","Serve fresh."]},
+    "Muz": {kcal:105, co2e:0.08, allergens:["None"], ingredients: {"Banana":"1 medium"}, time:"1 min", steps:["Serve fresh."]},
+    "Mandalina": {kcal:47, co2e:0.05, allergens:["None"], ingredients: {"Mandarin":"1 medium"}, time:"1 min", steps:["Serve fresh."]},
+    "Makarna": {kcal:320, co2e:0.35, allergens:["Gluten"], ingredients: {"Pasta":"120 g","Salt":"to taste"}, time:"15 min",
+      steps:["Boil water with salt.","Cook pasta until al dente.","Drain and serve."]},
+    "Domates Soslu Makarna": {kcal:380, co2e:0.42, allergens:["Gluten"], ingredients: {"Pasta":"120 g","Tomato sauce":"150 g","Olive oil":"10 g","Garlic":"5 g"}, time:"20 min",
+      steps:["Cook pasta.","Warm sauce with olive oil and garlic.","Combine pasta with sauce.","Serve hot."]},
+    "Bulgur Pilavı": {kcal:240, co2e:0.28, allergens:["None"], ingredients: {"Bulgur":"120 g","Tomato paste":"15 g","Oil":"10 g","Water":"250 ml"}, time:"25 min",
+      steps:["Saute bulgur with oil and paste.","Add water and simmer.","Rest 10 minutes and fluff."]},
+    "Tazefasulye": {kcal:210, co2e:0.25, allergens:["None"], ingredients: {"Green beans":"200 g","Onion":"60 g","Tomato":"150 g","Olive oil":"10 g"}, time:"45 min",
+      steps:["Saute onion in olive oil.","Add beans and tomato.","Add a splash of water.","Simmer until tender."]},
+    "Sütlaç": {kcal:260, co2e:0.55, allergens:["Dairy"], ingredients: {"Milk":"250 ml","Rice":"30 g","Sugar":"20 g"}, time:"35 min",
+      steps:["Cook rice until soft.","Add milk and simmer.","Sweeten and thicken.","Chill and serve."]},
+    "Kemalpaşa": {kcal:320, co2e:0.60, allergens:["Gluten","Dairy"], ingredients: {"Kemalpaşa dessert":"2 pieces","Syrup":"150 ml"}, time:"20 min",
+      steps:["Bring syrup to a gentle simmer.","Cook dessert pieces until soft.","Serve warm or chilled."]},
+    "Profiterol": {kcal:360, co2e:0.85, allergens:["Gluten","Dairy","Egg"], ingredients: {"Choux":"80 g","Pastry cream":"120 g","Chocolate sauce":"40 g"}, time:"40 min",
+      steps:["Fill choux with pastry cream.","Top with chocolate sauce.","Serve chilled."]},
+    "Kereviz": {kcal:180, co2e:0.22, allergens:["None"], ingredients: {"Celery root":"200 g","Carrot":"60 g","Olive oil":"10 g","Lemon":"10 g"}, time:"40 min",
+      steps:["Peel and slice celery root.","Cook with vegetables.","Season with lemon.","Serve warm or cold."]},
+    "Soslu Patlıcan": {kcal:230, co2e:0.30, allergens:["None"], ingredients: {"Eggplant":"250 g","Tomato sauce":"150 g","Olive oil":"10 g"}, time:"45 min",
+      steps:["Roast or pan-fry eggplant slices.","Warm tomato sauce.","Combine and simmer 10 minutes.","Serve."]},
+    "Fıstıklı Alman Patates": {kcal:310, co2e:0.40, allergens:["None"], ingredients: {"Potato":"250 g","Pistachio":"15 g","Olive oil":"10 g","Mustard":"5 g"}, time:"35 min",
+      steps:["Boil potatoes until tender.","Slice and mix dressing.","Top with pistachio.","Serve."]},
+    "Soğan Halkası/Lahana Kavurma": {kcal:260, co2e:0.32, allergens:["Gluten (if battered)"], ingredients: {"Onion":"150 g","Cabbage":"200 g","Oil":"10 g","Salt":"to taste"}, time:"25 min",
+      steps:["Slice onion/cabbage.","Sauté cabbage in a pan.","Optional: fry onion rings.","Serve hot."]}
+  };
+
+  function normalizeDishEntry(key, d){
+    const out = {};
+    const kcal = d && Number.isFinite(Number(d.kcal)) ? Number(d.kcal) : (FALLBACK[key]?.kcal ?? 0);
+    const co2 = d && Number.isFinite(Number(d.co2e_kg_per_serving)) ? Number(d.co2e_kg_per_serving)
+              : (d && Number.isFinite(Number(d.carbon_kg)) ? Number(d.carbon_kg) : (FALLBACK[key]?.co2e ?? 0));
+    out.kcal = kcal;
+    out.co2e = co2;
+    // ingredients: accept array or object
+    let ing = d?.ingredients;
+    if(Array.isArray(ing)) ing = Object.fromEntries(ing.map(x=>[String(x),""]));
+    if(!ing || typeof ing !== "object") ing = (FALLBACK[key]?.ingredients ?? {});
+    out.ingredients = ing;
+    out.allergens = Array.isArray(d?.allergens) ? d.allergens : (FALLBACK[key]?.allergens ?? ["None"]);
+    // recipe: accept string or object
+    if(typeof d?.recipe === "string"){
+      out.time = d.time || (FALLBACK[key]?.time ?? "");
+      out.steps = d.recipe ? [d.recipe] : (FALLBACK[key]?.steps ?? []);
+    }else{
+      out.time = d?.recipe?.time || d?.time || (FALLBACK[key]?.time ?? "");
+      out.steps = Array.isArray(d?.recipe?.steps) ? d.recipe.steps : (FALLBACK[key]?.steps ?? []);
+    }
+    // name variants
+    out.name_en = d?.name_en || key;
+    out.name_tr = d?.name_tr || key;
+    out.name_ru = d?.name_ru || RU_DISH[key] || key;
+    return out;
+  }
+
+  function dishLabel(key, entry){
+    if(lang==="en") return entry.name_en || key;
+    if(lang==="ru") return entry.name_ru || key;
+    return key;
+  }
+
+  const elDayChips = document.getElementById("dayChips");
+  const elMenuGrid = document.getElementById("menuGrid");
+  const elRecipesGrid = document.getElementById("recipesGrid");
+  const elSearch = document.getElementById("recipeSearch");
+  const elKpiDishes = document.getElementById("kpiDishes");
+  const elKpiCalories = document.getElementById("kpiCalories");
+  const elKpiCO2 = document.getElementById("kpiCO2");
+  const elChart = document.getElementById("co2Chart");
+
+  let MENU=null, DB=null, selectedDay=null, chart=null;
+
+  function setLangUI(){
+    document.querySelectorAll(".langBtn").forEach(b=>{
+      const is = (b.dataset.lang||"").toLowerCase()===lang;
+      b.classList.toggle("active", is);
+      b.setAttribute("aria-pressed", is ? "true":"false");
+    });
+    // placeholders
+    if(elSearch) elSearch.placeholder = T[lang].search_ph;
+    // translate simple data-i18n keys we override
+    document.querySelectorAll("[data-i18n]").forEach(el=>{
+      const key = el.getAttribute("data-i18n");
+      if(T[lang][key]) el.textContent = T[lang][key];
+    });
+    // update day chips labels
+    renderDayChips();
+    renderAll();
+  }
+
+  function bindLangButtons(){
+    document.querySelectorAll(".langBtn").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        const v = (btn.dataset.lang||"en").toLowerCase();
+        if(!LANGS.includes(v)) return;
+        lang=v;
+        localStorage.setItem(LS_KEY, lang);
+        setLangUI();
+      });
+    });
+  }
+
+  async function loadJSON(path){
+    const r = await fetch(path, {cache:"no-store"});
+    if(!r.ok) throw new Error(`Fetch failed ${path}: ${r.status}`);
+    return r.json();
+  }
+
+  function renderDayChips(){
+    if(!elDayChips || !MENU?.days) return;
+    const days = Object.keys(MENU.days);
+    if(!selectedDay) selectedDay = days[0];
+    elDayChips.innerHTML = "";
+    days.forEach(day=>{
+      const btn = document.createElement("button");
+      btn.className = "pill" + (day===selectedDay ? " active":"");
+      btn.type="button";
+      btn.textContent = WEEKDAY_LABELS[lang][day] || day;
+      btn.addEventListener("click", ()=>{
+        selectedDay = day;
+        renderDayChips();
+        renderAll();
+      });
+      elDayChips.appendChild(btn);
+    });
+  }
+
+  function ensureTableUnderChart(){
+    if(!elChart) return null;
+    let table = document.getElementById("co2Table");
+    if(table) return table;
+    const wrap = elChart.closest(".box") || elChart.parentElement;
+    if(!wrap) return null;
+    const h = document.createElement("h4");
+    h.id = "co2TableTitle";
+    h.style.marginTop = "14px";
+    h.textContent = T[lang].sus_table_title;
+    const div = document.createElement("div");
+    div.className = "box";
+    div.style.marginTop = "10px";
+    div.innerHTML = `
+      <table id="co2Table" class="table" style="width:100%; border-collapse:collapse">
+        <thead>
+          <tr>
+            <th style="text-align:left; padding:10px; border-bottom:1px solid var(--border)">${T[lang].tbl_dish}</th>
+            <th style="text-align:right; padding:10px; border-bottom:1px solid var(--border)">${T[lang].tbl_kcal}</th>
+            <th style="text-align:right; padding:10px; border-bottom:1px solid var(--border)">${T[lang].tbl_co2}</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+        <tfoot>
+          <tr>
+            <td style="padding:10px; border-top:1px solid var(--border); font-weight:600">${T[lang].lbl_total}</td>
+            <td id="co2TTotalKcal" style="padding:10px; border-top:1px solid var(--border); text-align:right; font-weight:600">—</td>
+            <td id="co2TTotalCO2" style="padding:10px; border-top:1px solid var(--border); text-align:right; font-weight:600">—</td>
+          </tr>
+        </tfoot>
+      </table>`;
+    wrap.insertAdjacentElement("afterend", h);
+    h.insertAdjacentElement("afterend", div);
+    return div.querySelector("#co2Table");
+  }
+
+  function renderMenu(){
+    if(!elMenuGrid || !MENU?.days) return;
+    const dishes = MENU.days[selectedDay] || [];
+    elMenuGrid.innerHTML = "";
+    dishes.forEach(key=>{
+      const raw = DB?.[key];
+      const e = normalizeDishEntry(key, raw);
+      const card = document.createElement("div");
+      card.className = "dishCard";
+      const allergens = (e.allergens && e.allergens.length) ? e.allergens.join(", ") : "None";
+      const ingRows = Object.entries(e.ingredients || {}).map(([k,v])=>`<tr><td style="padding:6px 8px; border-bottom:1px solid var(--border)">${k}</td><td style="padding:6px 8px; border-bottom:1px solid var(--border); text-align:right">${v||""}</td></tr>`).join("");
+      const steps = (e.steps||[]).map((s,i)=>`<li style="margin:4px 0">${s}</li>`).join("");
+      card.innerHTML = `
+        <div class="dishHead">
+          <div>
+            <div class="dishName">${dishLabel(key, e)}</div>
+            <div class="dishMeta">${Math.round(e.kcal)} ${T[lang].lbl_kcal} • ${e.co2e.toFixed(2)} ${T[lang].lbl_co2}</div>
+          </div>
+        </div>
+        <div class="dishTabs">
+          <button class="tabBtn active" type="button" data-tab="ing">${T[lang].lbl_ingredients}</button>
+          <button class="tabBtn" type="button" data-tab="rec">${T[lang].lbl_recipe}</button>
+          <button class="tabBtn" type="button" data-tab="all">${T[lang].lbl_allergens}</button>
+        </div>
+        <div class="tabPane active" data-pane="ing">
+          <table style="width:100%; border-collapse:collapse; font-size:14px">
+            <tbody>${ingRows || `<tr><td style="padding:8px">—</td><td></td></tr>`}</tbody>
+          </table>
+        </div>
+        <div class="tabPane" data-pane="rec">
+          <div style="display:flex; gap:10px; flex-wrap:wrap; margin-bottom:8px">
+            <span class="pillMini">${T[lang].lbl_time}: ${e.time || "—"}</span>
+            <span class="pillMini">${Math.round(e.kcal)} ${T[lang].lbl_kcal}</span>
+            <span class="pillMini">${e.co2e.toFixed(2)} ${T[lang].lbl_co2}</span>
+          </div>
+          <ol style="margin:0; padding-left:18px">${steps || `<li>—</li>`}</ol>
+        </div>
+        <div class="tabPane" data-pane="all">
+          <div class="muted">${allergens}</div>
+        </div>
+      `;
+      // tabs
+      card.querySelectorAll(".tabBtn").forEach(btn=>{
+        btn.addEventListener("click", ()=>{
+          const tab = btn.dataset.tab;
+          card.querySelectorAll(".tabBtn").forEach(b=>b.classList.toggle("active", b===btn));
+          card.querySelectorAll(".tabPane").forEach(p=>p.classList.toggle("active", p.dataset.pane===tab));
+        });
+      });
+      elMenuGrid.appendChild(card);
+    });
+
+    // KPI
+    const totalKcal = dishes.reduce((s,k)=> s + (normalizeDishEntry(k, DB?.[k]).kcal||0), 0);
+    const totalCO2 = dishes.reduce((s,k)=> s + (normalizeDishEntry(k, DB?.[k]).co2e||0), 0);
+    if(elKpiDishes) elKpiDishes.textContent = String(dishes.length);
+    if(elKpiCalories) elKpiCalories.textContent = String(Math.round(totalKcal));
+    if(elKpiCO2) elKpiCO2.textContent = totalCO2.toFixed(2);
+
+    // update sustainability chart/table too
+    renderCO2ChartAndTable(dishes);
+  }
+
+  function renderRecipes(){
+    if(!elRecipesGrid || !MENU?.days) return;
+    const all = new Set();
+    Object.values(MENU.days).forEach(arr=> (arr||[]).forEach(x=>all.add(x)));
+    let list = Array.from(all);
+    const q = (elSearch?.value || "").trim().toLowerCase();
+    if(q){
+      list = list.filter(k=>{
+        const e = normalizeDishEntry(k, DB?.[k]);
+        return (k.toLowerCase().includes(q) || (e.name_en||"").toLowerCase().includes(q) || (e.name_ru||"").toLowerCase().includes(q));
+      });
+    }
+    elRecipesGrid.innerHTML = "";
+    list.forEach(key=>{
+      const e = normalizeDishEntry(key, DB?.[key]);
+      const allergens = (e.allergens && e.allergens.length) ? e.allergens.join(", ") : "None";
+      const ingRows = Object.entries(e.ingredients||{}).map(([k,v])=>`<tr><td style="padding:6px 8px; border-bottom:1px solid var(--border)">${k}</td><td style="padding:6px 8px; border-bottom:1px solid var(--border); text-align:right">${v||""}</td></tr>`).join("");
+      const steps = (e.steps||[]).map((s,i)=>`<tr><td style="padding:6px 8px; border-bottom:1px solid var(--border); width:28px; text-align:right; color:var(--muted)">${i+1}</td><td style="padding:6px 8px; border-bottom:1px solid var(--border)">${s}</td></tr>`).join("");
+      const card = document.createElement("details");
+      card.className = "recipeCard";
+      card.innerHTML = `
+        <summary>
+          <div>
+            <div class="dishName">${dishLabel(key, e)}</div>
+            <div class="dishMeta">${Math.round(e.kcal)} ${T[lang].lbl_kcal} • ${e.co2e.toFixed(2)} ${T[lang].lbl_co2} • ${T[lang].lbl_time}: ${e.time || "—"}</div>
+          </div>
+        </summary>
+        <div class="recipeBody">
+          <div class="grid2">
+            <div>
+              <div class="secTitle">${T[lang].lbl_ingredients}</div>
+              <table style="width:100%; border-collapse:collapse; font-size:14px"><tbody>${ingRows || `<tr><td style="padding:8px">—</td><td></td></tr>`}</tbody></table>
+              <div class="secTitle" style="margin-top:10px">${T[lang].lbl_allergens}</div>
+              <div class="muted">${allergens}</div>
+            </div>
+            <div>
+              <div class="secTitle">${T[lang].lbl_steps}</div>
+              <table style="width:100%; border-collapse:collapse; font-size:14px"><tbody>${steps || `<tr><td style="padding:8px">—</td><td></td></tr>`}</tbody></table>
+            </div>
+          </div>
+        </div>
+      `;
+      elRecipesGrid.appendChild(card);
+    });
+  }
+
+  function renderCO2ChartAndTable(dishes){
+    if(!elChart) return;
+    const labels = dishes.map(k=> dishLabel(k, normalizeDishEntry(k, DB?.[k])));
+    const values = dishes.map(k=> normalizeDishEntry(k, DB?.[k]).co2e || 0);
+    // chart
+    if(window.Chart){
+      if(chart) chart.destroy();
+      const ctx = elChart.getContext("2d");
+      chart = new Chart(ctx, {
+        type:"bar",
+        data:{ labels, datasets:[{ label: T[lang].tbl_co2, data: values }]},
+        options:{
+          responsive:true,
+          plugins:{ legend:{ display:false } },
+          scales:{ y:{ beginAtZero:true, ticks:{ callback:(v)=>v } } }
+        }
+      });
+    }
+    // table
+    const table = ensureTableUnderChart();
+    if(!table) return;
+    const tbody = table.querySelector("tbody");
+    tbody.innerHTML = "";
+    let tk=0, tc=0;
+    dishes.forEach(k=>{
+      const e = normalizeDishEntry(k, DB?.[k]);
+      tk += e.kcal||0;
+      tc += e.co2e||0;
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td style="padding:10px; border-bottom:1px solid var(--border)">${dishLabel(k,e)}</td>
+        <td style="padding:10px; border-bottom:1px solid var(--border); text-align:right">${Math.round(e.kcal||0)}</td>
+        <td style="padding:10px; border-bottom:1px solid var(--border); text-align:right">${(e.co2e||0).toFixed(2)}</td>`;
+      tbody.appendChild(tr);
+    });
+    const totK = document.getElementById("co2TTotalKcal");
+    const totC = document.getElementById("co2TTotalCO2");
+    if(totK) totK.textContent = String(Math.round(tk));
+    if(totC) totC.textContent = tc.toFixed(2);
+    const title = document.getElementById("co2TableTitle");
+    if(title) title.textContent = T[lang].sus_table_title;
+  }
+
+  function renderAll(){
+    renderMenu();
+    renderRecipes();
+  }
+
+  function softenTypography(){
+    const style = document.createElement("style");
+    style.textContent = `
+      body{ font-weight:400 !important; letter-spacing:0.1px; }
+      .dishName{ font-weight:600; }
+      .dishMeta{ font-weight:400; }
+      .pillMini{ display:inline-flex; align-items:center; gap:6px; padding:6px 10px; border:1px solid var(--border); border-radius:999px; font-size:12px; color:var(--muted); }
+      .dishCard{ border:1px solid var(--border); border-radius:16px; padding:14px; background:var(--card); box-shadow:0 10px 24px rgba(0,0,0,.06); }
+      .dishTabs{ display:flex; gap:8px; margin:10px 0 8px; flex-wrap:wrap; }
+      .tabBtn{ padding:8px 10px; border-radius:10px; border:1px solid var(--border); background:transparent; cursor:pointer; font-weight:500; }
+      .tabBtn.active{ background:rgba(0,0,0,.06); }
+      .tabPane{ display:none; }
+      .tabPane.active{ display:block; }
+      details.recipeCard{ border:1px solid var(--border); border-radius:16px; background:var(--card); padding:0; overflow:hidden; box-shadow:0 10px 24px rgba(0,0,0,.06); }
+      details.recipeCard summary{ list-style:none; cursor:pointer; padding:14px; display:flex; gap:12px; align-items:flex-start; }
+      details.recipeCard summary::-webkit-details-marker{ display:none; }
+      details.recipeCard[open] summary{ border-bottom:1px solid var(--border); }
+      .recipeBody{ padding:14px; }
+      .grid2{ display:grid; grid-template-columns: 1fr 1fr; gap:14px; }
+      @media(max-width: 820px){ .grid2{ grid-template-columns:1fr; } }
+      .secTitle{ font-weight:650; margin-bottom:6px; }
+    `;
+    document.head.appendChild(style);
+  }
+
+  async function bootPatch(){
+    try{
+      // Load latest data (relative paths work on GH Pages)
+      const [menu, db] = await Promise.all([
+        loadJSON("./menu.json"),
+        loadJSON("./dishes_db.json")
+      ]);
+      MENU = menu;
+      DB = db || {};
+      bindLangButtons();
+      softenTypography();
+      // initial selected day
+      selectedDay = Object.keys(MENU.days||{})[0] || "Monday";
+      if(elSearch){
+        elSearch.addEventListener("input", renderRecipes);
+        elSearch.placeholder = T[lang].search_ph;
+      }
+      // translate chart title if present
+      const chartTitle = document.querySelector('[data-i18n="sus_chart_title"]');
+      if(chartTitle) chartTitle.textContent = T[lang].sus_chart_title;
+      setLangUI();
+    }catch(err){
+      console.error("GreenPlate patch boot failed:", err);
+    }
+  }
+
+  document.addEventListener("DOMContentLoaded", bootPatch);
+})();
+</script>
+
 </body>
 </html>
