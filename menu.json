@@ -1,0 +1,48 @@
+{
+  "updated_at": "2025-12-19T15:46:27Z",
+  "pdf_filename": "menu.pdf",
+  "date_range": "8.12.2025/12.12.2025",
+  "days": {
+    "Monday": [
+      "Domates Çorbası",
+      "Etli Nohut",
+      "Pirinç Pilavı",
+      "Fıstıklı Alman Patates",
+      "Salata Açık Büfe",
+      "Muz"
+    ],
+    "Tuesday": [
+      "Mercimek Çorbası",
+      "Balık Hamsi",
+      "Makarna",
+      "Tazefasulye",
+      "Salata Açık Büfe",
+      "Kemalpaşa"
+    ],
+    "Wednesday": [
+      "Yoğurt Çorbası",
+      "Tavuk Şiş",
+      "Bulgur Pilavı",
+      "Soğan Halkası/Lahana Kavurma",
+      "Salata Açık Büfe",
+      "Sütlaç"
+    ],
+    "Thursday": [
+      "Tel Şehriye Çorbası",
+      "İzmir Köfte",
+      "Pirinç Pilavı",
+      "Soslu Patlıcan",
+      "Salata Açık Büfe",
+      "Mandalina"
+    ],
+    "Friday": [
+      "Beyran Çorbası",
+      "Tavuk Kanat",
+      "Domates Soslu Makarna",
+      "Kereviz",
+      "Salata Açık Büfe",
+      "Profiterol"
+    ]
+  },
+  "notes": "Parsed from official weekly PDF (table extraction)."
+}
