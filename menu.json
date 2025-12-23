@@ -1,48 +1,53 @@
 {
-  "updated_at": "2025-12-19T15:46:27Z",
+  "updated_at": "2025-12-22T00:00:00Z",
   "pdf_filename": "menu.pdf",
-  "date_range": "8.12.2025/12.12.2025",
+  "date_range": "22.12.2025/26.12.2025",
   "days": {
     "Monday": [
-      "Domates Çorbası",
-      "Etli Nohut",
+      "Arpa Şehriye Çorbası",
+      "Tavuk Şinitzel",
       "Pirinç Pilavı",
-      "Fıstıklı Alman Patates",
-      "Salata Açık Büfe",
-      "Muz"
+      "Nohut Yemeği",
+      "Yoğurt",
+      "Açık büfe",
+      "Portakal"
     ],
     "Tuesday": [
-      "Mercimek Çorbası",
-      "Balık Hamsi",
-      "Makarna",
+      "Tavuk Çorbası",
+      "Mantarlı et steak",
+      "Keşkek",
       "Tazefasulye",
-      "Salata Açık Büfe",
-      "Kemalpaşa"
+      "Yoğurt",
+      "Açık büfe",
+      "Haşhaşlı Tatlı"
     ],
     "Wednesday": [
-      "Yoğurt Çorbası",
-      "Tavuk Şiş",
-      "Bulgur Pilavı",
-      "Soğan Halkası/Lahana Kavurma",
-      "Salata Açık Büfe",
-      "Sütlaç"
+      "Mengen Çorbası",
+      "Tavuk Tandır (ızgara tavadan)",
+      "Tereyağlı Makarna",
+      "Ev Usulü Patates",
+      "Yoğurt",
+      "Açık büfe",
+      "Kazandibi"
     ],
     "Thursday": [
-      "Tel Şehriye Çorbası",
-      "İzmir Köfte",
-      "Pirinç Pilavı",
-      "Soslu Patlıcan",
-      "Salata Açık Büfe",
+      "Mantar Çorbası",
+      "Çökertme Kebabı",
+      "Şehriyeli Pirinç Pilavı",
+      "Bezelye Yemeği",
+      "Yoğurt",
+      "Açık büfe",
       "Mandalina"
     ],
     "Friday": [
-      "Beyran Çorbası",
-      "Tavuk Kanat",
-      "Domates Soslu Makarna",
-      "Kereviz",
-      "Salata Açık Büfe",
-      "Profiterol"
+      "Yayla Çorbası",
+      "Tavuk Kalçalı but",
+      "Tel Şehriyeli bulgur Pilavı",
+      "Ispanak Kavurma",
+      "Yoğurt",
+      "Açık büfe",
+      "Kestanli Yaş Pasta"
     ]
   },
-  "notes": "Parsed from official weekly PDF (table extraction)."
+  "notes": "Parsed from official weekly PDF/table image."
 }
