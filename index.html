@@ -884,286 +884,543 @@
   // =============================
   // Data model (demo) with TR/EN/RU
   // =============================
-  const MENU = {
-    "Monday": [
-      {
-        id: "lentil_soup",
-        name: { en: "Lentil Soup", tr: "Mercimek Çorbası", ru: "Чечевичный суп" },
-        description: {
-          en: "Classic lentil soup with mild spices.",
-          tr: "Hafif baharatlarla klasik mercimek çorbası.",
-          ru: "Классический суп из чечевицы с мягкими специями."
+    const MENU = {
+      "Monday": [
+        {
+          id: "arpa_sehriye_corbasi",
+          name: { en: "Orzo Soup", tr: "Arpa Şehriye Çorbası", ru: "Суп с орзо" },
+          description: {
+            en: "Light soup with orzo (barley noodles) and vegetables.",
+            tr: "Arpa şehriye ve sebzelerle hafif çorba.",
+            ru: "Лёгкий суп с орзо и овощами."
+          },
+          calories_kcal: 190,
+          co2_kg: 0.55,
+          allergens: {
+            en: ["Gluten (wheat)"],
+            tr: ["Gluten (buğday)"],
+            ru: ["Глютен (пшеница)"]
+          },
+          ingredients: {
+            en: ["Orzo", "Onion", "Carrot", "Tomato paste", "Olive oil", "Vegetable stock", "Salt", "Black pepper"],
+            tr: ["Arpa şehriye", "Soğan", "Havuç", "Domates salçası", "Zeytinyağı", "Sebze suyu", "Tuz", "Karabiber"],
+            ru: ["Орзо", "Лук", "Морковь", "Томатная паста", "Оливковое масло", "Овощной бульон", "Соль", "Чёрный перец"]
+          },
+          macros_g: { protein: 5, carbs: 32, fat: 5 },
+          recipe_steps: {
+            en: ["Sauté onion and carrot in olive oil.", "Add tomato paste and stock.", "Add orzo and simmer until tender.", "Season and serve hot."],
+            tr: ["Soğan ve havucu zeytinyağında soteleyin.", "Salça ve suyu ekleyin.", "Arpa şehriyeyi ekleyip yumuşayana kadar pişirin.", "Baharatlayıp sıcak servis edin."],
+            ru: ["Обжарьте лук и морковь на оливковом масле.", "Добавьте пасту и бульон.", "Всыпьте орзо и варите до мягкости.", "Приправьте и подавайте."]
+          }
         },
-        calories_kcal: 180,
-        co2_kg: 0.65,
-        allergens: {
-          en: ["None (check kitchen cross-contact)"],
-          tr: ["Yok (mutfak çapraz bulaşma olabilir)"],
-          ru: ["Нет (возможен перекрёстный контакт на кухне)"]
+        {
+          id: "tavuk_sinitzel",
+          name: { en: "Chicken Schnitzel", tr: "Tavuk Şinitzel", ru: "Куриный шницель" },
+          description: {
+            en: "Breaded chicken cutlet, golden and crispy.",
+            tr: "Pane kaplı, altın renkli çıtır tavuk.",
+            ru: "Панированная куриная отбивная, хрустящая и румяная."
+          },
+          calories_kcal: 610,
+          co2_kg: 2.35,
+          allergens: {
+            en: ["Gluten (breadcrumbs)", "Egg"],
+            tr: ["Gluten (galeta unu)", "Yumurta"],
+            ru: ["Глютен (панировка)", "Яйцо"]
+          },
+          ingredients: {
+            en: ["Chicken breast", "Flour", "Egg", "Breadcrumbs", "Salt", "Black pepper", "Oil"],
+            tr: ["Tavuk göğsü", "Un", "Yumurta", "Galeta unu", "Tuz", "Karabiber", "Yağ"],
+            ru: ["Куриная грудка", "Мука", "Яйцо", "Панировочные сухари", "Соль", "Перец", "Масло"]
+          },
+          macros_g: { protein: 38, carbs: 35, fat: 28 },
+          recipe_steps: {
+            en: ["Pound chicken to even thickness.", "Coat in flour → egg → breadcrumbs.", "Pan-fry until golden on both sides.", "Rest 2 minutes and serve."],
+            tr: ["Tavuğu inceltin.", "Un → yumurta → galeta ununa bulayın.", "Her iki tarafını altın rengi olana kadar kızartın.", "2 dk dinlendirip servis edin."],
+            ru: ["Отбейте курицу.", "Обваляйте: мука → яйцо → сухари.", "Обжарьте до золотистой корочки с двух сторон.", "Дайте постоять 2 минуты и подавайте."]
+          }
         },
-        ingredients: {
-          en: ["Red lentils", "Onion", "Carrot", "Tomato paste", "Olive oil", "Spices", "Salt"],
-          tr: ["Kırmızı mercimek", "Soğan", "Havuç", "Domates salçası", "Zeytinyağı", "Baharatlar", "Tuz"],
-          ru: ["Красная чечевица", "Лук", "Морковь", "Томатная паста", "Оливковое масло", "Специи", "Соль"]
+        {
+          id: "pirinc_pilavi",
+          name: { en: "Rice Pilaf", tr: "Pirinç Pilavı", ru: "Рисовый плов" },
+          description: {
+            en: "Butter rice pilaf served as a side.",
+            tr: "Yan lezzet olarak tereyağlı pirinç pilavı.",
+            ru: "Гарнир — рисовый плов с маслом."
+          },
+          calories_kcal: 260,
+          co2_kg: 0.65,
+          allergens: {
+            en: ["Dairy (butter)"],
+            tr: ["Süt ürünü (tereyağı)"],
+            ru: ["Молочные продукты (масло)"]
+          },
+          ingredients: {
+            en: ["Rice", "Butter", "Water/stock", "Salt"],
+            tr: ["Pirinç", "Tereyağı", "Su/et suyu", "Tuz"],
+            ru: ["Рис", "Сливочное масло", "Вода/бульон", "Соль"]
+          },
+          macros_g: { protein: 4, carbs: 52, fat: 5 },
+          recipe_steps: {
+            en: ["Rinse rice.", "Sauté in butter briefly.", "Add water/stock and salt.", "Simmer and rest 10 minutes."],
+            tr: ["Pirinci yıkayın.", "Tereyağında kısa soteleyin.", "Su/et suyu ve tuzu ekleyin.", "Pişirip 10 dk dinlendirin."],
+            ru: ["Промойте рис.", "Слегка обжарьте на масле.", "Добавьте воду/бульон и соль.", "Варите и дайте настояться 10 минут."]
+          }
         },
-        macros_g: { protein: 10, carbs: 26, fat: 4 },
-        recipe_steps: {
-          en: ["Rinse lentils.", "Sauté onion/carrot.", "Add lentils + water, simmer.", "Blend, season and serve."],
-          tr: ["Mercimeği yıkayın.", "Soğan/havuç soteleyin.", "Mercimek + su ekleyip pişirin.", "Blenderdan geçirip servis edin."],
-          ru: ["Промойте чечевицу.", "Обжарьте лук/морковь.", "Добавьте чечевицу + воду и варите.", "Пюрируйте, приправьте и подавайте."]
+        {
+          id: "nohut_yemegi",
+          name: { en: "Chickpea Stew", tr: "Nohut Yemeği", ru: "Нут в соусе" },
+          description: {
+            en: "Traditional chickpea stew cooked with tomato base.",
+            tr: "Domatesli geleneksel nohut yemeği.",
+            ru: "Традиционное блюдо из нута в томатной основе."
+          },
+          calories_kcal: 330,
+          co2_kg: 0.85,
+          allergens: {
+            en: ["None (check kitchen cross-contact)"],
+            tr: ["Yok (mutfak çapraz bulaşma olabilir)"],
+            ru: ["Нет (возможен перекрёстный контакт на кухне)"]
+          },
+          ingredients: {
+            en: ["Chickpeas", "Onion", "Tomato paste", "Olive oil", "Spices", "Salt"],
+            tr: ["Nohut", "Soğan", "Domates salçası", "Zeytinyağı", "Baharatlar", "Tuz"],
+            ru: ["Нут", "Лук", "Томатная паста", "Оливковое масло", "Специи", "Соль"]
+          },
+          macros_g: { protein: 14, carbs: 50, fat: 8 },
+          recipe_steps: {
+            en: ["Soak chickpeas overnight (or use cooked).", "Sauté onion, add paste and spices.", "Add chickpeas + water and simmer.", "Serve warm."],
+            tr: ["Nohutu bir gece önceden ıslatın (veya haşlanmış kullanın).", "Soğanı soteleyip salça ve baharat ekleyin.", "Nohut + su ekleyip pişirin.", "Sıcak servis edin."],
+            ru: ["Замочите нут на ночь (или используйте готовый).", "Обжарьте лук, добавьте пасту и специи.", "Добавьте нут и воду, тушите.", "Подавайте тёплым."]
+          }
+        },
+        {
+          id: "yogurt",
+          name: { en: "Yogurt", tr: "Yoğurt", ru: "Йогурт" },
+          description: {
+            en: "Plain yogurt portion.",
+            tr: "Sade yoğurt porsiyonu.",
+            ru: "Порция натурального йогурта."
+          },
+          calories_kcal: 120,
+          co2_kg: 0.60,
+          allergens: {
+            en: ["Dairy"],
+            tr: ["Süt ürünü"],
+            ru: ["Молочные продукты"]
+          },
+          ingredients: {
+            en: ["Milk", "Yogurt cultures"],
+            tr: ["Süt", "Yoğurt mayası"],
+            ru: ["Молоко", "Закваска"]
+          },
+          macros_g: { protein: 6, carbs: 8, fat: 6 },
+          recipe_steps: {
+            en: ["Served chilled."],
+            tr: ["Soğuk servis edilir."],
+            ru: ["Подаётся охлаждённым."]
+          }
+        },
+        {
+          id: "open_buffet",
+          name: { en: "Open Buffet (Salad Bar)", tr: "Açık büfe", ru: "Открытый буфет" },
+          description: {
+            en: "Self-service salad/side station (varies daily).",
+            tr: "Kendin seç açık büfe (günlük değişir).",
+            ru: "Самообслуживание: салаты/гарниры (меняется ежедневно)."
+          },
+          calories_kcal: 160,
+          co2_kg: 0.45,
+          allergens: {
+            en: ["Varies (ask staff)"],
+            tr: ["Değişken (personelden bilgi alın)"],
+            ru: ["Зависит от выбора (уточняйте у персонала)"]
+          },
+          ingredients: {
+            en: ["Mixed vegetables", "Dressings (varies)", "Seasonings"],
+            tr: ["Karışık sebzeler", "Soslar (değişken)", "Baharatlar"],
+            ru: ["Овощи", "Соусы (по выбору)", "Приправы"]
+          },
+          macros_g: { protein: 4, carbs: 18, fat: 8 },
+          recipe_steps: {
+            en: ["Choose items at the buffet station."],
+            tr: ["Açık büfeden seçerek alın."],
+            ru: ["Выберите позиции на линии буфета."]
+          }
+        },
+        {
+          id: "orange",
+          name: { en: "Orange", tr: "Portakal", ru: "Апельсин" },
+          description: {
+            en: "Fresh seasonal fruit.",
+            tr: "Mevsim meyvesi.",
+            ru: "Свежий сезонный фрукт."
+          },
+          calories_kcal: 80,
+          co2_kg: 0.10,
+          allergens: {
+            en: ["None"],
+            tr: ["Yok"],
+            ru: ["Нет"]
+          },
+          ingredients: {
+            en: ["Orange"],
+            tr: ["Portakal"],
+            ru: ["Апельсин"]
+          },
+          macros_g: { protein: 1, carbs: 19, fat: 0 },
+          recipe_steps: {
+            en: ["Serve whole or sliced."],
+            tr: ["Bütün veya dilimlenmiş servis edilir."],
+            ru: ["Подавайте целым или нарезанным."]
+          }
         }
-      },
-      {
-        id: "chicken_rice",
-        name: { en: "Chicken with Rice", tr: "Tavuk Pilav", ru: "Курица с рисом" },
-        description: {
-          en: "Roasted chicken served with rice pilaf.",
-          tr: "Pilav ile servis edilen fırınlanmış tavuk.",
-          ru: "Запечённая курица с рисовым пловом."
-        },
-        calories_kcal: 520,
-        co2_kg: 2.40,
-        allergens: {
-          en: ["May contain gluten (kitchen)", "May contain dairy (kitchen)"],
-          tr: ["Gluten içerebilir (mutfak)", "Süt ürünü içerebilir (mutfak)"],
-          ru: ["Может содержать глютен (кухня)", "Может содержать молочные продукты (кухня)"]
-        },
-        ingredients: {
-          en: ["Chicken", "Rice", "Butter (optional)", "Broth", "Salt", "Pepper"],
-          tr: ["Tavuk", "Pirinç", "Tereyağı (opsiyonel)", "Et suyu", "Tuz", "Karabiber"],
-          ru: ["Курица", "Рис", "Сливочное масло (по желанию)", "Бульон", "Соль", "Перец"]
-        },
-        macros_g: { protein: 32, carbs: 58, fat: 16 },
-        recipe_steps: {
-          en: ["Cook rice in broth.", "Roast or grill chicken.", "Serve together; adjust seasoning."],
-          tr: ["Pilavı et suyuyla pişirin.", "Tavuğu fırınlayın veya ızgara yapın.", "Birlikte servis edin."],
-          ru: ["Приготовьте рис на бульоне.", "Запеките или обжарьте курицу.", "Подавайте вместе, отрегулируйте специи."]
-        }
-      },
-      {
-        id: "season_salad",
-        name: { en: "Seasonal Salad", tr: "Mevsim Salata", ru: "Сезонный салат" },
-        description: {
-          en: "Fresh greens, tomato, cucumber, lemon dressing.",
-          tr: "Taze yeşillikler, domates, salatalık, limon sosu.",
-          ru: "Свежая зелень, помидор, огурец, лимонная заправка."
-        },
-        calories_kcal: 140,
-        co2_kg: 0.25,
-        allergens: { en: ["None"], tr: ["Yok"], ru: ["Нет"] },
-        ingredients: {
-          en: ["Lettuce", "Tomato", "Cucumber", "Lemon", "Olive oil", "Salt"],
-          tr: ["Marul", "Domates", "Salatalık", "Limon", "Zeytinyağı", "Tuz"],
-          ru: ["Салат-латук", "Помидор", "Огурец", "Лимон", "Оливковое масло", "Соль"]
-        },
-        macros_g: { protein: 3, carbs: 12, fat: 9 },
-        recipe_steps: {
-          en: ["Chop vegetables.", "Mix dressing.", "Toss and serve."],
-          tr: ["Sebzeleri doğrayın.", "Sosu karıştırın.", "Harmanlayıp servis edin."],
-          ru: ["Нарежьте овощи.", "Смешайте заправку.", "Перемешайте и подавайте."]
-        }
-      }
-    ],
-    "Tuesday": [
-      {
-        id: "tomato_soup",
-        name: { en: "Tomato Soup", tr: "Domates Çorbası", ru: "Томатный суп" },
-        description: {
-          en: "Tomato soup; can be made dairy-free.",
-          tr: "Domates çorbası; süt ürünsüz yapılabilir.",
-          ru: "Томатный суп; можно приготовить без молочных продуктов."
-        },
-        calories_kcal: 210,
-        co2_kg: 0.55,
-        allergens: {
-          en: ["Dairy (if cream is used)"],
-          tr: ["Süt ürünü (krema kullanılırsa)"],
-          ru: ["Молочные продукты (если используется сливки)"]
-        },
-        ingredients: {
-          en: ["Tomatoes", "Onion", "Garlic", "Olive oil", "Stock", "Cream (optional)"],
-          tr: ["Domates", "Soğan", "Sarımsak", "Zeytinyağı", "Et suyu", "Krema (opsiyonel)"],
-          ru: ["Помидоры", "Лук", "Чеснок", "Оливковое масло", "Бульон", "Сливки (по желанию)"]
-        },
-        macros_g: { protein: 5, carbs: 28, fat: 8 },
-        recipe_steps: {
-          en: ["Sauté aromatics.", "Add tomatoes + stock, simmer.", "Blend. Add cream if desired."],
-          tr: ["Soğan-sarımsağı soteleyin.", "Domates + et suyu ekleyip pişirin.", "Blenderdan geçirip isterseniz krema ekleyin."],
-          ru: ["Обжарьте лук и чеснок.", "Добавьте помидоры и бульон, варите.", "Пюрируйте, при желании добавьте сливки."]
-        }
-      },
-      {
-        id: "vegetable_pasta",
-        name: { en: "Vegetable Pasta", tr: "Sebzeli Makarna", ru: "Паста с овощами" },
-        description: {
-          en: "Pasta with mixed vegetables.",
-          tr: "Karışık sebzeli makarna.",
-          ru: "Паста с ассорти из овощей."
-        },
-        calories_kcal: 460,
-        co2_kg: 1.10,
-        allergens: { en: ["Gluten"], tr: ["Gluten"], ru: ["Глютен"] },
-        ingredients: {
-          en: ["Pasta", "Zucchini", "Bell pepper", "Tomato sauce", "Olive oil"],
-          tr: ["Makarna", "Kabak", "Biber", "Domates sosu", "Zeytinyağı"],
-          ru: ["Паста", "Кабачок", "Болгарский перец", "Томатный соус", "Оливковое масло"]
-        },
-        macros_g: { protein: 14, carbs: 72, fat: 10 },
-        recipe_steps: {
-          en: ["Boil pasta.", "Sauté vegetables.", "Mix with sauce and pasta."],
-          tr: ["Makarnayı haşlayın.", "Sebzeleri soteleyin.", "Sos ve makarnayla karıştırın."],
-          ru: ["Отварите пасту.", "Обжарьте овощи.", "Смешайте с соусом и пастой."]
-        }
-      }
-    ],
-    "Wednesday": [
-      {
-        id: "beans_stew",
-        name: { en: "White Beans Stew", tr: "Kuru Fasulye", ru: "Тушёная фасоль" },
-        description: {
-          en: "Traditional bean stew with tomato base.",
-          tr: "Domates bazlı geleneksel kuru fasulye.",
-          ru: "Традиционное блюдо из фасоли в томатной основе."
-        },
-        calories_kcal: 480,
-        co2_kg: 0.95,
-        allergens: {
-          en: ["May contain gluten (kitchen)"],
-          tr: ["Gluten içerebilir (mutfak)"],
-          ru: ["Может содержать глютен (кухня)"]
-        },
-        ingredients: {
-          en: ["White beans", "Onion", "Tomato paste", "Olive oil", "Spices"],
-          tr: ["Kuru fasulye", "Soğan", "Domates salçası", "Zeytinyağı", "Baharatlar"],
-          ru: ["Белая фасоль", "Лук", "Томатная паста", "Оливковое масло", "Специи"]
-        },
-        macros_g: { protein: 20, carbs: 68, fat: 9 },
-        recipe_steps: {
-          en: ["Soak beans overnight.", "Simmer until tender.", "Cook with onion + tomato paste; season."],
-          tr: ["Fasulyeyi bir gece suda bekletin.", "Yumuşayana kadar pişirin.", "Soğan + salçayla pişirip baharatlayın."],
-          ru: ["Замочите фасоль на ночь.", "Варите до мягкости.", "Тушите с луком и томатной пастой, приправьте."]
-        }
-      },
-      {
-        id: "yogurt",
-        name: { en: "Yogurt Cup", tr: "Yoğurt", ru: "Йогурт" },
-        description: {
-          en: "Plain yogurt.",
-          tr: "Sade yoğurt.",
-          ru: "Натуральный йогурт."
-        },
-        calories_kcal: 160,
-        co2_kg: 0.45,
-        allergens: { en: ["Dairy"], tr: ["Süt ürünü"], ru: ["Молочные продукты"] },
-        ingredients: {
-          en: ["Milk", "Yogurt cultures"],
-          tr: ["Süt", "Yoğurt kültürü"],
-          ru: ["Молоко", "Закваска"]
-        },
-        macros_g: { protein: 9, carbs: 12, fat: 8 },
-        recipe_steps: {
-          en: ["Chill and serve."],
-          tr: ["Soğutup servis edin."],
-          ru: ["Охладите и подавайте."]
-        }
-      }
-    ],
+      ],
 
-    "Thursday": [
-      {
-        id: "chickpea_stew",
-        name: { en: "Chickpea Stew", tr: "Nohut Yemeği", ru: "Нут (тушёный)" },
-        description: { en: "Hearty chickpea stew in tomato base.", tr: "Domates bazlı doyurucu nohut yemeği.", ru: "Сытное блюдо из нута в томатной основе." },
-        calories_kcal: 510, co2_kg: 0.85,
-        allergens: { en: ["May contain gluten (kitchen)"], tr: ["Gluten içerebilir (mutfak)"], ru: ["Может содержать глютен (кухня)"] },
-        ingredients: { en: ["Chickpeas","Onion","Tomato paste","Olive oil","Spices","Salt"], tr: ["Nohut","Soğan","Domates salçası","Zeytinyağı","Baharatlar","Tuz"], ru: ["Нут","Лук","Томатная паста","Оливковое масло","Специи","Соль"] },
-        macros_g: { protein: 20, carbs: 70, fat: 10 },
-        recipe_steps: { en: ["Soak chickpeas overnight.","Simmer until tender.","Cook with onion + tomato paste; season."], tr: ["Nohutu bir gece suda bekletin.","Yumuşayana kadar pişirin.","Soğan + salçayla pişirip baharatlayın."], ru: ["Замочите нут на ночь.","Варите до мягкости.","Тушите с луком и томатной пастой, приправьте."] }
-      },
-      {
-        id: "bulgur_pilaf",
-        name: { en: "Bulgur Pilaf", tr: "Bulgur Pilavı", ru: "Булгур-плов" },
-        description: { en: "Bulgur pilaf with tomato and herbs.", tr: "Domatesli ve otlu bulgur pilavı.", ru: "Булгур с томатом и зеленью." },
-        calories_kcal: 380, co2_kg: 0.60,
-        allergens: { en: ["Gluten"], tr: ["Gluten"], ru: ["Глютен"] },
-        ingredients: { en: ["Bulgur","Tomato","Onion","Olive oil","Herbs","Salt"], tr: ["Bulgur","Domates","Soğan","Zeytinyağı","Otlar","Tuz"], ru: ["Булгур","Помидор","Лук","Оливковое масло","Зелень","Соль"] },
-        macros_g: { protein: 10, carbs: 72, fat: 8 },
-        recipe_steps: { en: ["Sauté onion.","Add bulgur and tomato.","Add water and cook until tender."], tr: ["Soğanı soteleyin.","Bulgur ve domatesi ekleyin.","Su ekleyip pişirin."], ru: ["Обжарьте лук.","Добавьте булгур и томат.","Добавьте воду и готовьте до мягкости."] }
-      }
-    ],
-    "Friday": [
-      {
-        id: "fish_veg",
-        name: { en: "Baked Fish with Vegetables", tr: "Fırında Balık & Sebze", ru: "Запечённая рыба с овощами" },
-        description: { en: "Oven-baked fish served with seasonal vegetables.", tr: "Mevsim sebzeleriyle fırında balık.", ru: "Рыба, запечённая с сезонными овощами." },
-        calories_kcal: 470, co2_kg: 1.60,
-        allergens: { en: ["Fish"], tr: ["Balık"], ru: ["Рыба"] },
-        ingredients: { en: ["Fish","Zucchini","Carrot","Lemon","Olive oil","Salt","Pepper"], tr: ["Balık","Kabak","Havuç","Limon","Zeytinyağı","Tuz","Karabiber"], ru: ["Рыба","Кабачок","Морковь","Лимон","Оливковое масло","Соль","Перец"] },
-        macros_g: { protein: 34, carbs: 18, fat: 24 },
-        recipe_steps: { en: ["Season fish and vegetables.","Bake until fish flakes.","Serve with lemon."], tr: ["Balık ve sebzeleri baharatlayın.","Balık pişene kadar fırınlayın.","Limonla servis edin."], ru: ["Приправьте рыбу и овощи.","Запекайте до готовности.","Подавайте с лимоном."] }
-      },
-      {
-        id: "yogurt_cacik",
-        name: { en: "Cacık (Yogurt & Cucumber)", tr: "Cacık", ru: "Джаджык (йогурт с огурцом)" },
-        description: { en: "Cold yogurt side with cucumber and herbs.", tr: "Salatalık ve naneli soğuk yoğurt mezesi.", ru: "Холодный йогуртовый гарнир с огурцом и зеленью." },
-        calories_kcal: 160, co2_kg: 0.45,
-        allergens: { en: ["Dairy"], tr: ["Süt ürünü"], ru: ["Молочные продукты"] },
-        ingredients: { en: ["Yogurt","Cucumber","Garlic","Mint","Salt"], tr: ["Yoğurt","Salatalık","Sarımsak","Nane","Tuz"], ru: ["Йогурт","Огурец","Чеснок","Мята","Соль"] },
-        macros_g: { protein: 9, carbs: 12, fat: 8 },
-        recipe_steps: { en: ["Grate cucumber.","Mix with yogurt, garlic, herbs.","Chill and serve."], tr: ["Salatalığı rendeleyin.","Yoğurt, sarımsak, nane ile karıştırın.","Soğutup servis edin."], ru: ["Натрите огурец.","Смешайте с йогуртом, чесноком и зеленью.","Охладите и подавайте."] }
-      }
-    ],
-    "Saturday": [
-      {
-        id: "vegetable_stew",
-        name: { en: "Mixed Vegetable Stew", tr: "Türlü", ru: "Овощное рагу" },
-        description: { en: "Slow-cooked mixed vegetables in tomato sauce.", tr: "Domates sosunda pişmiş karışık sebzeler.", ru: "Тушёные овощи в томатном соусе." },
-        calories_kcal: 390, co2_kg: 0.55,
-        allergens: { en: ["None"], tr: ["Yok"], ru: ["Нет"] },
-        ingredients: { en: ["Eggplant","Zucchini","Potato","Tomato","Onion","Olive oil","Salt"], tr: ["Patlıcan","Kabak","Patates","Domates","Soğan","Zeytinyağı","Tuz"], ru: ["Баклажан","Кабачок","Картофель","Помидор","Лук","Оливковое масло","Соль"] },
-        macros_g: { protein: 8, carbs: 52, fat: 16 },
-        recipe_steps: { en: ["Chop vegetables.","Sauté onion.","Add vegetables + tomato; simmer until tender."], tr: ["Sebzeleri doğrayın.","Soğanı soteleyin.","Sebze + domates ekleyip pişirin."], ru: ["Нарежьте овощи.","Обжарьте лук.","Добавьте овощи и томат, тушите до мягкости."] }
-      },
-      {
-        id: "rice_pudding",
-        name: { en: "Rice Pudding", tr: "Sütlaç", ru: "Рисовый пудинг" },
-        description: { en: "Classic milk dessert served chilled.", tr: "Soğuk servis edilen klasik sütlü tatlı.", ru: "Классический молочный десерт, подаётся охлаждённым." },
-        calories_kcal: 280, co2_kg: 0.75,
-        allergens: { en: ["Dairy"], tr: ["Süt ürünü"], ru: ["Молочные продукты"] },
-        ingredients: { en: ["Milk","Rice","Sugar","Vanilla","Cinnamon (optional)"], tr: ["Süt","Pirinç","Şeker","Vanilya","Tarçın (opsiyonel)"], ru: ["Молоко","Рис","Сахар","Ваниль","Корица (по желанию)"] },
-        macros_g: { protein: 7, carbs: 45, fat: 8 },
-        recipe_steps: { en: ["Cook rice until soft.","Add milk and sugar; simmer.","Chill and serve."], tr: ["Pirinç yumuşayana kadar pişirin.","Süt ve şekeri ekleyip kaynatın.","Soğutup servis edin."], ru: ["Варите рис до мягкости.","Добавьте молоко и сахар, варите.","Охладите и подавайте."] }
-      }
-    ],
-    "Sunday": [
-      {
-        id: "omelette",
-        name: { en: "Vegetable Omelette", tr: "Sebzeli Omlet", ru: "Омлет с овощами" },
-        description: { en: "Egg omelette with vegetables and herbs.", tr: "Sebze ve otlarla yumurtalı omlet.", ru: "Яичный омлет с овощами и зеленью." },
-        calories_kcal: 420, co2_kg: 1.10,
-        allergens: { en: ["Egg"], tr: ["Yumurta"], ru: ["Яйцо"] },
-        ingredients: { en: ["Eggs","Tomato","Pepper","Onion","Herbs","Oil","Salt"], tr: ["Yumurta","Domates","Biber","Soğan","Otlar","Yağ","Tuz"], ru: ["Яйца","Помидор","Перец","Лук","Зелень","Масло","Соль"] },
-        macros_g: { protein: 22, carbs: 16, fat: 28 },
-        recipe_steps: { en: ["Sauté vegetables.","Add beaten eggs.","Cook until set; serve warm."], tr: ["Sebzeleri soteleyin.","Çırpılmış yumurtayı ekleyin.","Pişirip sıcak servis edin."], ru: ["Обжарьте овощи.","Добавьте взбитые яйца.","Готовьте до схватывания; подавайте тёплым."] }
-      },
-      {
-        id: "fruit_salad",
-        name: { en: "Fruit Salad", tr: "Meyve Salatası", ru: "Фруктовый салат" },
-        description: { en: "Seasonal fruits, served fresh.", tr: "Taze servis edilen mevsim meyveleri.", ru: "Свежие сезонные фрукты." },
-        calories_kcal: 190, co2_kg: 0.30,
-        allergens: { en: ["None"], tr: ["Yok"], ru: ["Нет"] },
-        ingredients: { en: ["Seasonal fruits"], tr: ["Mevsim meyveleri"], ru: ["Сезонные фрукты"] },
-        macros_g: { protein: 2, carbs: 46, fat: 1 },
-        recipe_steps: { en: ["Chop fruits.","Mix gently.","Serve chilled."], tr: ["Meyveleri doğrayın.","Nazikçe karıştırın.","Soğuk servis edin."], ru: ["Нарежьте фрукты.","Аккуратно перемешайте.","Подавайте охлаждённым."] }
-      }
-    ]
+      "Tuesday": [
+        {
+          id: "tavuk_corbasi",
+          name: { en: "Chicken Soup", tr: "Tavuk Çorbası", ru: "Куриный суп" },
+          description: {
+            en: "Comforting chicken soup with vegetables.",
+            tr: "Sebzeli, klasik tavuk çorbası.",
+            ru: "Насыщенный куриный суп с овощами."
+          },
+          calories_kcal: 210,
+          co2_kg: 0.80,
+          allergens: {
+            en: ["May contain gluten (kitchen)"],
+            tr: ["Gluten içerebilir (mutfak)"],
+            ru: ["Может содержать глютен (кухня)"]
+          },
+          ingredients: {
+            en: ["Chicken", "Carrot", "Onion", "Stock", "Salt", "Black pepper"],
+            tr: ["Tavuk", "Havuç", "Soğan", "Et suyu", "Tuz", "Karabiber"],
+            ru: ["Курица", "Морковь", "Лук", "Бульон", "Соль", "Перец"]
+          },
+          macros_g: { protein: 18, carbs: 10, fat: 10 },
+          recipe_steps: {
+            en: ["Simmer chicken with vegetables.", "Skim and season.", "Serve hot."],
+            tr: ["Tavuğu sebzelerle kaynatın.", "Köpüğü alıp baharatlayın.", "Sıcak servis edin."],
+            ru: ["Отварите курицу с овощами.", "Снимайте пену, приправьте.", "Подавайте горячим."]
+          }
+        },
+        {
+          id: "mantarlı_et_steak",
+          name: { en: "Beef Steak with Mushrooms", tr: "Mantarlı et steak", ru: "Стейк с грибами" },
+          description: {
+            en: "Pan-seared beef steak topped with mushroom sauce.",
+            tr: "Tavada mühürlenmiş et ve mantar sosu.",
+            ru: "Обжаренный стейк с грибным соусом."
+          },
+          calories_kcal: 720,
+          co2_kg: 5.10,
+          allergens: {
+            en: ["May contain dairy (butter/cream)"],
+            tr: ["Süt ürünü içerebilir (tereyağı/krema)"],
+            ru: ["Может содержать молочные продукты (масло/сливки)"]
+          },
+          ingredients: {
+            en: ["Beef steak", "Mushrooms", "Onion", "Butter/olive oil", "Salt", "Black pepper"],
+            tr: ["Dana steak", "Mantar", "Soğan", "Tereyağı/zeytinyağı", "Tuz", "Karabiber"],
+            ru: ["Говяжий стейк", "Грибы", "Лук", "Масло/оливковое масло", "Соль", "Перец"]
+          },
+          macros_g: { protein: 45, carbs: 10, fat: 52 },
+          recipe_steps: {
+            en: ["Season steak and sear in hot pan.", "Sauté mushrooms and onion.", "Combine as topping and serve."],
+            tr: ["Steaki baharatlayıp tavada mühürleyin.", "Mantarı ve soğanı soteleyin.", "Üzerine koyup servis edin."],
+            ru: ["Приправьте и обжарьте стейк.", "Обжарьте грибы и лук.", "Подавайте, выложив соус сверху."]
+          }
+        },
+        {
+          id: "keskek",
+          name: { en: "Keşkek (Wheat & Chicken Stew)", tr: "Keşkek", ru: "Кешкек" },
+          description: {
+            en: "Traditional Anatolian dish made from wheat and chicken.",
+            tr: "Buğday ve tavukla yapılan geleneksel keşkeк.",
+            ru: "Традиционное блюдо из пшеницы и курицы."
+          },
+          calories_kcal: 410,
+          co2_kg: 1.70,
+          allergens: {
+            en: ["Gluten (wheat)"],
+            tr: ["Gluten (buğday)"],
+            ru: ["Глютен (пшеница)"]
+          },
+          ingredients: {
+            en: ["Cracked wheat", "Chicken", "Butter", "Salt", "Paprika"],
+            tr: ["Buğday", "Tavuk", "Tereyağı", "Tuz", "Pul biber"],
+            ru: ["Пшеница", "Курица", "Сливочное масло", "Соль", "Паприка"]
+          },
+          macros_g: { protein: 20, carbs: 55, fat: 12 },
+          recipe_steps: {
+            en: ["Cook wheat until soft.", "Add shredded chicken.", "Mash to creamy texture.", "Top with butter and paprika."],
+            tr: ["Buğdayı yumuşayana kadar pişirin.", "Didiklenmiş tavuğu ekleyin.", "Ezerek kıvam verin.", "Tereyağı ve biberle servis edin."],
+            ru: ["Сварите пшеницу до мягкости.", "Добавьте курицу.", "Разомните до кремовой текстуры.", "Сверху масло и паприка."]
+          }
+        },
+        {
+          id: "taze_fasulye",
+          name: { en: "Green Beans in Olive Oil", tr: "Tazefasulye", ru: "Зелёная фасоль" },
+          description: {
+            en: "Turkish-style green beans simmered in tomato and olive oil.",
+            tr: "Zeytinyağlı, domatesli taze fasulye.",
+            ru: "Фасоль, тушёная в томатах и оливковом масле."
+          },
+          calories_kcal: 220,
+          co2_kg: 0.55,
+          allergens: {
+            en: ["None"],
+            tr: ["Yok"],
+            ru: ["Нет"]
+          },
+          ingredients: {
+            en: ["Green beans", "Tomato", "Onion", "Olive oil", "Salt"],
+            tr: ["Taze fasulye", "Domates", "Soğan", "Zeytinyağı", "Tuz"],
+            ru: ["Стручковая фасоль", "Томат", "Лук", "Оливковое масло", "Соль"]
+          },
+          macros_g: { protein: 4, carbs: 18, fat: 15 },
+          recipe_steps: {
+            en: ["Sauté onion in olive oil.", "Add beans and tomato.", "Simmer until tender.", "Serve warm or room temp."],
+            tr: ["Soğanı zeytinyağında soteleyin.", "Fasulye ve domatesi ekleyin.", "Yumuşayana kadar pişirin.", "Ilık/oda ısısında servis edin."],
+            ru: ["Обжарьте лук на оливковом масле.", "Добавьте фасоль и томаты.", "Тушите до мягкости.", "Подавайте тёплым или комнатной температуры."]
+          }
+        },
+        { /* yogurt */ 
+          id: "yogurt_tue",
+          name: { en: "Yogurt", tr: "Yoğurt", ru: "Йогурт" },
+          description: { en: "Plain yogurt portion.", tr: "Sade yoğurt porsiyonu.", ru: "Порция натурального йогурта." },
+          calories_kcal: 120, co2_kg: 0.60,
+          allergens: { en: ["Dairy"], tr: ["Süt ürünü"], ru: ["Молочные продукты"] },
+          ingredients: { en: ["Milk", "Yogurt cultures"], tr: ["Süt", "Yoğurt mayası"], ru: ["Молоко", "Закваска"] },
+          macros_g: { protein: 6, carbs: 8, fat: 6 },
+          recipe_steps: { en: ["Served chilled."], tr: ["Soğuk servis edilir."], ru: ["Подаётся охлаждённым."] }
+        },
+        { /* open buffet */ 
+          id: "open_buffet_tue",
+          name: { en: "Open Buffet (Salad Bar)", tr: "Açık büfe", ru: "Открытый буфет" },
+          description: { en: "Self-service salad/side station (varies daily).", tr: "Kendin seç açık büfe (günlük değişir).", ru: "Самообслуживание: салаты/гарниры (меняется ежедневно)." },
+          calories_kcal: 160, co2_kg: 0.45,
+          allergens: { en: ["Varies (ask staff)"], tr: ["Değişken (personelden bilgi alın)"], ru: ["Зависит от выбора (уточняйте у персонала)"] },
+          ingredients: { en: ["Mixed vegetables", "Dressings (varies)", "Seasonings"], tr: ["Karışık sebzeler", "Soslar (değişken)", "Baharatlar"], ru: ["Овощи", "Соусы (по выбору)", "Приправы"] },
+          macros_g: { protein: 4, carbs: 18, fat: 8 },
+          recipe_steps: { en: ["Choose items at the buffet station."], tr: ["Açık büfeden seçerek alın."], ru: ["Выберите позиции на линии буфета."] }
+        },
+        {
+          id: "hashasli_tatli",
+          name: { en: "Poppy Seed Dessert", tr: "Haşhaşlı Tatlı", ru: "Маковый десерт" },
+          description: {
+            en: "Sweet dessert with poppy seed flavor.",
+            tr: "Haşhaş aromalı tatlı.",
+            ru: "Сладкий десерт с маком."
+          },
+          calories_kcal: 360,
+          co2_kg: 1.05,
+          allergens: {
+            en: ["Gluten", "Dairy", "Egg (may contain)"],
+            tr: ["Gluten", "Süt ürünü", "Yumurta (içerebilir)"],
+            ru: ["Глютен", "Молочные продукты", "Яйцо (может содержать)"]
+          },
+          ingredients: {
+            en: ["Flour", "Milk", "Sugar", "Poppy seeds", "Butter", "Baking powder"],
+            tr: ["Un", "Süt", "Şeker", "Haşhaş", "Tereyağı", "Kabartma tozu"],
+            ru: ["Мука", "Молоко", "Сахар", "Мак", "Масло", "Разрыхлитель"]
+          },
+          macros_g: { protein: 7, carbs: 48, fat: 16 },
+          recipe_steps: {
+            en: ["Prepare batter with poppy seeds.", "Bake until set.", "Cool and serve."],
+            tr: ["Haşhaşlı hamuru hazırlayın.", "Pişirin.", "Soğutup servis edin."],
+            ru: ["Приготовьте тесто с маком.", "Выпекайте.", "Охладите и подавайте."]
+          }
+        }
+      ],
 
+      "Wednesday": [
+        {
+          id: "mengen_corbasi",
+          name: { en: "Mengen Soup", tr: "Mengen Çorbası", ru: "Суп «Менген»" },
+          description: { en: "Creamy Turkish-style soup (varies by kitchen).", tr: "Kremalı Mengen usulü çorba (mutfağa göre değişir).", ru: "Сливочный суп в стиле Менген (может отличаться)." },
+          calories_kcal: 240,
+          co2_kg: 0.90,
+          allergens: { en: ["Dairy", "May contain gluten"], tr: ["Süt ürünü", "Gluten içerebilir"], ru: ["Молочные продукты", "Может содержать глютен"] },
+          ingredients: { en: ["Vegetables", "Cream/yogurt", "Spices", "Salt"], tr: ["Sebzeler", "Krema/yoğurt", "Baharatlar", "Tuz"], ru: ["Овощи", "Сливки/йогурт", "Специи", "Соль"] },
+          macros_g: { protein: 8, carbs: 20, fat: 14 },
+          recipe_steps: { en: ["Cook vegetables until soft.", "Blend, add dairy and season.", "Simmer briefly and serve."], tr: ["Sebzeleri yumuşayana kadar pişirin.", "Blenderdan geçirip süt ürünü ekleyin.", "Kısaca kaynatıp servis edin."], ru: ["Отварите овощи.", "Измельчите, добавьте молочное и приправьте.", "Коротко прогрейте и подавайте."] }
+        },
+        {
+          id: "tavuk_tandir",
+          name: { en: "Chicken Tandır (Griddle)", tr: "Tavuk Tandır (ızgara tavadan)", ru: "Курица тандир" },
+          description: { en: "Tender chicken cooked on a griddle/pan.", tr: "Izgara tavada pişmiş yumuşak tavuk.", ru: "Нежная курица, приготовленная на гриле/сковороде." },
+          calories_kcal: 560,
+          co2_kg: 2.20,
+          allergens: { en: ["None"], tr: ["Yok"], ru: ["Нет"] },
+          ingredients: { en: ["Chicken", "Spices", "Oil", "Salt"], tr: ["Tavuk", "Baharatlar", "Yağ", "Tuz"], ru: ["Курица", "Специи", "Масло", "Соль"] },
+          macros_g: { protein: 46, carbs: 6, fat: 34 },
+          recipe_steps: { en: ["Marinate chicken with spices.", "Cook on hot pan until done.", "Rest and serve."], tr: ["Tavuğu baharatlayıp marine edin.", "Sıcak tavada pişirin.", "Dinlendirip servis edin."], ru: ["Замаринуйте курицу со специями.", "Приготовьте на горячей сковороде.", "Дайте отдохнуть и подавайте."] }
+        },
+        {
+          id: "tereyagli_makarna",
+          name: { en: "Butter Pasta", tr: "Tereyağlı Makarna", ru: "Паста с маслом" },
+          description: { en: "Pasta tossed with butter.", tr: "Tereyağı ile harmanlanmış makarna.", ru: "Паста, перемешанная со сливочным маслом." },
+          calories_kcal: 390,
+          co2_kg: 0.95,
+          allergens: { en: ["Gluten", "Dairy"], tr: ["Gluten", "Süt ürünü"], ru: ["Глютен", "Молочные продукты"] },
+          ingredients: { en: ["Pasta", "Butter", "Salt"], tr: ["Makarna", "Tereyağı", "Tuz"], ru: ["Макароны", "Сливочное масло", "Соль"] },
+          macros_g: { protein: 12, carbs: 63, fat: 10 },
+          recipe_steps: { en: ["Boil pasta until al dente.", "Drain and toss with butter.", "Season and serve."], tr: ["Makarnayı haşlayın.", "Süzüp tereyağıyla karıştırın.", "Baharatlayıp servis edin."], ru: ["Сварите пасту.", "Слейте и добавьте масло.", "Приправьте и подавайте."] }
+        },
+        {
+          id: "ev_usulu_patates",
+          name: { en: "Homestyle Potatoes", tr: "Ev Usulü Patates", ru: "Картофель по-домашнему" },
+          description: { en: "Potatoes cooked with onions and spices.", tr: "Soğan ve baharatlarla ev usulü patates.", ru: "Картофель с луком и специями." },
+          calories_kcal: 280,
+          co2_kg: 0.55,
+          allergens: { en: ["None"], tr: ["Yok"], ru: ["Нет"] },
+          ingredients: { en: ["Potatoes", "Onion", "Olive oil", "Salt", "Paprika"], tr: ["Patates", "Soğan", "Zeytinyağı", "Tuz", "Pul biber"], ru: ["Картофель", "Лук", "Оливковое масло", "Соль", "Паприка"] },
+          macros_g: { protein: 5, carbs: 40, fat: 10 },
+          recipe_steps: { en: ["Sauté onion.", "Add potatoes and season.", "Cook until tender and lightly browned."], tr: ["Soğanı soteleyin.", "Patatesi ekleyip baharatlayın.", "Yumuşayıp kızarana kadar pişirin."], ru: ["Обжарьте лук.", "Добавьте картофель и специи.", "Готовьте до мягкости и лёгкой корочки."] }
+        },
+        { id: "yogurt_wed", name: { en: "Yogurt", tr: "Yoğurt", ru: "Йогурт" }, description: { en: "Plain yogurt portion.", tr: "Sade yoğurt porsiyonu.", ru: "Порция натурального йогурта." }, calories_kcal: 120, co2_kg: 0.60,
+          allergens: { en: ["Dairy"], tr: ["Süt ürünü"], ru: ["Молочные продукты"] }, ingredients: { en: ["Milk", "Yogurt cultures"], tr: ["Süt", "Yoğurt mayası"], ru: ["Молоко", "Закваска"] },
+          macros_g: { protein: 6, carbs: 8, fat: 6 }, recipe_steps: { en: ["Served chilled."], tr: ["Soğuk servis edilir."], ru: ["Подаётся охлаждённым."] } },
+        { id: "open_buffet_wed", name: { en: "Open Buffet (Salad Bar)", tr: "Açık büfe", ru: "Открытый буфет" }, description: { en: "Self-service salad/side station (varies daily).", tr: "Kendin seç açık büfe (günlük değişir).", ru: "Самообслуживание: салаты/гарниры (меняется ежедневно)." },
+          calories_kcal: 160, co2_kg: 0.45, allergens: { en: ["Varies (ask staff)"], tr: ["Değişken (personelden bilgi alın)"], ru: ["Зависит от выбора (уточняйте у персонала)"] },
+          ingredients: { en: ["Mixed vegetables", "Dressings (varies)", "Seasonings"], tr: ["Karışık sebzeler", "Soslar (değişken)", "Baharatlar"], ru: ["Овощи", "Соусы (по выбору)", "Приправы"] },
+          macros_g: { protein: 4, carbs: 18, fat: 8 }, recipe_steps: { en: ["Choose items at the buffet station."], tr: ["Açık büfeden seçerek alın."], ru: ["Выберите позиции на линии буфета."] } },
+        {
+          id: "kazandibi",
+          name: { en: "Kazandibi", tr: "Kazandibi", ru: "Казандиби" },
+          description: { en: "Turkish caramelized milk pudding.", tr: "Karamelize sütlü tatlı.", ru: "Турецкий молочный пудинг с карамельной корочкой." },
+          calories_kcal: 320,
+          co2_kg: 1.10,
+          allergens: { en: ["Dairy", "May contain gluten"], tr: ["Süt ürünü", "Gluten içerebilir"], ru: ["Молочные продукты", "Может содержать глютен"] },
+          ingredients: { en: ["Milk", "Sugar", "Rice flour/starch", "Vanilla"], tr: ["Süt", "Şeker", "Pirinç unu/nişasta", "Vanilya"], ru: ["Молоко", "Сахар", "Рисовая мука/крахмал", "Ваниль"] },
+          macros_g: { protein: 8, carbs: 55, fat: 6 },
+          recipe_steps: { en: ["Cook milk pudding until thick.", "Caramelize the base in pan.", "Chill and slice to serve."], tr: ["Muhallebiyi pişirip koyulaştırın.", "Tavada altını karamelize edin.", "Soğutup dilimleyin."], ru: ["Сварите пудинг до густоты.", "Карамелизуйте дно.", "Охладите и нарежьте."] }
+        }
+      ],
 
-  };
+      "Thursday": [
+        {
+          id: "mantar_corbasi",
+          name: { en: "Mushroom Soup", tr: "Mantar Çorbası", ru: "Грибной суп" },
+          description: { en: "Creamy mushroom soup.", tr: "Kremalı mantar çorbası.", ru: "Сливочный грибной суп." },
+          calories_kcal: 230, co2_kg: 0.95,
+          allergens: { en: ["Dairy", "May contain gluten"], tr: ["Süt ürünü", "Gluten içerebilir"], ru: ["Молочные продукты", "Может содержать глютен"] },
+          ingredients: { en: ["Mushrooms", "Milk/cream", "Onion", "Butter", "Salt", "Pepper"], tr: ["Mantar", "Süt/krema", "Soğan", "Tereyağı", "Tuz", "Karabiber"], ru: ["Грибы", "Молоко/сливки", "Лук", "Масло", "Соль", "Перец"] },
+          macros_g: { protein: 7, carbs: 14, fat: 16 },
+          recipe_steps: { en: ["Sauté mushrooms and onion.", "Add dairy and simmer.", "Blend (optional) and season."], tr: ["Mantar ve soğanı soteleyin.", "Süt ürününü ekleyip kaynatın.", "İsterseniz blenderdan geçirip baharatlayın."], ru: ["Обжарьте грибы и лук.", "Добавьте молочное и проварите.", "При желании измельчите и приправьте."] }
+        },
+        {
+          id: "cokertme_kebabi",
+          name: { en: "Çökertme Kebab", tr: "Çökertme Kebabı", ru: "Кебаб «Чокертме»" },
+          description: { en: "Beef strips over crispy potatoes with yogurt sauce.", tr: "Çıtır patates üzerinde et ve yoğurt sosu.", ru: "Мясо на хрустящем картофеле с йогуртовым соусом." },
+          calories_kcal: 780, co2_kg: 4.60,
+          allergens: { en: ["Dairy", "May contain gluten"], tr: ["Süt ürünü", "Gluten içerebilir"], ru: ["Молочные продукты", "Может содержать глютен"] },
+          ingredients: { en: ["Beef", "Potatoes", "Yogurt", "Garlic", "Tomato sauce", "Oil", "Salt"], tr: ["Et", "Patates", "Yoğurt", "Sarımsak", "Domates sosu", "Yağ", "Tuz"], ru: ["Говядина", "Картофель", "Йогурт", "Чеснок", "Томатный соус", "Масло", "Соль"] },
+          macros_g: { protein: 38, carbs: 62, fat: 44 },
+          recipe_steps: { en: ["Fry thin potato sticks.", "Sauté beef strips.", "Mix yogurt with garlic.", "Assemble: potatoes + beef + yogurt + sauce."], tr: ["Patatesi kızartın.", "Eti soteleyin.", "Yoğurdu sarımsakla karıştırın.", "Patates + et + yoğurt + sos ile servis edin."], ru: ["Обжарьте картофель соломкой.", "Обжарьте мясо.", "Смешайте йогурт с чесноком.", "Соберите блюдо: картофель + мясо + йогурт + соус."] }
+        },
+        {
+          id: "sehriyeli_pirinc_pilavi",
+          name: { en: "Rice Pilaf with Orzo", tr: "Şehriyeli Pirinç Pilavı", ru: "Рис с вермишелью" },
+          description: { en: "Rice pilaf cooked with toasted orzo.", tr: "Kavrulmuş şehriye ile pirinç pilavı.", ru: "Рисовый плов с обжаренной вермишелью." },
+          calories_kcal: 290, co2_kg: 0.75,
+          allergens: { en: ["Gluten (orzo)", "Dairy (may contain)"], tr: ["Gluten (şehriye)", "Süt ürünü (içerebilir)"], ru: ["Глютен (вермишель)", "Молочные продукты (может содержать)"] },
+          ingredients: { en: ["Rice", "Orzo", "Butter/oil", "Water/stock", "Salt"], tr: ["Pirinç", "Şehriye", "Tereyağı/yağ", "Su/et suyu", "Tuz"], ru: ["Рис", "Вермишель", "Масло", "Вода/бульон", "Соль"] },
+          macros_g: { protein: 5, carbs: 58, fat: 6 },
+          recipe_steps: { en: ["Toast orzo in butter/oil.", "Add rice and sauté.", "Add water/stock, simmer and rest."], tr: ["Şehriyeyi yağda kavurun.", "Pirinç ekleyip soteleyin.", "Su/et suyu ekleyip pişirip dinlendirin."], ru: ["Обжарьте вермишель.", "Добавьте рис и слегка обжарьте.", "Добавьте воду/бульон, сварите и дайте настояться."] }
+        },
+        {
+          id: "bezelye_yemegi",
+          name: { en: "Pea Stew", tr: "Bezelye Yemeği", ru: "Тушёный горошек" },
+          description: { en: "Peas cooked in tomato sauce with vegetables.", tr: "Sebzeli, domatesli bezelye yemeği.", ru: "Горошек в томатном соусе с овощами." },
+          calories_kcal: 250, co2_kg: 0.60,
+          allergens: { en: ["None"], tr: ["Yok"], ru: ["Нет"] },
+          ingredients: { en: ["Peas", "Carrot", "Potato", "Onion", "Tomato", "Olive oil", "Salt"], tr: ["Bezelye", "Havuç", "Patates", "Soğan", "Domates", "Zeytinyağı", "Tuz"], ru: ["Горошек", "Морковь", "Картофель", "Лук", "Томат", "Оливковое масло", "Соль"] },
+          macros_g: { protein: 8, carbs: 36, fat: 8 },
+          recipe_steps: { en: ["Sauté onion.", "Add vegetables and peas.", "Add tomato and water, simmer.", "Serve warm."], tr: ["Soğanı soteleyin.", "Sebzeler ve bezelyeyi ekleyin.", "Domates + su ekleyip pişirin.", "Sıcak servis edin."], ru: ["Обжарьте лук.", "Добавьте овощи и горошек.", "Добавьте томат и воду, тушите.", "Подавайте тёплым."] }
+        },
+        { id: "yogurt_thu", name: { en: "Yogurt", tr: "Yoğurt", ru: "Йогурт" }, description: { en: "Plain yogurt portion.", tr: "Sade yoğurt porsiyonu.", ru: "Порция натурального йогурта." }, calories_kcal: 120, co2_kg: 0.60,
+          allergens: { en: ["Dairy"], tr: ["Süt ürünü"], ru: ["Молочные продукты"] }, ingredients: { en: ["Milk", "Yogurt cultures"], tr: ["Süt", "Yoğurt mayası"], ru: ["Молоко", "Закваска"] },
+          macros_g: { protein: 6, carbs: 8, fat: 6 }, recipe_steps: { en: ["Served chilled."], tr: ["Soğuk servis edilir."], ru: ["Подаётся охлаждённым."] } },
+        { id: "open_buffet_thu", name: { en: "Open Buffet (Salad Bar)", tr: "Açık büfe", ru: "Открытый буфет" }, description: { en: "Self-service salad/side station (varies daily).", tr: "Kendin seç açık büfe (günlük değişir).", ru: "Самообслуживание: салаты/гарниры (меняется ежедневно)." },
+          calories_kcal: 160, co2_kg: 0.45, allergens: { en: ["Varies (ask staff)"], tr: ["Değişken (personelden bilgi alın)"], ru: ["Зависит от выбора (уточняйте у персонала)"] },
+          ingredients: { en: ["Mixed vegetables", "Dressings (varies)", "Seasonings"], tr: ["Karışık sebzeler", "Soslar (değişken)", "Baharatlar"], ru: ["Овощи", "Соусы (по выбору)", "Приправы"] },
+          macros_g: { protein: 4, carbs: 18, fat: 8 }, recipe_steps: { en: ["Choose items at the buffet station."], tr: ["Açık büfeden seçerek alın."], ru: ["Выберите позиции на линии буфета."] } },
+        {
+          id: "mandalina",
+          name: { en: "Mandarin", tr: "Mandalina", ru: "Мандарин" },
+          description: { en: "Fresh seasonal fruit.", tr: "Mevsim meyvesi.", ru: "Свежий сезонный фрукт." },
+          calories_kcal: 70, co2_kg: 0.10,
+          allergens: { en: ["None"], tr: ["Yok"], ru: ["Нет"] },
+          ingredients: { en: ["Mandarin"], tr: ["Mandalina"], ru: ["Мандарин"] },
+          macros_g: { protein: 1, carbs: 17, fat: 0 },
+          recipe_steps: { en: ["Serve whole or peeled."], tr: ["Bütün veya soyulmuş servis edilir."], ru: ["Подавайте целым или очищенным."] }
+        }
+      ],
 
-  // =============================
-  // i18n (UI)
-  // =============================
+      "Friday": [
+        {
+          id: "yayla_corbasi",
+          name: { en: "Yayla Soup (Yogurt & Rice)", tr: "Yayla Çorbası", ru: "Йогуртовый суп «Яйла»" },
+          description: { en: "Yogurt soup with rice and mint.", tr: "Pirinçli, naneli yoğurt çorbası.", ru: "Суп на йогурте с рисом и мятой." },
+          calories_kcal: 250, co2_kg: 0.95,
+          allergens: { en: ["Dairy"], tr: ["Süt ürünü"], ru: ["Молочные продукты"] },
+          ingredients: { en: ["Yogurt", "Rice", "Mint", "Egg (binder)", "Salt"], tr: ["Yoğurt", "Pirinç", "Nane", "Yumurta (terbiye)", "Tuz"], ru: ["Йогурт", "Рис", "Мята", "Яйцо (для загущения)", "Соль"] },
+          macros_g: { protein: 10, carbs: 28, fat: 10 },
+          recipe_steps: { en: ["Cook rice in water.", "Temper yogurt with egg.", "Combine and simmer gently.", "Finish with mint."], tr: ["Pirinç kaynatın.", "Yoğurdu yumurtayla terbiyeleyin.", "Birleştirip kısık ateşte kaynatın.", "Nane ile servis edin."], ru: ["Сварите рис.", "Смешайте йогурт с яйцом.", "Соедините и прогрейте на слабом огне.", "Добавьте мяту."] }
+        },
+        {
+          id: "tavuk_kalca_but",
+          name: { en: "Chicken Leg (Thigh & Drumstick)", tr: "Tavuk Kalçalı but", ru: "Куриная ножка" },
+          description: { en: "Roasted chicken leg portion.", tr: "Fırında/ızgarada tavuk but.", ru: "Порция запечённой куриной ножки." },
+          calories_kcal: 640, co2_kg: 2.50,
+          allergens: { en: ["None"], tr: ["Yok"], ru: ["Нет"] },
+          ingredients: { en: ["Chicken leg", "Spices", "Oil", "Salt"], tr: ["Tavuk but", "Baharatlar", "Yağ", "Tuz"], ru: ["Куриная ножка", "Специи", "Масло", "Соль"] },
+          macros_g: { protein: 45, carbs: 3, fat: 46 },
+          recipe_steps: { en: ["Season chicken leg.", "Roast until cooked through.", "Serve hot."], tr: ["Butu baharatlayın.", "Pişene kadar fırınlayın.", "Sıcak servis edin."], ru: ["Приправьте ножку.", "Запеките до готовности.", "Подавайте горячим."] }
+        },
+        {
+          id: "tel_sehriyeli_bulgur",
+          name: { en: "Bulgur Pilaf with Vermicelli", tr: "Tel Şehriyeli bulgur Pilavı", ru: "Булгур с вермишелью" },
+          description: { en: "Bulgur pilaf cooked with toasted vermicelli.", tr: "Tel şehriyeli bulgur pilavı.", ru: "Булгур, приготовленный с вермишелью." },
+          calories_kcal: 310, co2_kg: 0.70,
+          allergens: { en: ["Gluten (bulgur, vermicelli)"], tr: ["Gluten (bulgur, şehriye)"], ru: ["Глютен (булгур, вермишель)"] },
+          ingredients: { en: ["Bulgur", "Vermicelli", "Butter/oil", "Water/stock", "Salt"], tr: ["Bulgur", "Tel şehriye", "Tereyağı/yağ", "Su/et suyu", "Tuz"], ru: ["Булгур", "Вермишель", "Масло", "Вода/бульон", "Соль"] },
+          macros_g: { protein: 9, carbs: 60, fat: 6 },
+          recipe_steps: { en: ["Toast vermicelli.", "Add bulgur and sauté.", "Add liquid and simmer.", "Rest and fluff."], tr: ["Şehriyeyi kavurun.", "Bulguru ekleyip soteleyin.", "Sıvıyı ekleyip pişirin.", "Dinlendirip karıştırın."], ru: ["Обжарьте вермишель.", "Добавьте булгур и слегка обжарьте.", "Добавьте жидкость и сварите.", "Дайте настояться и разрыхлите."] }
+        },
+        {
+          id: "ispanak_kavurma",
+          name: { en: "Sautéed Spinach", tr: "Ispanak Kavurma", ru: "Жареный шпинат" },
+          description: { en: "Spinach sautéed with onion and spices.", tr: "Soğanlı ıspanak kavurma.", ru: "Шпинат, обжаренный с луком и специями." },
+          calories_kcal: 200, co2_kg: 0.45,
+          allergens: { en: ["None"], tr: ["Yok"], ru: ["Нет"] },
+          ingredients: { en: ["Spinach", "Onion", "Olive oil", "Salt", "Pepper"], tr: ["Ispanak", "Soğan", "Zeytinyağı", "Tuz", "Karabiber"], ru: ["Шпинат", "Лук", "Оливковое масло", "Соль", "Перец"] },
+          macros_g: { protein: 6, carbs: 10, fat: 14 },
+          recipe_steps: { en: ["Sauté onion in oil.", "Add spinach and cook until wilted.", "Season and serve."], tr: ["Soğanı yağda soteleyin.", "Ispanağı ekleyip soldurun.", "Baharatlayıp servis edin."], ru: ["Обжарьте лук.", "Добавьте шпинат и готовьте до мягкости.", "Приправьте и подавайте."] }
+        },
+        { id: "yogurt_fri", name: { en: "Yogurt", tr: "Yoğurt", ru: "Йогурт" }, description: { en: "Plain yogurt portion.", tr: "Sade yoğurt porsiyonu.", ru: "Порция натурального йогурта." }, calories_kcal: 120, co2_kg: 0.60,
+          allergens: { en: ["Dairy"], tr: ["Süt ürünü"], ru: ["Молочные продукты"] }, ingredients: { en: ["Milk", "Yogurt cultures"], tr: ["Süt", "Yoğurt mayası"], ru: ["Молоко", "Закваска"] },
+          macros_g: { protein: 6, carbs: 8, fat: 6 }, recipe_steps: { en: ["Served chilled."], tr: ["Soğuk servis edilir."], ru: ["Подаётся охлаждённым."] } },
+        { id: "open_buffet_fri", name: { en: "Open Buffet (Salad Bar)", tr: "Açık büfe", ru: "Открытый буфет" }, description: { en: "Self-service salad/side station (varies daily).", tr: "Kendin seç açık büfe (günlük değişir).", ru: "Самообслуживание: салаты/гарниры (меняется ежедневно)." },
+          calories_kcal: 160, co2_kg: 0.45, allergens: { en: ["Varies (ask staff)"], tr: ["Değişken (personelden bilgi alın)"], ru: ["Зависит от выбора (уточняйте у персонала)"] },
+          ingredients: { en: ["Mixed vegetables", "Dressings (varies)", "Seasonings"], tr: ["Karışık sebzeler", "Soslar (değişken)", "Baharatlar"], ru: ["Овощи", "Соусы (по выбору)", "Приправы"] },
+          macros_g: { protein: 4, carbs: 18, fat: 8 }, recipe_steps: { en: ["Choose items at the buffet station."], tr: ["Açık büfeden seçerek alın."], ru: ["Выберите позиции на линии буфета."] } },
+        {
+          id: "kestaneli_yas_pasta",
+          name: { en: "Chestnut Cake", tr: "Kestaneli Yaş Pasta", ru: "Каштановый торт" },
+          description: { en: "Moist cake with chestnut cream.", tr: "Kestane kremalı yaş pasta.", ru: "Влажный торт с каштановым кремом." },
+          calories_kcal: 420, co2_kg: 1.35,
+          allergens: { en: ["Gluten", "Dairy", "Egg", "Nuts (chestnut)"], tr: ["Gluten", "Süt ürünü", "Yumurta", "Kuruyemiş (kestane)"], ru: ["Глютен", "Молочные продукты", "Яйцо", "Орехи (каштан)"] },
+          ingredients: { en: ["Flour", "Egg", "Milk/cream", "Sugar", "Chestnut puree", "Butter"], tr: ["Un", "Yumurta", "Süt/krema", "Şeker", "Kestane püresi", "Tereyağı"], ru: ["Мука", "Яйцо", "Молоко/сливки", "Сахар", "Каштановое пюре", "Масло"] },
+          macros_g: { protein: 8, carbs: 55, fat: 18 },
+          recipe_steps: { en: ["Bake sponge cake.", "Prepare chestnut cream.", "Assemble and chill.", "Slice and serve."], tr: ["Keki pişirin.", "Kestane kremasını hazırlayın.", "Birleştirip soğutun.", "Dilimleyip servis edin."], ru: ["Испеките бисквит.", "Сделайте каштановый крем.", "Соберите торт и охладите.", "Нарежьте и подавайте."] }
+        }
+      ]
+    };
+
   const I18N = {
     en: {
       logo_tagline:"Smart campus menu • nutrition • allergens • carbon footprint",
