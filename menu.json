@@ -1,47 +1,51 @@
 {
-  "Monday": [
-    "Arpa Şehriye Çorbası",
-    "Tavuk Şinitzel",
-    "Pirinç Pilavı",
-    "Nohut Yemeği",
-    "Yoğurt",
-    "Açık büfe",
-    "Portakal"
-  ],
-  "Tuesday": [
-    "Tavuk Çorbası",
-    "Mantarlı Et Steak",
-    "Keşkek",
-    "Taze Fasulye",
-    "Yoğurt",
-    "Açık büfe",
-    "Haşhaşlı Tatlı"
-  ],
-  "Wednesday": [
-    "Mengen Çorbası",
-    "Tavuk Tandır",
-    "Tereyağlı Makarna",
-    "Ev Usulü Patates",
-    "Yoğurt",
-    "Açık büfe",
-    "Kazandibi"
-  ],
-  "Thursday": [
-    "Mantar Çorbası",
-    "Çökertme Kebabı",
-    "Şehriyeli Pirinç Pilavı",
-    "Bezelye Yemeği",
-    "Yoğurt",
-    "Açık büfe",
-    "Mandalina"
-  ],
-  "Friday": [
-    "Yayla Çorbası",
-    "Tavuk Kalçalı But",
-    "Tel Şehriyeli Bulgur Pilavı",
-    "Ispanak Kavurma",
-    "Yoğurt",
-    "Açık büfe",
-    "Kestaneli Yaş Pasta"
-  ]
+  "week_label": "22.12.2025–26.12.2025",
+  "pdf_filename": "menu.pdf",
+  "days": {
+    "Monday": [
+      "Arpa Şehriye Çorbası",
+      "Tavuk Şinitzel",
+      "Pirinç Pilavı",
+      "Nohut Yemeği",
+      "Yoğurt",
+      "Açık büfe",
+      "Portakal"
+    ],
+    "Tuesday": [
+      "Tavuk Çorbası",
+      "Mantarlı et steak",
+      "Keşkek",
+      "Tazefasulye",
+      "Yoğurt",
+      "Açık büfe",
+      "Haşhaşlı Tatlı"
+    ],
+    "Wednesday": [
+      "Mengen Çorbası",
+      "Tavuk Tandır (ızgara tavadan)",
+      "Tereyağlı Makarna",
+      "Ev Usulü Patates",
+      "Yoğurt",
+      "Açık büfe",
+      "Kazandibi"
+    ],
+    "Thursday": [
+      "Mantar Çorbası",
+      "Çökertme Kebabı",
+      "Şehriyeli Pirinç Pilavı",
+      "Bezelye Yemeği",
+      "Yoğurt",
+      "Açık büfe",
+      "Mandalina"
+    ],
+    "Friday": [
+      "Yayla Çorbası",
+      "Tavuk Kalçalı but",
+      "Tel Şehriyeli bulgur Pilavı",
+      "Ispanak Kavurma",
+      "Yoğurt",
+      "Açık büfe",
+      "Kestaneli Yaş Pasta"
+    ]
+  }
 }
