@@ -1,238 +1,166 @@
 {
-  "Arpa Şehriye Çorbası": {
+  "Arpa Sehriye Corbasi": {
+    "name_en": "Barley & Vermicelli Soup",
     "kcal": 190,
-    "protein_g": 6,
-    "fat_g": 7,
-    "carbs_g": 26,
-    "fiber_g": 3,
-    "co2e_kg_per_serving": 0.35,
-    "ingredients": {
-      "Arpa şehriye": "50 g",
-      "Broth": "350 ml",
-      "Tomato paste": "10 g",
-      "Butter or oil": "8 g"
-    },
-    "allergens": ["Gluten", "Dairy (if butter)"],
+    "macros": { "protein_g": 5, "fat_g": 6, "carbs_g": 29 },
+    "nutrition": ["B vitamins", "Iron", "Fiber"],
+    "allergens": ["Gluten (wheat)", "May contain dairy (butter)"],
+    "co2_kg_per_serving": 0.45,
+    "ingredients": ["Pearl barley", "Vermicelli", "Onion", "Carrot", "Tomato paste", "Olive oil or butter", "Stock or water", "Salt", "Black pepper"],
     "recipe": {
-      "time": "25 min",
+      "method": "Boiling",
+      "time_min": 35,
       "steps": [
-        "Toast arpa şehriye in butter or oil.",
-        "Add tomato paste and stir briefly.",
-        "Add broth and simmer until tender.",
-        "Season and serve hot."
+        "Rinse barley and soak 15 minutes if possible to reduce cooking time.",
+        "Sauté chopped onion (and carrot if used) in olive oil/butter until soft.",
+        "Add tomato paste and cook 1 minute to remove raw taste.",
+        "Add barley and stock/water, bring to a gentle boil.",
+        "Cook 20–25 minutes until barley is tender.",
+        "Add vermicelli and cook 5–7 minutes more.",
+        "Season with salt and pepper, rest 3 minutes, serve hot."
       ]
     }
   },
 
-  "Tavuk Şinitzel": {
-    "kcal": 540,
-    "protein_g": 38,
-    "fat_g": 26,
-    "carbs_g": 40,
-    "fiber_g": 2,
-    "co2e_kg_per_serving": 1.2,
-    "ingredients": {
-      "Chicken breast": "160 g",
-      "Flour": "25 g",
-      "Egg": "1",
-      "Breadcrumbs": "40 g",
-      "Oil": "15 g"
-    },
-    "allergens": ["Gluten", "Egg"],
-    "recipe": {
-      "time": "30 min",
-      "steps": [
-        "Flatten and season chicken.",
-        "Coat with flour, egg, then breadcrumbs.",
-        "Fry until golden on both sides.",
-        "Drain and serve."
-      ]
-    }
-  },
-
-  "Pirinç Pilavı": {
-    "kcal": 280,
-    "protein_g": 5,
-    "fat_g": 8,
-    "carbs_g": 48,
-    "fiber_g": 1,
-    "co2e_kg_per_serving": 0.6,
-    "ingredients": {
-      "Rice": "120 g",
-      "Butter": "15 g",
-      "Water": "250 ml"
-    },
-    "allergens": ["Dairy"],
-    "recipe": {
-      "time": "25 min",
-      "steps": [
-        "Wash rice thoroughly.",
-        "Toast rice in butter.",
-        "Add water and cook until fluffy."
-      ]
-    }
-  },
-
-  "Nohut Yemeği": {
-    "kcal": 360,
-    "protein_g": 16,
-    "fat_g": 10,
-    "carbs_g": 52,
-    "fiber_g": 12,
-    "co2e_kg_per_serving": 0.55,
-    "ingredients": {
-      "Cooked chickpeas": "200 g",
-      "Onion": "60 g",
-      "Tomato paste": "20 g",
-      "Oil": "10 g"
-    },
-    "allergens": ["None"],
-    "recipe": {
-      "time": "40 min",
-      "steps": [
-        "Saute onion in oil.",
-        "Add tomato paste and chickpeas.",
-        "Simmer with water until thick."
-      ]
-    }
-  },
-
-  "Yoğurt": {
-    "kcal": 120,
-    "protein_g": 8,
-    "fat_g": 6,
-    "carbs_g": 9,
-    "fiber_g": 0,
-    "co2e_kg_per_serving": 0.45,
-    "ingredients": {
-      "Plain yogurt": "200 g"
-    },
-    "allergens": ["Dairy"],
-    "recipe": {
-      "time": "—",
-      "steps": ["Serve chilled."]
-    }
-  },
-
-  "Açık büfe": {
-    "kcal": 180,
-    "protein_g": 4,
-    "fat_g": 10,
-    "carbs_g": 18,
-    "fiber_g": 6,
-    "co2e_kg_per_serving": 0.25,
-    "ingredients": {
-      "Mixed salad vegetables": "1 bowl",
-      "Olive oil / lemon": "optional"
-    },
-    "allergens": ["May vary"],
-    "recipe": {
-      "time": "—",
-      "steps": ["Selection varies daily."]
-    }
-  },
-
-  "Portakal": {
-    "kcal": 62,
-    "protein_g": 1,
-    "fat_g": 0,
-    "carbs_g": 15,
-    "fiber_g": 3,
-    "co2e_kg_per_serving": 0.08,
-    "ingredients": {
-      "Orange": "1 medium"
-    },
-    "allergens": ["None"],
-    "recipe": {
-      "time": "—",
-      "steps": ["Serve fresh."]
-    }
-  },
-
-  "Tavuk Çorbası": {
+  "Tavuk Corbasi": {
+    "name_en": "Chicken Soup",
     "kcal": 220,
-    "protein_g": 18,
-    "fat_g": 9,
-    "carbs_g": 16,
-    "fiber_g": 2,
-    "co2e_kg_per_serving": 0.8,
-    "ingredients": {
-      "Chicken": "90 g",
-      "Broth": "350 ml",
-      "Carrot": "50 g",
-      "Onion": "30 g"
-    },
-    "allergens": ["None"],
+    "macros": { "protein_g": 18, "fat_g": 9, "carbs_g": 16 },
+    "nutrition": ["Protein", "B vitamins", "Zinc"],
+    "allergens": ["May contain gluten (if flour/noodles used)", "Celery (optional)"],
+    "co2_kg_per_serving": 0.95,
+    "ingredients": ["Chicken", "Onion", "Carrot", "Garlic", "Stock or water", "Olive oil", "Salt", "Black pepper", "Lemon (optional)"],
     "recipe": {
-      "time": "35 min",
+      "method": "Boiling",
+      "time_min": 45,
       "steps": [
-        "Simmer vegetables in broth.",
-        "Add shredded chicken.",
-        "Season and serve hot."
+        "Boil chicken with onion and carrot until cooked (about 25–30 minutes).",
+        "Remove chicken, shred the meat, discard bones/skin.",
+        "Strain broth if you want a clearer soup.",
+        "Return broth to pot, add shredded chicken and simmer 10 minutes.",
+        "Adjust salt/pepper; add lemon juice for a brighter taste.",
+        "Serve hot."
       ]
     }
   },
 
-  "Mantarlı et steak": {
+  "Mengen Corbasi": {
+    "name_en": "Mengen-Style Vegetable Soup",
+    "kcal": 210,
+    "macros": { "protein_g": 6, "fat_g": 7, "carbs_g": 30 },
+    "nutrition": ["Vitamin A", "Vitamin C", "Fiber"],
+    "allergens": ["Gluten (if flour/noodles used)", "May contain dairy (butter)"],
+    "co2_kg_per_serving": 0.55,
+    "ingredients": ["Mixed vegetables (carrot, potato, zucchini)", "Onion", "Tomato paste", "Olive oil or butter", "Stock or water", "Salt", "Black pepper", "Dried mint (optional)"],
+    "recipe": {
+      "method": "Boiling",
+      "time_min": 35,
+      "steps": [
+        "Sauté onion in oil/butter until soft.",
+        "Add tomato paste and cook 1 minute.",
+        "Add diced vegetables and stir 2 minutes.",
+        "Pour in stock/water and bring to a boil.",
+        "Simmer 20–25 minutes until vegetables are tender.",
+        "Season and optionally finish with dried mint."
+      ]
+    }
+  },
+
+  "Mantar Corbasi": {
+    "name_en": "Mushroom Soup",
+    "kcal": 260,
+    "macros": { "protein_g": 8, "fat_g": 14, "carbs_g": 24 },
+    "nutrition": ["Selenium", "B vitamins"],
+    "allergens": ["Dairy", "Gluten (if flour used)"],
+    "co2_kg_per_serving": 0.70,
+    "ingredients": ["Mushrooms", "Onion", "Butter", "Flour", "Milk", "Stock or water", "Salt", "Black pepper"],
+    "recipe": {
+      "method": "Boiling",
+      "time_min": 30,
+      "steps": [
+        "Sauté onion and sliced mushrooms in butter until mushrooms release water and brown slightly.",
+        "Add flour and cook 1 minute (roux).",
+        "Slowly add milk while whisking to avoid lumps.",
+        "Add stock/water and simmer 10–15 minutes.",
+        "Blend partially if you want a creamier texture.",
+        "Season with salt and pepper, serve."
+      ]
+    }
+  },
+
+  "Yayla Corbasi": {
+    "name_en": "Yogurt & Rice Soup (Yayla)",
+    "kcal": 230,
+    "macros": { "protein_g": 9, "fat_g": 8, "carbs_g": 29 },
+    "nutrition": ["Calcium", "Probiotics", "Vitamin B12"],
+    "allergens": ["Dairy", "Egg (often)"],
+    "co2_kg_per_serving": 0.65,
+    "ingredients": ["Yogurt", "Rice", "Egg (optional)", "Flour (optional)", "Butter", "Dried mint", "Salt"],
+    "recipe": {
+      "method": "Boiling",
+      "time_min": 35,
+      "steps": [
+        "Cook rice in water until nearly soft (10–12 minutes).",
+        "In a bowl, whisk yogurt with egg (optional) and a spoon of flour (optional) until smooth.",
+        "Temper: add a few ladles of hot soup into the yogurt mixture while whisking.",
+        "Pour mixture back into the pot on low heat, stirring constantly (do not boil hard).",
+        "Simmer 5–7 minutes until slightly thickened.",
+        "Finish with butter and dried mint, season and serve."
+      ]
+    }
+  },
+
+  "Tavuk Snitzel": {
+    "name_en": "Chicken Schnitzel",
     "kcal": 520,
-    "protein_g": 40,
-    "fat_g": 34,
-    "carbs_g": 12,
-    "fiber_g": 2,
-    "co2e_kg_per_serving": 3.0,
-    "ingredients": {
-      "Beef steak": "170 g",
-      "Mushrooms": "120 g",
-      "Butter or oil": "12 g"
-    },
-    "allergens": ["Dairy (if butter)"],
+    "macros": { "protein_g": 35, "fat_g": 22, "carbs_g": 45 },
+    "nutrition": ["Protein", "Niacin", "Selenium"],
+    "allergens": ["Gluten (breadcrumbs/flour)", "Egg"],
+    "co2_kg_per_serving": 1.60,
+    "ingredients": ["Chicken breast", "Flour", "Egg", "Breadcrumbs", "Salt", "Black pepper", "Oil for frying"],
     "recipe": {
-      "time": "25 min",
+      "method": "Pan-frying",
+      "time_min": 25,
       "steps": [
-        "Sear steak to desired doneness.",
-        "Saute mushrooms separately.",
-        "Serve together."
+        "Pound chicken breast to even thickness.",
+        "Season with salt and pepper.",
+        "Coat in flour, then egg, then breadcrumbs.",
+        "Heat oil in a pan (medium heat).",
+        "Fry 3–4 minutes per side until golden and cooked through.",
+        "Rest 2 minutes on paper towel, serve."
       ]
     }
   },
 
-  "Keşkek": {
-    "kcal": 480,
-    "protein_g": 22,
-    "fat_g": 16,
-    "carbs_g": 60,
-    "fiber_g": 7,
-    "co2e_kg_per_serving": 1.4,
-    "ingredients": {
-      "Wheat": "120 g",
-      "Chicken or meat": "80 g",
-      "Butter": "12 g"
-    },
-    "allergens": ["Gluten", "Dairy"],
+  "Mantarli Et Steak": {
+    "name_en": "Beef Steak with Mushrooms",
+    "kcal": 610,
+    "macros": { "protein_g": 42, "fat_g": 38, "carbs_g": 18 },
+    "nutrition": ["Iron", "Zinc", "Vitamin B12"],
+    "allergens": ["Dairy (butter/cream, optional)"],
+    "co2_kg_per_serving": 4.80,
+    "ingredients": ["Beef steak", "Mushrooms", "Onion", "Butter or olive oil", "Garlic", "Salt", "Black pepper", "Cream (optional)"],
     "recipe": {
-      "time": "90 min",
+      "method": "Pan-searing",
+      "time_min": 25,
       "steps": [
-        "Cook wheat until very soft.",
-        "Add meat and stir until creamy.",
-        "Top with melted butter."
+        "Season steak with salt and pepper.",
+        "Sear on a hot pan 2–4 minutes each side (depending on thickness).",
+        "Rest steak 5 minutes.",
+        "In the same pan sauté mushrooms and onion with butter/oil.",
+        "Add garlic; optionally add a splash of cream for sauce.",
+        "Serve mushrooms over steak."
       ]
     }
   },
 
-  "Kazandibi": {
-    "kcal": 330,
-    "protein_g": 7,
-    "fat_g": 10,
-    "carbs_g": 52,
-    "fiber_g": 0,
-    "co2e_kg_per_serving": 0.95,
-    "ingredients": {
-      "Milk": "250 ml",
-      "Sugar": "30 g",
-      "Starch": "18 g"
-    },
-    "allerge
+  "Tavuk Tandir Izgara": {
+    "name_en": "Grilled-Style Chicken Tandır",
+    "kcal": 540,
+    "macros": { "protein_g": 40, "fat_g": 28, "carbs_g": 30 },
+    "nutrition": ["Protein", "B vitamins"],
+    "allergens": ["May contain yogurt (marinade)"],
+    "co2_kg_per_serving": 1.55,
+    "ingredients": ["Chicken pieces",]()
 
-
-  
     
