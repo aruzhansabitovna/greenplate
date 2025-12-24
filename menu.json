@@ -1,6 +1,7 @@
 {
-  "week_label": "22.12.2025–26.12.2025",
-  "pdf_filename": "menu.pdf",
+  "week_start": "2025-12-22",
+  "week_end": "2025-12-26",
+  "menu_pdf_url": "./menu.pdf",
   "days": {
     "Monday": [
       "Arpa Şehriye Çorbası",
@@ -15,7 +16,7 @@
       "Tavuk Çorbası",
       "Mantarlı et steak",
       "Keşkek",
-      "Tazefasulye",
+      "Taze fasulye",
       "Yoğurt",
       "Açık büfe",
       "Haşhaşlı Tatlı"
@@ -30,7 +31,7 @@
       "Kazandibi"
     ],
     "Thursday": [
-      "Mantar Çorbası",
+      "Mantar  Çorbası",
       "Çökertme Kebabı",
       "Şehriyeli Pirinç Pilavı",
       "Bezelye Yemeği",
