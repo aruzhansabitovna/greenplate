@@ -232,14 +232,6 @@
 }
 
 .noScroll{ overflow:hidden !important; }
-
-    .miniTable{ width:100%; border-collapse:separate; border-spacing:0; margin-top:8px; overflow:hidden; border:1px solid var(--line); border-radius:12px; }
-    .miniTd{ padding:10px 12px; border-bottom:1px solid var(--line); font-size:14px; }
-    .miniTable tr:last-child .miniTd{ border-bottom:none; }
-    .miniTdAmt{ text-align:right; white-space:nowrap; }
-    .stepsList{ margin:8px 0 0 18px; }
-    .stepsList li{ margin:6px 0; }
-
 </style>
 </head>
 <body>
@@ -903,125 +895,6 @@
   function escHtml(s){
     return safeText(s).replace(/[&<>"']/g, m => ({ "&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;" }[m]));
   }
-  function tKey(k){ return (T[lang] && T[lang][k]) || (T.en && T.en[k]) || k; }
-
-  function normalizeIngredients(ing){
-    if(!ing) return [];
-    if(Array.isArray(ing)) return ing.map(x=>({name:String(x), amount:""}));
-    if(typeof ing === "object"){
-      return Object.entries(ing).map(([name, amount])=>({name:String(name), amount:String(amount)}));
-    }
-    return [{name:String(ing), amount:""}];
-  }
-
-  function ingredientsToSearchText(ing){
-    return normalizeIngredients(ing).map(r=>`${r.name} ${r.amount}`.trim()).join(" ");
-  }
-
-  function normalizeRecipe(r){
-    if(!r) return {time:"", steps:[], text:""};
-    if(typeof r === "string") return {time:"", steps:[], text:r};
-    if(typeof r === "object"){
-      const time = r.time ? String(r.time) : "";
-      const steps = Array.isArray(r.steps) ? r.steps.map(s=>String(s)) : [];
-      const text = r.text ? String(r.text) : "";
-      return {time, steps, text};
-    }
-    return {time:"", steps:[], text:String(r)};
-  }
-
-  function recipeToSearchText(r){
-    const rr = normalizeRecipe(r);
-    return [rr.time, rr.text, ...(rr.steps||[])].join(" ");
-  }
-
-  function normalizeNutrition(d){
-    const n = d?.nutrition && typeof d.nutrition === "object" ? d.nutrition : {};
-    const getNum = (v)=> (v==null || v==="") ? null : Number(v);
-    return {
-      kcal: Number.isFinite(Number(d?.kcal)) ? Math.round(Number(d.kcal)) : null,
-      protein_g: getNum(n.protein_g ?? d?.protein_g),
-      fat_g: getNum(n.fat_g ?? d?.fat_g),
-      carbs_g: getNum(n.carbs_g ?? d?.carbs_g),
-      fiber_g: getNum(n.fiber_g ?? d?.fiber_g),
-      co2: Number.isFinite(Number(d?.co2e_kg_per_serving)) ? Number(d.co2e_kg_per_serving) : null
-    };
-  }
-
-  function renderKVTable(rows){
-    if(!rows.length) return `<div class="muted">${escHtml(tKey("no_data"))}</div>`;
-    return `<table class="miniTable"><tbody>` + rows.map(r=>{
-      const a = r.amount ? `<td class="miniTd miniTdAmt">${escHtml(r.amount)}</td>` : `<td class="miniTd miniTdAmt muted">—</td>`;
-      return `<tr><td class="miniTd">${escHtml(r.name)}</td>${a}</tr>`;
-    }).join("") + `</tbody></table>`;
-  }
-
-  function renderNutritionTable(n){
-    const rows = [];
-    if(n.kcal!=null) rows.push([tKey("lbl_kcal"), `${n.kcal} ${tKey("lbl_kcal")}`.replace("kcal kcal","kcal").replace("ккал ккал","ккал")]);
-    const add = (label, val)=>{ if(val!=null && !Number.isNaN(val)) rows.push([label, `${val} g`]); };
-    add(tKey("lbl_protein"), n.protein_g);
-    add(tKey("lbl_fat"), n.fat_g);
-    add(tKey("lbl_carbs"), n.carbs_g);
-    add(tKey("lbl_fiber"), n.fiber_g);
-
-    const co2 = (n.co2!=null) ? `${n.co2.toFixed(2)} ${tKey("lbl_co2")}` : null;
-
-    let html = "";
-    if(rows.length){
-      html += `<table class="miniTable"><tbody>` + rows.map(([k,v])=>`<tr><td class="miniTd">${escHtml(k)}</td><td class="miniTd miniTdAmt">${escHtml(v)}</td></tr>`).join("") + `</tbody></table>`;
-    } else {
-      html += `<div class="muted">${escHtml(tKey("no_data"))}</div>`;
-    }
-    if(co2) html += `<div class="pillMini" style="margin-top:8px">${escHtml(co2)}</div>`;
-    return html;
-  }
-
-  function renderRecipeCard(title, d){
-    const ing = normalizeIngredients(d?.ingredients);
-    const rr = normalizeRecipe(d?.recipe);
-    const n = normalizeNutrition(d);
-    const allergens = Array.isArray(d?.allergens) ? d.allergens : (d?.allergens ? [String(d.allergens)] : []);
-    const kcalPill = (n.kcal!=null) ? `${n.kcal} ${tKey("lbl_kcal")}` : `— ${tKey("lbl_kcal")}`;
-    const co2Pill = (n.co2!=null) ? `${n.co2.toFixed(2)} ${tKey("lbl_co2")}` : null;
-
-    return `
-      <article class="dishCard">
-        <div class="dishTop">
-          <div class="dishTitle">${escHtml(title)}</div>
-          <div class="dishMeta">
-            <span class="pillMini">${escHtml(kcalPill)}</span>
-            ${co2Pill ? `<span class="pillMini">${escHtml(co2Pill)}</span>` : ``}
-          </div>
-        </div>
-
-        <div class="dishBody">
-          <details class="dishDetails">
-            <summary>${escHtml(tKey("recipes_nutrition"))}</summary>
-            ${renderNutritionTable(n)}
-          </details>
-
-          <details class="dishDetails">
-            <summary>${escHtml(tKey("lbl_ingredients"))}</summary>
-            ${renderKVTable(ing)}
-          </details>
-
-          <details class="dishDetails">
-            <summary>${escHtml(tKey("lbl_allergens"))}</summary>
-            ${allergens.length ? `<div>${allergens.map(a=>`<span class="pillMini" style="margin-right:6px">${escHtml(a)}</span>`).join("")}</div>` : `<div class="muted">${escHtml(tKey("no_data"))}</div>`}
-          </details>
-
-          <details class="dishDetails" open>
-            <summary>${escHtml(tKey("lbl_recipe"))}</summary>
-            ${rr.time ? `<div class="muted" style="margin-bottom:6px">${escHtml(tKey("lbl_time") || "Time")}: ${escHtml(rr.time)}</div>` : ``}
-            ${rr.text ? `<div style="margin-bottom:8px">${escHtml(rr.text)}</div>` : ``}
-            ${rr.steps && rr.steps.length ? `<ol class="stepsList">` + rr.steps.map(s=>`<li>${escHtml(s)}</li>`).join("") + `</ol>` : `<div class="muted">${escHtml(tKey("no_data"))}</div>`}
-          </details>
-        </div>
-      </article>
-    `;
-  }
-
 
   function currentPath(){
     const h = (location.hash || "#/home").trim();
@@ -1208,15 +1081,34 @@
 
     for(const [key, d] of entries){
       const title = dishDisplayName(key);
-      const ingrText = ingredientsToSearchText(d?.ingredients);
-      const recipeText = recipeToSearchText(d?.recipe);
-      const hay = (key + " " + title + " " + ingrText + " " + recipeText).toLowerCase();
+      const ingredients = d?.ingredients ? (Array.isArray(d.ingredients) ? d.ingredients : [String(d.ingredients)]) : [];
+      const recipe = safeText(d?.recipe);
+      const hay = (key + " " + title + " " + ingredients.join(" ") + " " + recipe).toLowerCase();
       if(q && !hay.includes(q)) continue;
 
-      out.push(renderRecipeCard(title, d));
+      out.push(`
+        <article class="dishCard">
+          <div class="dishTop">
+            <div class="dishTitle">${escHtml(title)}</div>
+            <div class="dishMeta">
+              <span class="pillMini">${d && Number.isFinite(Number(d.kcal)) ? Math.round(Number(d.kcal)) : "—"} kcal</span>
+            </div>
+          </div>
+          <div class="dishBody">
+            <details class="dishDetails" open>
+              <summary>Recipe</summary>
+              ${recipe ? `<div>${escHtml(recipe)}</div>` : `<div class="muted">No data</div>`}
+            </details>
+            <details class="dishDetails">
+              <summary>Ingredients</summary>
+              ${ingredients.length ? `<ul>${ingredients.map(x=>`<li>${escHtml(x)}</li>`).join("")}</ul>` : `<div class="muted">No data</div>`}
+            </details>
+          </div>
+        </article>
+      `);
     }
 
-    grid.innerHTML = out.length ? out.join("") : `<div class="muted" style="padding:12px">${escHtml(tKey("no_recipes"))}</div>`;
+    grid.innerHTML = out.length ? out.join("") : `<div class="muted" style="padding:12px">No recipes found.</div>`;
   }
 
   function wireControls(){
@@ -1332,544 +1224,64 @@
   // Minimal UI translations (main pages + key labels). Missing keys fallback to existing text.
   const T = {
     en: {
-      "about_m1": "A single official weekly menu page reduces confusion.",
-      "about_m2": "Nutrition and allergen information supports safer choices.",
-      "about_m3": "Carbon metrics can be used for education and reporting.",
-      "about_media_p": "A clean, campus-ready interface for menu transparency, allergy safety, and sustainability learning.",
-      "about_media_t": "Project visuals",
-      "about_scope_p1": "As a pilot, GreenPlate focuses on a feasible scope that still demonstrates academic value: weekly menu ingestion, a curated recipe/ingredient layer, and transparent estimations of nutrition and carbon footprint. The architecture is intentionally modular so that the platform can be expanded with verified kitchen quantities, additional dishes, and a formally cited emissions dataset.",
-      "about_scope_p2": "From a deployment standpoint, GitHub Pages is a static host. To achieve true \u201cautomatic updates\u201d when a new weekly PDF is published, GreenPlate can use a scheduled GitHub Action that downloads the official PDF, converts it into a structured JSON feed, and redeploys the site. This approach is reliable, auditable, and suitable for a university pilot.",
-      "about_scope_t": "Scope and future work",
-      "about_settings_t": "Quick settings (demo)",
-      "about_sub": "GreenPlate is a smart meal-information platform for campus dining: menu, recipes, allergens, nutrition and carbon footprint.",
-      "about_title": "About this project",
-      "about_uni_addr": "Address:",
-      "about_uni_name": "Institution:",
-      "about_uni_note": "You can replace the logo URL and address with official details (and add a map link) when you have them.",
-      "about_uni_site": "Menu source (PDF):",
-      "about_uni_t": "University information",
-      "auto_options": "Auto-update options",
-      "btn_close": "Close",
-      "cta_open_dash": "Open sustainability dashboard",
-      "cta_open_menu": "Open the menu",
-      "day_pick": "Pick a day",
-      "filter_glutenfree": "Gluten-free",
-      "filter_lowcarbon": "Low carbon",
-      "footer_note": "GreenPlate \u2022 Single-file demo with multi-page navigation \u2022 Replace sample data with the official university feed.",
-      "hero_lead": "GreenPlate automatically turns the university\u2019s daily menu into clear dish cards: calories, ingredients, allergens, nutritional values, and carbon footprint. Built as a pilot\u2014adaptable to any institution.",
-      "hero_title": "Smart campus menu with nutrition and carbon footprint.",
-      "home_note": "Tip: Language selection is saved on the device, so students and lecturers don\u2019t need to switch every time.",
-      "home_real_1": "Example meal tray (campus cafeteria).",
-      "home_real_2": "Example meal tray (campus cafeteria).",
-      "home_real_3": "Example meal tray (campus cafeteria).",
-      "home_real_p": "Real campus meals (examples) \u2014 this is what GreenPlate turns into clear nutrition + allergen + carbon footprint cards.",
-      "home_real_t": "From our cafeteria",
-      "home_visual_p": "Nutritional transparency and carbon awareness can reduce confusion, improve trust, and encourage better campus food decisions.",
-      "home_visual_title": "A healthier, lower\u2011impact choice",
-      "home_why_1_a": "Check allergens before eating.",
-      "home_why_1_b": "See calories and macros for better choices.",
-      "home_why_1_c": "Compare dishes by carbon footprint.",
-      "home_why_1_t": "For students",
-      "home_why_2_a": "Supports sustainability education.",
-      "home_why_2_b": "Creates a single, official menu page for the week.",
-      "home_why_2_c": "Helps communicate dietary information clearly.",
-      "home_why_2_t": "For lecturers & administration",
-      "home_why_3_a": "Reduces repeated questions about ingredients and allergens.",
-      "home_why_3_b": "Encourages smarter portioning and less waste.",
-      "home_why_3_c": "Makes updates easy: weekly PDF \u2192 structured menu.",
-      "home_why_3_t": "For the cafeteria",
-      "home_why_sub": "A practical platform for the cafeteria that improves transparency, health choices, and sustainability.",
-      "home_why_title": "Why GreenPlate?",
-      "kpi_co2": "Total carbon footprint (selected day)",
-      "kpi_dishes": "Dishes shown",
-      "kpi_kcal": "Total kcal (selected day)",
-      "label_portions": "Portions",
-      "label_totalco2": "Total CO\u2082e",
-      "lbl_carbs": "Carbs",
-      "lbl_co2": "kg CO\u2082e / serving",
-      "lbl_fat": "Fat",
-      "lbl_fiber": "Fiber",
-      "lbl_kcal": "kcal",
-      "lbl_protein": "Protein",
-      "logo_tagline": "Smart campus menu \u2022 nutrition \u2022 allergens \u2022 carbon footprint",
-      "menu_hint": "What you see on each card",
-      "menu_hint_1": "Dish name (EN/TR/RU)",
-      "menu_hint_2": "Calories + macros per selected portions",
-      "menu_hint_3": "Allergens and ingredient list",
-      "menu_hint_4": "Carbon footprint (kg CO\u2082e)",
-      "menu_sub": "Choose a day to see dish cards. This demo uses sample dishes\u2014later we will automate weekly updates from the official PDF.",
-      "menu_title": "Weekly cafeteria menu",
-      "meth_app_p": "Below is the transparent ingredient-level logic used in GreenPlate. The same steps are applied consistently across dishes for fair comparison.",
-      "meth_app_t": "Ingredient-level calculation (summary table)",
-      "meth_density_note": "Note: for olive oil, density \u2248 0.91 kg/L (used to convert ml to kg).",
-      "meth_ex_note": "This prevents overestimating emissions when only a small part of a packaged ingredient is used.",
-      "meth_ex_parsed": "ParsedKg",
-      "meth_ex_qty": "Quantity",
-      "meth_ex_title": "Example: Olive oil",
-      "meth_ex_usedkg": "UsedKg",
-      "meth_ex_usedpct": "UsedPct",
-      "meth_f_category": "Food category (meat, vegetable, oil, dairy, grain, etc.)",
-      "meth_f_co2e": "Carbon footprint for this ingredient",
-      "meth_f_ef": "Emission factor (kg CO\u2082e per 1 kg of product)",
-      "meth_f_ingredient": "Name of the product (e.g., beef, olive oil, rice)",
-      "meth_f_parsed": "Quantity converted to kilograms",
-      "meth_f_quantity": "Planned amount used (g, ml, pcs, etc.)",
-      "meth_f_unittype": "Unit of measurement (g, kg, L, pcs)",
-      "meth_f_usedkg": "Actual amount used after adjustment",
-      "meth_f_usedpct": "Share of the package actually used in the recipe",
-      "meth_formula_p": "Dish CO\u2082e = \u03a3 (ingredient_kg \u00d7 factor_kgCO\u2082e_per_kg) \u00d7 portions",
-      "meth_formula_t": "Simple formula",
-      "meth_next_1": "Add kitchen-specific quantities for each recipe.",
-      "meth_next_2": "Include food waste (leftovers) and portion optimization.",
-      "meth_next_3": "Add seasonal/locally sourced multipliers.",
-      "meth_next_4": "Publish a weekly campus sustainability summary.",
-      "meth_or": "or",
-      "meth_part_1_p": "Each dish includes an ingredient list and (optionally) quantities. If the cafeteria only provides dish names, GreenPlate can use a standardized recipe template for the pilot and improve it over time with the kitchen team.",
-      "meth_part_1_t": "1) Recipe \u2192 ingredient list",
-      "meth_part_2_p": "For each ingredient, we multiply the ingredient amount (in kg) by its emission factor (kg CO\u2082e per kg). The sum across all ingredients is the dish footprint. This can be extended to include cooking energy and packaging.",
-      "meth_part_2_t": "2) Ingredient amount \u00d7 emission factor",
-      "meth_part_3_p": "Emission factors vary by country, farming method, and transport. GreenPlate should show the data source and clearly label values as \u201cestimated\u201d. For the pilot, a consistent dataset is chosen to keep comparisons fair.",
-      "meth_part_3_t": "3) Uncertainty and transparency",
-      "meth_part_4_t": "4) What\u2019s next for a stronger model",
-      "meth_s_adjust": "Adjust usage",
-      "meth_s_convert": "Convert to kg",
-      "meth_s_dish": "Dish footprint",
-      "meth_s_ing": "Ingredient footprint",
-      "meth_sub": "GreenPlate uses a transparent recipe-based approach: ingredient amounts \u00d7 emission factors, adjusted for portion size.",
-      "meth_tbl1_h1": "Field",
-      "meth_tbl1_h2": "Meaning",
-      "meth_tbl2_h1": "Step",
-      "meth_tbl2_h2": "Formula",
-      "meth_tbl2_title": "Core formulas",
-      "meth_tbl3_h1": "Parameter",
-      "meth_tbl3_h2": "Value",
-      "meth_title": "How carbon footprint is calculated",
-      "modal_all": "Allergens",
-      "modal_close": "Close",
-      "modal_ing": "Ingredients",
-      "modal_nut": "Nutrition per portion",
-      "modal_steps": "Steps",
-      "nav_about": "About us",
-      "nav_home": "Home",
-      "nav_menu": "Menu",
-      "nav_method": "How carbon footprint is calculated",
-      "nav_recipes": "Recipes",
-      "nav_sustain": "Sustainability",
-      "no_data": "No data",
-      "no_recipes": "No recipes found.",
-      "opt_a": "A) Link the official PDF (fastest)",
-      "opt_b": "B) Parse PDF in the browser (may be blocked by CORS)",
-      "opt_c": "C) GitHub Action \u2192 menu.json (most reliable)",
-      "recipes_find": "Find dish",
-      "recipes_nutrition": "Nutrition (per serving)",
-      "recipes_sub": "Every dish has ingredients, allergens, nutrition and step-by-step instructions. In real use, dishes come from the weekly menu source.",
-      "recipes_title": "Recipes and ingredients",
-      "set_addr": "Address / campus",
-      "set_logo": "University logo URL",
-      "set_name": "University name",
-      "set_save": "Save",
-      "source_desc_1": "GreenPlate can always show the official PDF to users as the single source of truth.",
-      "source_desc_2": "For a professional auto-update, a scheduled GitHub Action can download the PDF, convert it into menu.json, and redeploy the site.",
-      "source_desc_3": "This is the best approach for GitHub Pages, because it avoids browser CORS restrictions.",
-      "source_label": "Menu PDF URL",
-      "source_open": "Open PDF",
-      "source_title": "Official weekly menu source",
-      "sus_actions_1": "Transparent carbon footprint labels for each dish.",
-      "sus_actions_2": "Weekly summary for reporting and education.",
-      "sus_actions_3": "Comparison of \u201clow carbon\u201d options.",
-      "sus_actions_title": "What GreenPlate enables",
-      "sus_chart_title": "carbon footprint per dish (selected day)",
-      "sus_g1": "Clear information helps students compare meals at a glance.",
-      "sus_g2": "Plant-forward dishes usually have lower footprints and high nutritional value.",
-      "sus_g3": "Recipes and ingredient lists support allergen safety and trust.",
-      "sus_gallery_p": "Visual context for the project: transparent menus, plant-forward options, and responsible sourcing.",
-      "sus_gallery_t": "Campus food & sustainability",
-      "sus_sub": "Track carbon footprint by dish and by day. This page also explains why food sustainability matters on campus.",
-      "sus_table_p": "In the pilot, GreenPlate stores per-ingredient emission factors and calculates dish totals based on the recipe. Below is an illustrative table (you can later replace with your chosen dataset).",
-      "sus_table_title": "Example carbon footprint table",
-      "sus_title": "Sustainability dashboard",
-      "sus_why_p": "Food systems have a measurable climate impact. When students can compare dishes, they can make informed choices, and the cafeteria can also reduce waste and improve sourcing over time.",
-      "sus_why_title": "Why sustainability in a university cafeteria?",
-      "tbl_factor": "Emission factor",
-      "tbl_ing": "Ingredient",
-      "tbl_note": "Notes",
-      "tbl_row_1_a": "Beef",
-      "tbl_row_1_b": "kg",
-      "tbl_row_1_c": "~ 25\u201360 kg CO\u2082e / kg",
-      "tbl_row_1_d": "Depends on production system",
-      "tbl_row_2_a": "Chicken",
-      "tbl_row_2_b": "kg",
-      "tbl_row_2_c": "~ 5\u201310 kg CO\u2082e / kg",
-      "tbl_row_2_d": "Generally lower than beef",
-      "tbl_row_3_a": "Legumes",
-      "tbl_row_3_b": "kg",
-      "tbl_row_3_c": "~ 0.5\u20132 kg CO\u2082e / kg",
-      "tbl_row_3_d": "Often among lowest",
-      "tbl_row_4_a": "Vegetables",
-      "tbl_row_4_b": "kg",
-      "tbl_row_4_c": "~ 0.2\u20132 kg CO\u2082e / kg",
-      "tbl_row_4_d": "Seasonality and transport matter",
-      "tbl_unit": "Unit"
+      day_pick:"Pick a day",
+      search_ph:"Search dish…",
+      lbl_kcal:"kcal",
+      lbl_co2:"kg CO₂e / serving",
+      lbl_ingredients:"Ingredients",
+      lbl_allergens:"Allergens",
+      lbl_recipe:"Recipe",
+      lbl_steps:"Steps",
+      lbl_time:"Time",
+      lbl_total:"Total",
+      sus_chart_title:"Carbon footprint per dish (selected day)",
+      sus_table_title:"Table (selected day)",
+      tbl_dish:"Dish",
+      tbl_kcal:"kcal",
+      tbl_co2:"kg CO₂e",
+      kpi_dishes:"Dishes",
+      kpi_calories:"Total kcal",
+      kpi_co2:"Total CO₂e"
     },
     tr: {
-      "about_m1": "A single official weekly menu page reduces confusion.",
-      "about_m2": "Nutrition and allergen information supports safer choices.",
-      "about_m3": "Carbon metrics can be used for education and reporting.",
-      "about_media_p": "A clean, campus-ready interface for menu transparency, allergy safety, and sustainability learning.",
-      "about_media_t": "Project visuals",
-      "about_scope_p1": "As a pilot, GreenPlate focuses on a feasible scope that still demonstrates academic value: weekly menu ingestion, a curated recipe/ingredient layer, and transparent estimations of nutrition and carbon footprint. The architecture is intentionally modular so that the platform can be expanded with verified kitchen quantities, additional dishes, and a formally cited emissions dataset.",
-      "about_scope_p2": "From a deployment standpoint, GitHub Pages is a static host. To achieve true \u201cautomatic updates\u201d when a new weekly PDF is published, GreenPlate can use a scheduled GitHub Action that downloads the official PDF, converts it into a structured JSON feed, and redeploys the site. This approach is reliable, auditable, and suitable for a university pilot.",
-      "about_scope_t": "Scope and future work",
-      "about_settings_t": "Quick settings (demo)",
-      "about_sub": "GreenPlate is a smart meal-information platform for campus dining: menu, recipes, allergens, nutrition and carbon footprint.",
-      "about_title": "About this project",
-      "about_uni_addr": "Address:",
-      "about_uni_name": "Institution:",
-      "about_uni_note": "You can replace the logo URL and address with official details (and add a map link) when you have them.",
-      "about_uni_site": "Menu source (PDF):",
-      "about_uni_t": "University information",
-      "auto_options": "Auto-update options",
-      "btn_close": "Kapat",
-      "cta_open_dash": "Open sustainability dashboard",
-      "cta_open_menu": "Men\u00fcy\u00fc a\u00e7",
-      "day_pick": "G\u00fcn se\u00e7",
-      "filter_glutenfree": "Glutensiz",
-      "filter_lowcarbon": "D\u00fc\u015f\u00fck karbon",
-      "footer_note": "GreenPlate \u2022 Single-file demo with multi-page navigation \u2022 Replace sample data with the official university feed.",
-      "hero_lead": "GreenPlate automatically turns the university\u2019s daily menu into clear dish cards: calories, ingredients, allergens, nutritional values, and carbon footprint. Built as a pilot\u2014adaptable to any institution.",
-      "hero_title": "Smart campus menu with nutrition and carbon footprint.",
-      "home_note": "Tip: Language selection is saved on the device, so students and lecturers don\u2019t need to switch every time.",
-      "home_real_1": "Example meal tray (campus cafeteria).",
-      "home_real_2": "Example meal tray (campus cafeteria).",
-      "home_real_3": "Example meal tray (campus cafeteria).",
-      "home_real_p": "Real campus meals (examples) \u2014 this is what GreenPlate turns into clear nutrition + allergen + carbon footprint cards.",
-      "home_real_t": "From our cafeteria",
-      "home_visual_p": "Nutritional transparency and carbon awareness can reduce confusion, improve trust, and encourage better campus food decisions.",
-      "home_visual_title": "A healthier, lower\u2011impact choice",
-      "home_why_1_a": "Check allergens before eating.",
-      "home_why_1_b": "See calories and macros for better choices.",
-      "home_why_1_c": "Compare dishes by carbon footprint.",
-      "home_why_1_t": "For students",
-      "home_why_2_a": "Supports sustainability education.",
-      "home_why_2_b": "Creates a single, official menu page for the week.",
-      "home_why_2_c": "Helps communicate dietary information clearly.",
-      "home_why_2_t": "For lecturers & administration",
-      "home_why_3_a": "Reduces repeated questions about ingredients and allergens.",
-      "home_why_3_b": "Encourages smarter portioning and less waste.",
-      "home_why_3_c": "Makes updates easy: weekly PDF \u2192 structured menu.",
-      "home_why_3_t": "For the cafeteria",
-      "home_why_sub": "A practical platform for the cafeteria that improves transparency, health choices, and sustainability.",
-      "home_why_title": "Why GreenPlate?",
-      "kpi_co2": "Total carbon footprint (selected day)",
-      "kpi_dishes": "Dishes shown",
-      "kpi_kcal": "Total kcal (selected day)",
-      "label_portions": "Portions",
-      "label_totalco2": "Toplam CO\u2082e",
-      "lbl_carbs": "Karbonhidrat",
-      "lbl_co2": "kg CO\u2082e / porsiyon",
-      "lbl_fat": "Ya\u011f",
-      "lbl_fiber": "Lif",
-      "lbl_kcal": "kcal",
-      "lbl_protein": "Protein",
-      "logo_tagline": "Smart campus menu \u2022 nutrition \u2022 allergens \u2022 carbon footprint",
-      "menu_hint": "What you see on each card",
-      "menu_hint_1": "Dish name (EN/TR/RU)",
-      "menu_hint_2": "Calories + macros per selected portions",
-      "menu_hint_3": "Allergens and ingredient list",
-      "menu_hint_4": "Carbon footprint (kg CO\u2082e)",
-      "menu_sub": "Choose a day to see dish cards. This demo uses sample dishes\u2014later we will automate weekly updates from the official PDF.",
-      "menu_title": "Weekly cafeteria menu",
-      "meth_app_p": "Below is the transparent ingredient-level logic used in GreenPlate. The same steps are applied consistently across dishes for fair comparison.",
-      "meth_app_t": "Ingredient-level calculation (summary table)",
-      "meth_density_note": "Note: for olive oil, density \u2248 0.91 kg/L (used to convert ml to kg).",
-      "meth_ex_note": "This prevents overestimating emissions when only a small part of a packaged ingredient is used.",
-      "meth_ex_parsed": "ParsedKg",
-      "meth_ex_qty": "Quantity",
-      "meth_ex_title": "Example: Olive oil",
-      "meth_ex_usedkg": "UsedKg",
-      "meth_ex_usedpct": "UsedPct",
-      "meth_f_category": "Food category (meat, vegetable, oil, dairy, grain, etc.)",
-      "meth_f_co2e": "Carbon footprint for this ingredient",
-      "meth_f_ef": "Emission factor (kg CO\u2082e per 1 kg of product)",
-      "meth_f_ingredient": "Name of the product (e.g., beef, olive oil, rice)",
-      "meth_f_parsed": "Quantity converted to kilograms",
-      "meth_f_quantity": "Planned amount used (g, ml, pcs, etc.)",
-      "meth_f_unittype": "Unit of measurement (g, kg, L, pcs)",
-      "meth_f_usedkg": "Actual amount used after adjustment",
-      "meth_f_usedpct": "Share of the package actually used in the recipe",
-      "meth_formula_p": "Dish CO\u2082e = \u03a3 (ingredient_kg \u00d7 factor_kgCO\u2082e_per_kg) \u00d7 portions",
-      "meth_formula_t": "Simple formula",
-      "meth_next_1": "Add kitchen-specific quantities for each recipe.",
-      "meth_next_2": "Include food waste (leftovers) and portion optimization.",
-      "meth_next_3": "Add seasonal/locally sourced multipliers.",
-      "meth_next_4": "Publish a weekly campus sustainability summary.",
-      "meth_or": "or",
-      "meth_part_1_p": "Each dish includes an ingredient list and (optionally) quantities. If the cafeteria only provides dish names, GreenPlate can use a standardized recipe template for the pilot and improve it over time with the kitchen team.",
-      "meth_part_1_t": "1) Recipe \u2192 ingredient list",
-      "meth_part_2_p": "For each ingredient, we multiply the ingredient amount (in kg) by its emission factor (kg CO\u2082e per kg). The sum across all ingredients is the dish footprint. This can be extended to include cooking energy and packaging.",
-      "meth_part_2_t": "2) Ingredient amount \u00d7 emission factor",
-      "meth_part_3_p": "Emission factors vary by country, farming method, and transport. GreenPlate should show the data source and clearly label values as \u201cestimated\u201d. For the pilot, a consistent dataset is chosen to keep comparisons fair.",
-      "meth_part_3_t": "3) Uncertainty and transparency",
-      "meth_part_4_t": "4) What\u2019s next for a stronger model",
-      "meth_s_adjust": "Adjust usage",
-      "meth_s_convert": "Convert to kg",
-      "meth_s_dish": "Dish footprint",
-      "meth_s_ing": "Ingredient footprint",
-      "meth_sub": "GreenPlate uses a transparent recipe-based approach: ingredient amounts \u00d7 emission factors, adjusted for portion size.",
-      "meth_tbl1_h1": "Field",
-      "meth_tbl1_h2": "Meaning",
-      "meth_tbl2_h1": "Step",
-      "meth_tbl2_h2": "Formula",
-      "meth_tbl2_title": "Core formulas",
-      "meth_tbl3_h1": "Parameter",
-      "meth_tbl3_h2": "Value",
-      "meth_title": "Karbon ayak izi nas\u0131l hesaplan\u0131r",
-      "modal_all": "Alerjenler",
-      "modal_close": "Close",
-      "modal_ing": "\u0130\u00e7indekiler",
-      "modal_nut": "Nutrition per portion",
-      "modal_steps": "Ad\u0131mlar",
-      "nav_about": "Hakk\u0131m\u0131zda",
-      "nav_home": "Ana Sayfa",
-      "nav_menu": "Men\u00fc",
-      "nav_method": "Karbon ayak izi nas\u0131l hesaplan\u0131r",
-      "nav_recipes": "Tarifler",
-      "nav_sustain": "S\u00fcrd\u00fcr\u00fclebilirlik",
-      "no_data": "Veri yok",
-      "no_recipes": "Tarif bulunamad\u0131.",
-      "opt_a": "A) Link the official PDF (fastest)",
-      "opt_b": "B) Parse PDF in the browser (may be blocked by CORS)",
-      "opt_c": "C) GitHub Action \u2192 menu.json (most reliable)",
-      "recipes_find": "Yemek ara",
-      "recipes_nutrition": "Besin de\u011ferleri (porsiyon)",
-      "recipes_sub": "Every dish has ingredients, allergens, nutrition and step-by-step instructions. In real use, dishes come from the weekly menu source.",
-      "recipes_title": "Tarifler ve malzemeler",
-      "set_addr": "Address / campus",
-      "set_logo": "University logo URL",
-      "set_name": "University name",
-      "set_save": "Save",
-      "source_desc_1": "GreenPlate can always show the official PDF to users as the single source of truth.",
-      "source_desc_2": "For a professional auto-update, a scheduled GitHub Action can download the PDF, convert it into menu.json, and redeploy the site.",
-      "source_desc_3": "This is the best approach for GitHub Pages, because it avoids browser CORS restrictions.",
-      "source_label": "Menu PDF URL",
-      "source_open": "Open PDF",
-      "source_title": "Official weekly menu source",
-      "sus_actions_1": "Transparent carbon footprint labels for each dish.",
-      "sus_actions_2": "Weekly summary for reporting and education.",
-      "sus_actions_3": "Comparison of \u201clow carbon\u201d options.",
-      "sus_actions_title": "What GreenPlate enables",
-      "sus_chart_title": "carbon footprint per dish (selected day)",
-      "sus_g1": "Clear information helps students compare meals at a glance.",
-      "sus_g2": "Plant-forward dishes usually have lower footprints and high nutritional value.",
-      "sus_g3": "Recipes and ingredient lists support allergen safety and trust.",
-      "sus_gallery_p": "Visual context for the project: transparent menus, plant-forward options, and responsible sourcing.",
-      "sus_gallery_t": "Campus food & sustainability",
-      "sus_sub": "Track carbon footprint by dish and by day. This page also explains why food sustainability matters on campus.",
-      "sus_table_p": "In the pilot, GreenPlate stores per-ingredient emission factors and calculates dish totals based on the recipe. Below is an illustrative table (you can later replace with your chosen dataset).",
-      "sus_table_title": "Example carbon footprint table",
-      "sus_title": "Sustainability dashboard",
-      "sus_why_p": "Food systems have a measurable climate impact. When students can compare dishes, they can make informed choices, and the cafeteria can also reduce waste and improve sourcing over time.",
-      "sus_why_title": "Why sustainability in a university cafeteria?",
-      "tbl_factor": "Emission factor",
-      "tbl_ing": "Ingredient",
-      "tbl_note": "Notes",
-      "tbl_row_1_a": "Beef",
-      "tbl_row_1_b": "kg",
-      "tbl_row_1_c": "~ 25\u201360 kg CO\u2082e / kg",
-      "tbl_row_1_d": "Depends on production system",
-      "tbl_row_2_a": "Chicken",
-      "tbl_row_2_b": "kg",
-      "tbl_row_2_c": "~ 5\u201310 kg CO\u2082e / kg",
-      "tbl_row_2_d": "Generally lower than beef",
-      "tbl_row_3_a": "Legumes",
-      "tbl_row_3_b": "kg",
-      "tbl_row_3_c": "~ 0.5\u20132 kg CO\u2082e / kg",
-      "tbl_row_3_d": "Often among lowest",
-      "tbl_row_4_a": "Vegetables",
-      "tbl_row_4_b": "kg",
-      "tbl_row_4_c": "~ 0.2\u20132 kg CO\u2082e / kg",
-      "tbl_row_4_d": "Seasonality and transport matter",
-      "tbl_unit": "Unit"
+      day_pick:"Gün seç",
+      search_ph:"Yemek ara…",
+      lbl_kcal:"kalori",
+      lbl_co2:"kg CO₂e / porsiyon",
+      lbl_ingredients:"İçindekiler",
+      lbl_allergens:"Alerjenler",
+      lbl_recipe:"Tarif",
+      lbl_steps:"Adımlar",
+      lbl_time:"Süre",
+      lbl_total:"Toplam",
+      sus_chart_title:"Seçilen gün: yemek başına karbon ayak izi",
+      sus_table_title:"Tablo (seçilen gün)",
+      tbl_dish:"Yemek",
+      tbl_kcal:"kalori",
+      tbl_co2:"kg CO₂e",
+      kpi_dishes:"Yemek sayısı",
+      kpi_calories:"Toplam kalori",
+      kpi_co2:"Toplam CO₂e"
     },
     ru: {
-      "about_m1": "A single official weekly menu page reduces confusion.",
-      "about_m2": "Nutrition and allergen information supports safer choices.",
-      "about_m3": "Carbon metrics can be used for education and reporting.",
-      "about_media_p": "A clean, campus-ready interface for menu transparency, allergy safety, and sustainability learning.",
-      "about_media_t": "Project visuals",
-      "about_scope_p1": "As a pilot, GreenPlate focuses on a feasible scope that still demonstrates academic value: weekly menu ingestion, a curated recipe/ingredient layer, and transparent estimations of nutrition and carbon footprint. The architecture is intentionally modular so that the platform can be expanded with verified kitchen quantities, additional dishes, and a formally cited emissions dataset.",
-      "about_scope_p2": "From a deployment standpoint, GitHub Pages is a static host. To achieve true \u201cautomatic updates\u201d when a new weekly PDF is published, GreenPlate can use a scheduled GitHub Action that downloads the official PDF, converts it into a structured JSON feed, and redeploys the site. This approach is reliable, auditable, and suitable for a university pilot.",
-      "about_scope_t": "Scope and future work",
-      "about_settings_t": "Quick settings (demo)",
-      "about_sub": "GreenPlate is a smart meal-information platform for campus dining: menu, recipes, allergens, nutrition and carbon footprint.",
-      "about_title": "About this project",
-      "about_uni_addr": "Address:",
-      "about_uni_name": "Institution:",
-      "about_uni_note": "You can replace the logo URL and address with official details (and add a map link) when you have them.",
-      "about_uni_site": "Menu source (PDF):",
-      "about_uni_t": "University information",
-      "auto_options": "Auto-update options",
-      "btn_close": "\u0417\u0430\u043a\u0440\u044b\u0442\u044c",
-      "cta_open_dash": "Open sustainability dashboard",
-      "cta_open_menu": "\u041e\u0442\u043a\u0440\u044b\u0442\u044c \u043c\u0435\u043d\u044e",
-      "day_pick": "\u0412\u044b\u0431\u0435\u0440\u0438 \u0434\u0435\u043d\u044c",
-      "filter_glutenfree": "\u0411\u0435\u0437 \u0433\u043b\u044e\u0442\u0435\u043d\u0430",
-      "filter_lowcarbon": "\u041d\u0438\u0437\u043a\u0438\u0439 \u0443\u0433\u043b\u0435\u0440\u043e\u0434",
-      "footer_note": "GreenPlate \u2022 Single-file demo with multi-page navigation \u2022 Replace sample data with the official university feed.",
-      "hero_lead": "GreenPlate automatically turns the university\u2019s daily menu into clear dish cards: calories, ingredients, allergens, nutritional values, and carbon footprint. Built as a pilot\u2014adaptable to any institution.",
-      "hero_title": "Smart campus menu with nutrition and carbon footprint.",
-      "home_note": "Tip: Language selection is saved on the device, so students and lecturers don\u2019t need to switch every time.",
-      "home_real_1": "Example meal tray (campus cafeteria).",
-      "home_real_2": "Example meal tray (campus cafeteria).",
-      "home_real_3": "Example meal tray (campus cafeteria).",
-      "home_real_p": "Real campus meals (examples) \u2014 this is what GreenPlate turns into clear nutrition + allergen + carbon footprint cards.",
-      "home_real_t": "From our cafeteria",
-      "home_visual_p": "Nutritional transparency and carbon awareness can reduce confusion, improve trust, and encourage better campus food decisions.",
-      "home_visual_title": "A healthier, lower\u2011impact choice",
-      "home_why_1_a": "Check allergens before eating.",
-      "home_why_1_b": "See calories and macros for better choices.",
-      "home_why_1_c": "Compare dishes by carbon footprint.",
-      "home_why_1_t": "For students",
-      "home_why_2_a": "Supports sustainability education.",
-      "home_why_2_b": "Creates a single, official menu page for the week.",
-      "home_why_2_c": "Helps communicate dietary information clearly.",
-      "home_why_2_t": "For lecturers & administration",
-      "home_why_3_a": "Reduces repeated questions about ingredients and allergens.",
-      "home_why_3_b": "Encourages smarter portioning and less waste.",
-      "home_why_3_c": "Makes updates easy: weekly PDF \u2192 structured menu.",
-      "home_why_3_t": "For the cafeteria",
-      "home_why_sub": "A practical platform for the cafeteria that improves transparency, health choices, and sustainability.",
-      "home_why_title": "Why GreenPlate?",
-      "kpi_co2": "Total carbon footprint (selected day)",
-      "kpi_dishes": "Dishes shown",
-      "kpi_kcal": "Total kcal (selected day)",
-      "label_portions": "Portions",
-      "label_totalco2": "\u0412\u0441\u0435\u0433\u043e CO\u2082e",
-      "lbl_carbs": "\u0423\u0433\u043b\u0435\u0432\u043e\u0434\u044b",
-      "lbl_co2": "\u043a\u0433 CO\u2082e / \u043f\u043e\u0440\u0446\u0438\u044f",
-      "lbl_fat": "\u0416\u0438\u0440\u044b",
-      "lbl_fiber": "\u041a\u043b\u0435\u0442\u0447\u0430\u0442\u043a\u0430",
-      "lbl_kcal": "\u043a\u043a\u0430\u043b",
-      "lbl_protein": "\u0411\u0435\u043b\u043e\u043a",
-      "logo_tagline": "Smart campus menu \u2022 nutrition \u2022 allergens \u2022 carbon footprint",
-      "menu_hint": "What you see on each card",
-      "menu_hint_1": "Dish name (EN/TR/RU)",
-      "menu_hint_2": "Calories + macros per selected portions",
-      "menu_hint_3": "Allergens and ingredient list",
-      "menu_hint_4": "Carbon footprint (kg CO\u2082e)",
-      "menu_sub": "Choose a day to see dish cards. This demo uses sample dishes\u2014later we will automate weekly updates from the official PDF.",
-      "menu_title": "Weekly cafeteria menu",
-      "meth_app_p": "Below is the transparent ingredient-level logic used in GreenPlate. The same steps are applied consistently across dishes for fair comparison.",
-      "meth_app_t": "Ingredient-level calculation (summary table)",
-      "meth_density_note": "Note: for olive oil, density \u2248 0.91 kg/L (used to convert ml to kg).",
-      "meth_ex_note": "This prevents overestimating emissions when only a small part of a packaged ingredient is used.",
-      "meth_ex_parsed": "ParsedKg",
-      "meth_ex_qty": "Quantity",
-      "meth_ex_title": "Example: Olive oil",
-      "meth_ex_usedkg": "UsedKg",
-      "meth_ex_usedpct": "UsedPct",
-      "meth_f_category": "Food category (meat, vegetable, oil, dairy, grain, etc.)",
-      "meth_f_co2e": "Carbon footprint for this ingredient",
-      "meth_f_ef": "Emission factor (kg CO\u2082e per 1 kg of product)",
-      "meth_f_ingredient": "Name of the product (e.g., beef, olive oil, rice)",
-      "meth_f_parsed": "Quantity converted to kilograms",
-      "meth_f_quantity": "Planned amount used (g, ml, pcs, etc.)",
-      "meth_f_unittype": "Unit of measurement (g, kg, L, pcs)",
-      "meth_f_usedkg": "Actual amount used after adjustment",
-      "meth_f_usedpct": "Share of the package actually used in the recipe",
-      "meth_formula_p": "Dish CO\u2082e = \u03a3 (ingredient_kg \u00d7 factor_kgCO\u2082e_per_kg) \u00d7 portions",
-      "meth_formula_t": "Simple formula",
-      "meth_next_1": "Add kitchen-specific quantities for each recipe.",
-      "meth_next_2": "Include food waste (leftovers) and portion optimization.",
-      "meth_next_3": "Add seasonal/locally sourced multipliers.",
-      "meth_next_4": "Publish a weekly campus sustainability summary.",
-      "meth_or": "or",
-      "meth_part_1_p": "Each dish includes an ingredient list and (optionally) quantities. If the cafeteria only provides dish names, GreenPlate can use a standardized recipe template for the pilot and improve it over time with the kitchen team.",
-      "meth_part_1_t": "1) Recipe \u2192 ingredient list",
-      "meth_part_2_p": "For each ingredient, we multiply the ingredient amount (in kg) by its emission factor (kg CO\u2082e per kg). The sum across all ingredients is the dish footprint. This can be extended to include cooking energy and packaging.",
-      "meth_part_2_t": "2) Ingredient amount \u00d7 emission factor",
-      "meth_part_3_p": "Emission factors vary by country, farming method, and transport. GreenPlate should show the data source and clearly label values as \u201cestimated\u201d. For the pilot, a consistent dataset is chosen to keep comparisons fair.",
-      "meth_part_3_t": "3) Uncertainty and transparency",
-      "meth_part_4_t": "4) What\u2019s next for a stronger model",
-      "meth_s_adjust": "Adjust usage",
-      "meth_s_convert": "Convert to kg",
-      "meth_s_dish": "Dish footprint",
-      "meth_s_ing": "Ingredient footprint",
-      "meth_sub": "GreenPlate uses a transparent recipe-based approach: ingredient amounts \u00d7 emission factors, adjusted for portion size.",
-      "meth_tbl1_h1": "Field",
-      "meth_tbl1_h2": "Meaning",
-      "meth_tbl2_h1": "Step",
-      "meth_tbl2_h2": "Formula",
-      "meth_tbl2_title": "Core formulas",
-      "meth_tbl3_h1": "Parameter",
-      "meth_tbl3_h2": "Value",
-      "meth_title": "\u041a\u0430\u043a \u0441\u0447\u0438\u0442\u0430\u0435\u0442\u0441\u044f \u0443\u0433\u043b\u0435\u0440\u043e\u0434\u043d\u044b\u0439 \u0441\u043b\u0435\u0434",
-      "modal_all": "\u0410\u043b\u043b\u0435\u0440\u0433\u0435\u043d\u044b",
-      "modal_close": "Close",
-      "modal_ing": "\u0418\u043d\u0433\u0440\u0435\u0434\u0438\u0435\u043d\u0442\u044b",
-      "modal_nut": "Nutrition per portion",
-      "modal_steps": "\u0428\u0430\u0433\u0438",
-      "nav_about": "\u041e \u043f\u0440\u043e\u0435\u043a\u0442\u0435",
-      "nav_home": "\u0413\u043b\u0430\u0432\u043d\u0430\u044f",
-      "nav_menu": "\u041c\u0435\u043d\u044e",
-      "nav_method": "\u041a\u0430\u043a \u0441\u0447\u0438\u0442\u0430\u0435\u0442\u0441\u044f \u0443\u0433\u043b\u0435\u0440\u043e\u0434\u043d\u044b\u0439 \u0441\u043b\u0435\u0434",
-      "nav_recipes": "\u0420\u0435\u0446\u0435\u043f\u0442\u044b",
-      "nav_sustain": "\u0423\u0441\u0442\u043e\u0439\u0447\u0438\u0432\u043e\u0441\u0442\u044c",
-      "no_data": "\u041d\u0435\u0442 \u0434\u0430\u043d\u043d\u044b\u0445",
-      "no_recipes": "\u0420\u0435\u0446\u0435\u043f\u0442\u044b \u043d\u0435 \u043d\u0430\u0439\u0434\u0435\u043d\u044b.",
-      "opt_a": "A) Link the official PDF (fastest)",
-      "opt_b": "B) Parse PDF in the browser (may be blocked by CORS)",
-      "opt_c": "C) GitHub Action \u2192 menu.json (most reliable)",
-      "recipes_find": "\u041d\u0430\u0439\u0442\u0438 \u0431\u043b\u044e\u0434\u043e",
-      "recipes_nutrition": "\u041f\u0438\u0449\u0435\u0432\u0430\u044f \u0446\u0435\u043d\u043d\u043e\u0441\u0442\u044c (\u043f\u043e\u0440\u0446\u0438\u044f)",
-      "recipes_sub": "Every dish has ingredients, allergens, nutrition and step-by-step instructions. In real use, dishes come from the weekly menu source.",
-      "recipes_title": "\u0420\u0435\u0446\u0435\u043f\u0442\u044b \u0438 \u0438\u043d\u0433\u0440\u0435\u0434\u0438\u0435\u043d\u0442\u044b",
-      "set_addr": "Address / campus",
-      "set_logo": "University logo URL",
-      "set_name": "University name",
-      "set_save": "Save",
-      "source_desc_1": "GreenPlate can always show the official PDF to users as the single source of truth.",
-      "source_desc_2": "For a professional auto-update, a scheduled GitHub Action can download the PDF, convert it into menu.json, and redeploy the site.",
-      "source_desc_3": "This is the best approach for GitHub Pages, because it avoids browser CORS restrictions.",
-      "source_label": "Menu PDF URL",
-      "source_open": "Open PDF",
-      "source_title": "Official weekly menu source",
-      "sus_actions_1": "Transparent carbon footprint labels for each dish.",
-      "sus_actions_2": "Weekly summary for reporting and education.",
-      "sus_actions_3": "Comparison of \u201clow carbon\u201d options.",
-      "sus_actions_title": "What GreenPlate enables",
-      "sus_chart_title": "carbon footprint per dish (selected day)",
-      "sus_g1": "Clear information helps students compare meals at a glance.",
-      "sus_g2": "Plant-forward dishes usually have lower footprints and high nutritional value.",
-      "sus_g3": "Recipes and ingredient lists support allergen safety and trust.",
-      "sus_gallery_p": "Visual context for the project: transparent menus, plant-forward options, and responsible sourcing.",
-      "sus_gallery_t": "Campus food & sustainability",
-      "sus_sub": "Track carbon footprint by dish and by day. This page also explains why food sustainability matters on campus.",
-      "sus_table_p": "In the pilot, GreenPlate stores per-ingredient emission factors and calculates dish totals based on the recipe. Below is an illustrative table (you can later replace with your chosen dataset).",
-      "sus_table_title": "Example carbon footprint table",
-      "sus_title": "Sustainability dashboard",
-      "sus_why_p": "Food systems have a measurable climate impact. When students can compare dishes, they can make informed choices, and the cafeteria can also reduce waste and improve sourcing over time.",
-      "sus_why_title": "Why sustainability in a university cafeteria?",
-      "tbl_factor": "Emission factor",
-      "tbl_ing": "Ingredient",
-      "tbl_note": "Notes",
-      "tbl_row_1_a": "Beef",
-      "tbl_row_1_b": "kg",
-      "tbl_row_1_c": "~ 25\u201360 kg CO\u2082e / kg",
-      "tbl_row_1_d": "Depends on production system",
-      "tbl_row_2_a": "Chicken",
-      "tbl_row_2_b": "kg",
-      "tbl_row_2_c": "~ 5\u201310 kg CO\u2082e / kg",
-      "tbl_row_2_d": "Generally lower than beef",
-      "tbl_row_3_a": "Legumes",
-      "tbl_row_3_b": "kg",
-      "tbl_row_3_c": "~ 0.5\u20132 kg CO\u2082e / kg",
-      "tbl_row_3_d": "Often among lowest",
-      "tbl_row_4_a": "Vegetables",
-      "tbl_row_4_b": "kg",
-      "tbl_row_4_c": "~ 0.2\u20132 kg CO\u2082e / kg",
-      "tbl_row_4_d": "Seasonality and transport matter",
-      "tbl_unit": "Unit"
+      day_pick:"Выбери день",
+      search_ph:"Поиск блюда…",
+      lbl_kcal:"ккал",
+      lbl_co2:"кг CO₂e / порция",
+      lbl_ingredients:"Ингредиенты",
+      lbl_allergens:"Аллергены",
+      lbl_recipe:"Рецепт",
+      lbl_steps:"Шаги",
+      lbl_time:"Время",
+      lbl_total:"Итого",
+      sus_chart_title:"Углеродный след по блюдам (выбранный день)",
+      sus_table_title:"Таблица (выбранный день)",
+      tbl_dish:"Блюдо",
+      tbl_kcal:"ккал",
+      tbl_co2:"кг CO₂e",
+      kpi_dishes:"Блюд",
+      kpi_calories:"Всего ккал",
+      kpi_co2:"Всего CO₂e"
     }
   };
 
@@ -2138,24 +1550,49 @@
   }
 
   function renderRecipes(){
-    const grid = $("#recipesGrid");
-    if(!grid) return;
-
-    const q = ($("#recipeSearch")?.value || "").trim().toLowerCase();
-    const entries = Object.entries(state.db || {});
-    const out = [];
-
-    for(const [key, d] of entries){
-      const title = dishDisplayName(key);
-      const ingrText = ingredientsToSearchText(d?.ingredients);
-      const recipeText = recipeToSearchText(d?.recipe);
-      const hay = (key + " " + title + " " + ingrText + " " + recipeText).toLowerCase();
-      if(q && !hay.includes(q)) continue;
-
-      out.push(renderRecipeCard(title, d));
+    if(!elRecipesGrid || !MENU?.days) return;
+    const all = new Set();
+    Object.values(MENU.days).forEach(arr=> (arr||[]).forEach(x=>all.add(x)));
+    let list = Array.from(all);
+    const q = (elSearch?.value || "").trim().toLowerCase();
+    if(q){
+      list = list.filter(k=>{
+        const e = normalizeDishEntry(k, DB?.[k]);
+        return (k.toLowerCase().includes(q) || (e.name_en||"").toLowerCase().includes(q) || (e.name_ru||"").toLowerCase().includes(q));
+      });
     }
-
-    grid.innerHTML = out.length ? out.join("") : `<div class="muted" style="padding:12px">${escHtml(tKey("no_recipes"))}</div>`;
+    elRecipesGrid.innerHTML = "";
+    list.forEach(key=>{
+      const e = normalizeDishEntry(key, DB?.[key]);
+      const allergens = (e.allergens && e.allergens.length) ? e.allergens.join(", ") : "None";
+      const ingRows = Object.entries(e.ingredients||{}).map(([k,v])=>`<tr><td style="padding:6px 8px; border-bottom:1px solid var(--border)">${k}</td><td style="padding:6px 8px; border-bottom:1px solid var(--border); text-align:right">${v||""}</td></tr>`).join("");
+      const steps = (e.steps||[]).map((s,i)=>`<tr><td style="padding:6px 8px; border-bottom:1px solid var(--border); width:28px; text-align:right; color:var(--muted)">${i+1}</td><td style="padding:6px 8px; border-bottom:1px solid var(--border)">${s}</td></tr>`).join("");
+      const card = document.createElement("details");
+      card.className = "recipeCard";
+      card.innerHTML = `
+        <summary>
+          <div>
+            <div class="dishName">${dishLabel(key, e)}</div>
+            <div class="dishMeta">${Math.round(e.kcal)} ${T[lang].lbl_kcal} • ${e.co2e.toFixed(2)} ${T[lang].lbl_co2} • ${T[lang].lbl_time}: ${e.time || "—"}</div>
+          </div>
+        </summary>
+        <div class="recipeBody">
+          <div class="grid2">
+            <div>
+              <div class="secTitle">${T[lang].lbl_ingredients}</div>
+              <table style="width:100%; border-collapse:collapse; font-size:14px"><tbody>${ingRows || `<tr><td style="padding:8px">—</td><td></td></tr>`}</tbody></table>
+              <div class="secTitle" style="margin-top:10px">${T[lang].lbl_allergens}</div>
+              <div class="muted">${allergens}</div>
+            </div>
+            <div>
+              <div class="secTitle">${T[lang].lbl_steps}</div>
+              <table style="width:100%; border-collapse:collapse; font-size:14px"><tbody>${steps || `<tr><td style="padding:8px">—</td><td></td></tr>`}</tbody></table>
+            </div>
+          </div>
+        </div>
+      `;
+      elRecipesGrid.appendChild(card);
+    });
   }
 
   function renderCO2ChartAndTable(dishes){
