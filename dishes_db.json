@@ -1,0 +1,1104 @@
+{
+  "Arpa Şehriye Çorbası": {
+    "name_en": "Barley Vermicelli Soup",
+    "name_tr": "Arpa Şehriye Çorbası",
+    "name_ru": "Суп с перловкой и вермишелью",
+    "kcal": 170,
+    "nutrition": {
+      "protein_g": 5,
+      "carbs_g": 28,
+      "fat_g": 4,
+      "fiber_g": 3,
+      "sugar_g": 4,
+      "salt_g": 1.2
+    },
+    "ingredients": [
+      "Barley vermicelli (arpa şehriye)",
+      "Onion",
+      "Carrot",
+      "Tomato paste",
+      "Stock (veg/chicken)",
+      "Olive oil/butter",
+      "Salt",
+      "Black pepper",
+      "Dried mint (optional)"
+    ],
+    "allergens": [
+      "Gluten"
+    ],
+    "recipe": {
+      "summary": "Light tomato-based soup with barley vermicelli.",
+      "time": "25–30 min",
+      "steps": [
+        "Sauté onion and carrot in oil/butter until soft.",
+        "Stir in tomato paste for 1 minute.",
+        "Add stock; bring to a boil.",
+        "Add barley vermicelli and simmer 10–12 minutes until tender.",
+        "Season and serve with dried mint if desired."
+      ]
+    },
+    "co2e": 0.35
+  },
+  "Tavuk Çorbası": {
+    "name_en": "Chicken Soup",
+    "name_tr": "Tavuk Çorbası",
+    "name_ru": "Куриный суп",
+    "kcal": 220,
+    "nutrition": {
+      "protein_g": 18,
+      "carbs_g": 18,
+      "fat_g": 8,
+      "fiber_g": 1,
+      "sugar_g": 2,
+      "salt_g": 1.4
+    },
+    "ingredients": [
+      "Chicken (shredded)",
+      "Onion",
+      "Carrot",
+      "Garlic",
+      "Chicken stock",
+      "Lemon juice",
+      "Egg yolk (optional)",
+      "Flour (optional)",
+      "Salt",
+      "Black pepper"
+    ],
+    "allergens": [
+      "May contain egg",
+      "May contain gluten"
+    ],
+    "recipe": {
+      "summary": "Classic chicken soup with vegetables; often finished with lemon.",
+      "time": "40–60 min",
+      "steps": [
+        "Boil chicken with onion/carrot; shred chicken.",
+        "Strain stock and return to pot.",
+        "Simmer vegetables until tender.",
+        "Add shredded chicken back.",
+        "Optional: temper yogurt/egg-lemon mix or egg-lemon mix and stir in.",
+        "Season and serve."
+      ]
+    },
+    "co2e": 0.75
+  },
+  "Mengen Çorbası": {
+    "name_en": "Mengen-Style Village Soup",
+    "name_tr": "Mengen Çorbası",
+    "name_ru": "Деревенский суп «Менген»",
+    "kcal": 240,
+    "nutrition": {
+      "protein_g": 10,
+      "carbs_g": 30,
+      "fat_g": 9,
+      "fiber_g": 4,
+      "sugar_g": 4,
+      "salt_g": 1.3
+    },
+    "ingredients": [
+      "Onion",
+      "Carrot",
+      "Tomato/paste",
+      "Bulgur or rice",
+      "Optional lentils",
+      "Butter/olive oil",
+      "Stock/water",
+      "Salt",
+      "Pepper",
+      "Dried herbs"
+    ],
+    "allergens": [
+      "May contain gluten (bulgur)",
+      "May contain legumes"
+    ],
+    "recipe": {
+      "summary": "Hearty village soup from the Mengen region.",
+      "time": "35–45 min",
+      "steps": [
+        "Sauté onion and vegetables in oil/butter.",
+        "Add tomato/paste and cook briefly.",
+        "Add washed bulgur/rice (and a little lentils if used).",
+        "Add stock and simmer until tender.",
+        "Season with herbs and serve."
+      ]
+    },
+    "co2e": 0.6
+  },
+  "Mantar Çorbası": {
+    "name_en": "Creamy Mushroom Soup",
+    "name_tr": "Mantar Çorbası",
+    "name_ru": "Грибной суп",
+    "kcal": 260,
+    "nutrition": {
+      "protein_g": 8,
+      "carbs_g": 20,
+      "fat_g": 16,
+      "fiber_g": 2,
+      "sugar_g": 5,
+      "salt_g": 1.2
+    },
+    "ingredients": [
+      "Mushrooms",
+      "Onion",
+      "Butter",
+      "Flour",
+      "Milk/cream",
+      "Stock",
+      "Salt",
+      "Black pepper",
+      "Parsley"
+    ],
+    "allergens": [
+      "Milk/dairy",
+      "Gluten"
+    ],
+    "recipe": {
+      "summary": "Velvety mushroom soup thickened with a light roux and milk.",
+      "time": "25–35 min",
+      "steps": [
+        "Sauté mushrooms and onion in butter until browned.",
+        "Stir in flour for 1 minute.",
+        "Whisk in stock, then milk/cream.",
+        "Simmer 10–15 minutes; blend partially if desired.",
+        "Season and finish with parsley."
+      ]
+    },
+    "co2e": 0.8
+  },
+  "Yayla Çorbası": {
+    "name_en": "Yayla Soup (Yogurt & Rice)",
+    "name_tr": "Yayla Çorbası",
+    "name_ru": "Суп «Яйла» (йогурт + рис)",
+    "kcal": 230,
+    "nutrition": {
+      "protein_g": 9,
+      "carbs_g": 26,
+      "fat_g": 10,
+      "fiber_g": 1,
+      "sugar_g": 6,
+      "salt_g": 1.2
+    },
+    "ingredients": [
+      "Yogurt",
+      "Rice",
+      "Egg yolk (optional)",
+      "Flour (optional)",
+      "Dried mint",
+      "Butter",
+      "Water/stock",
+      "Salt"
+    ],
+    "allergens": [
+      "Milk/dairy",
+      "May contain egg",
+      "May contain gluten"
+    ],
+    "recipe": {
+      "summary": "Traditional yogurt soup with rice and mint butter.",
+      "time": "30–40 min",
+      "steps": [
+        "Cook rice in water/stock until soft.",
+        "Whisk yogurt with egg yolk and a little flour (optional).",
+        "Temper with hot broth; stir back into pot.",
+        "Simmer gently (do not boil hard).",
+        "Sizzle butter with dried mint and pour on top."
+      ]
+    },
+    "co2e": 0.85
+  },
+  "Tavuk Şinitzel": {
+    "name_en": "Chicken Schnitzel",
+    "name_tr": "Tavuk Şinitzel",
+    "name_ru": "Куриный шницель",
+    "kcal": 520,
+    "nutrition": {
+      "protein_g": 38,
+      "carbs_g": 35,
+      "fat_g": 24,
+      "fiber_g": 2,
+      "sugar_g": 2,
+      "salt_g": 1.6
+    },
+    "ingredients": [
+      "Chicken breast",
+      "Flour",
+      "Egg",
+      "Breadcrumbs",
+      "Oil for frying",
+      "Salt",
+      "Black pepper",
+      "Lemon (optional)"
+    ],
+    "allergens": [
+      "Gluten",
+      "Egg"
+    ],
+    "recipe": {
+      "summary": "Breaded chicken cutlet, pan-fried until crisp.",
+      "time": "25–30 min",
+      "steps": [
+        "Pound chicken to even thickness; season.",
+        "Coat in flour → egg → breadcrumbs.",
+        "Shallow-fry until golden and cooked through.",
+        "Drain and serve with lemon."
+      ]
+    },
+    "co2e": 1.35
+  },
+  "Mantarlı et steak": {
+    "name_en": "Beef Steak with Mushrooms",
+    "name_tr": "Mantarlı Et Steak",
+    "name_ru": "Стейк с грибами",
+    "kcal": 650,
+    "nutrition": {
+      "protein_g": 42,
+      "carbs_g": 10,
+      "fat_g": 46,
+      "fiber_g": 1,
+      "sugar_g": 3,
+      "salt_g": 1.7
+    },
+    "ingredients": [
+      "Beef steak",
+      "Mushrooms",
+      "Onion",
+      "Butter/olive oil",
+      "Garlic",
+      "Salt",
+      "Pepper",
+      "Optional cream/stock"
+    ],
+    "allergens": [
+      "May contain dairy"
+    ],
+    "recipe": {
+      "summary": "Pan-seared steak topped with sautéed mushrooms.",
+      "time": "25–35 min",
+      "steps": [
+        "Season and sear steak to desired doneness; rest.",
+        "Sauté mushrooms/onion in butter/oil; add garlic.",
+        "Optional: add a splash of cream/stock to make sauce.",
+        "Top steak and serve."
+      ]
+    },
+    "co2e": 3.8
+  },
+  "Tavuk Tandır (ızgara tavadan)": {
+    "name_en": "Chicken Tandır (Pan-Grilled)",
+    "name_tr": "Tavuk Tandır (ızgara tavadan)",
+    "name_ru": "Курица тандыр (на гриль-сковороде)",
+    "kcal": 480,
+    "nutrition": {
+      "protein_g": 40,
+      "carbs_g": 8,
+      "fat_g": 32,
+      "fiber_g": 0,
+      "sugar_g": 1,
+      "salt_g": 1.5
+    },
+    "ingredients": [
+      "Chicken thigh/leg pieces",
+      "Yogurt (marinade)",
+      "Garlic",
+      "Paprika",
+      "Cumin",
+      "Olive oil",
+      "Salt",
+      "Pepper",
+      "Lemon"
+    ],
+    "allergens": [
+      "Milk/dairy"
+    ],
+    "recipe": {
+      "summary": "Marinated chicken cooked on a grill pan for smoky flavor.",
+      "time": "Marinate 2–8 h + cook 20–25 min",
+      "steps": [
+        "Mix yogurt, garlic, spices, oil; coat chicken.",
+        "Marinate at least 2 hours.",
+        "Cook on hot grill pan, turning until browned and fully cooked.",
+        "Rest 5 minutes; serve with lemon."
+      ]
+    },
+    "co2e": 1.45
+  },
+  "Çökertme Kebabı": {
+    "name_en": "Çökertme Kebab (Beef over Potatoes)",
+    "name_tr": "Çökertme Kebabı",
+    "name_ru": "Кебаб «Чёкертме»",
+    "kcal": 720,
+    "nutrition": {
+      "protein_g": 38,
+      "carbs_g": 55,
+      "fat_g": 40,
+      "fiber_g": 6,
+      "sugar_g": 5,
+      "salt_g": 1.8
+    },
+    "ingredients": [
+      "Beef strips",
+      "Potatoes (thin fries)",
+      "Yogurt",
+      "Garlic",
+      "Tomato sauce",
+      "Butter/olive oil",
+      "Salt",
+      "Pepper",
+      "Paprika"
+    ],
+    "allergens": [
+      "Milk/dairy"
+    ],
+    "recipe": {
+      "summary": "Thin beef strips served over crispy potatoes with garlic yogurt and tomato sauce.",
+      "time": "40–55 min",
+      "steps": [
+        "Cut potatoes into thin matchsticks; fry or bake until crisp.",
+        "Sauté beef strips with salt/pepper until browned.",
+        "Mix yogurt with grated garlic and a pinch of salt.",
+        "Make quick tomato-butter sauce with paprika.",
+        "Plate: potatoes → yogurt → beef → tomato sauce."
+      ]
+    },
+    "co2e": 3.9
+  },
+  "Tavuk Kalçalı but": {
+    "name_en": "Roasted Chicken Thigh",
+    "name_tr": "Tavuk Kalçalı But",
+    "name_ru": "Запечённое куриное бедро",
+    "kcal": 520,
+    "nutrition": {
+      "protein_g": 38,
+      "carbs_g": 6,
+      "fat_g": 36,
+      "fiber_g": 0,
+      "sugar_g": 1,
+      "salt_g": 1.5
+    },
+    "ingredients": [
+      "Chicken thigh (bone-in)",
+      "Olive oil",
+      "Salt",
+      "Pepper",
+      "Paprika",
+      "Oregano/thyme",
+      "Garlic (optional)"
+    ],
+    "allergens": [],
+    "recipe": {
+      "summary": "Seasoned chicken thighs roasted until juicy and golden.",
+      "time": "45–55 min",
+      "steps": [
+        "Rub chicken with oil and spices.",
+        "Bake at 200°C for 35–45 min (internal 75°C).",
+        "Rest 5–10 minutes and serve."
+      ]
+    },
+    "co2e": 1.55
+  },
+  "Pirinç Pilavı": {
+    "name_en": "Turkish Rice Pilaf",
+    "name_tr": "Pirinç Pilavı",
+    "name_ru": "Рисовый плов по-турецки",
+    "kcal": 320,
+    "nutrition": {
+      "protein_g": 6,
+      "carbs_g": 58,
+      "fat_g": 7,
+      "fiber_g": 1,
+      "sugar_g": 0.5,
+      "salt_g": 0.8
+    },
+    "ingredients": [
+      "Rice",
+      "Butter",
+      "Stock/water",
+      "Salt",
+      "Optional vermicelli"
+    ],
+    "allergens": [
+      "Milk/dairy",
+      "May contain gluten"
+    ],
+    "recipe": {
+      "summary": "Fluffy rice pilaf cooked in butter and stock.",
+      "time": "25–30 min",
+      "steps": [
+        "Rinse rice; soak 10 min and drain.",
+        "Optional: toast vermicelli in butter.",
+        "Add rice; stir 2 min.",
+        "Add hot stock and salt; simmer covered until absorbed.",
+        "Rest 10 min; fluff."
+      ]
+    },
+    "co2e": 0.45
+  },
+  "Şehriyeli Pirinç Pilavı": {
+    "name_en": "Rice Pilaf with Vermicelli",
+    "name_tr": "Şehriyeli Pirinç Pilavı",
+    "name_ru": "Рисовый плов с вермишелью",
+    "kcal": 350,
+    "nutrition": {
+      "protein_g": 7,
+      "carbs_g": 62,
+      "fat_g": 8,
+      "fiber_g": 1,
+      "sugar_g": 0.5,
+      "salt_g": 0.9
+    },
+    "ingredients": [
+      "Rice",
+      "Vermicelli",
+      "Butter",
+      "Stock/water",
+      "Salt"
+    ],
+    "allergens": [
+      "Gluten",
+      "Milk/dairy"
+    ],
+    "recipe": {
+      "summary": "Rice pilaf with toasted vermicelli.",
+      "time": "25–30 min",
+      "steps": [
+        "Toast vermicelli in butter until golden.",
+        "Add rinsed rice and stir 2 min.",
+        "Add hot stock/water and salt; simmer covered until done.",
+        "Rest and fluff."
+      ]
+    },
+    "co2e": 0.5
+  },
+  "Tel Şehriyeli Bulgur Pilavı": {
+    "name_en": "Bulgur Pilaf with Vermicelli",
+    "name_tr": "Tel Şehriyeli Bulgur Pilavı",
+    "name_ru": "Булгур-плов с вермишелью",
+    "kcal": 310,
+    "nutrition": {
+      "protein_g": 7,
+      "carbs_g": 55,
+      "fat_g": 6,
+      "fiber_g": 6,
+      "sugar_g": 1,
+      "salt_g": 0.9
+    },
+    "ingredients": [
+      "Bulgur",
+      "Vermicelli",
+      "Oil/butter",
+      "Optional tomato paste",
+      "Stock/water",
+      "Salt",
+      "Pepper"
+    ],
+    "allergens": [
+      "Gluten",
+      "May contain dairy"
+    ],
+    "recipe": {
+      "summary": "Nutty bulgur pilaf with thin vermicelli.",
+      "time": "20–25 min",
+      "steps": [
+        "Toast vermicelli in oil/butter.",
+        "Add bulgur (and tomato paste if used); stir 1 min.",
+        "Add stock/water and salt; simmer covered 12–15 min.",
+        "Rest 5 min; fluff."
+      ]
+    },
+    "co2e": 0.35
+  },
+  "Tereyağlı Makarna": {
+    "name_en": "Butter Pasta",
+    "name_tr": "Tereyağlı Makarna",
+    "name_ru": "Макароны с маслом",
+    "kcal": 430,
+    "nutrition": {
+      "protein_g": 12,
+      "carbs_g": 60,
+      "fat_g": 16,
+      "fiber_g": 3,
+      "sugar_g": 2,
+      "salt_g": 1.0
+    },
+    "ingredients": [
+      "Pasta",
+      "Butter",
+      "Salt",
+      "Optional cheese"
+    ],
+    "allergens": [
+      "Gluten",
+      "Milk/dairy"
+    ],
+    "recipe": {
+      "summary": "Boiled pasta tossed with butter; simple cafeteria classic.",
+      "time": "15–20 min",
+      "steps": [
+        "Boil pasta in salted water until al dente.",
+        "Drain (reserve a little water).",
+        "Toss with butter and a splash of pasta water.",
+        "Optional: add cheese; serve."
+      ]
+    },
+    "co2e": 0.85
+  },
+  "Keşkek": {
+    "name_en": "Keşkek (Wheat & Meat Stew)",
+    "name_tr": "Keşkek",
+    "name_ru": "Кешкек (пшеница с мясом)",
+    "kcal": 520,
+    "nutrition": {
+      "protein_g": 28,
+      "carbs_g": 45,
+      "fat_g": 24,
+      "fiber_g": 6,
+      "sugar_g": 2,
+      "salt_g": 1.3
+    },
+    "ingredients": [
+      "Cracked wheat (dövme)",
+      "Chicken or beef",
+      "Onion",
+      "Butter",
+      "Stock",
+      "Salt",
+      "Pepper",
+      "Paprika"
+    ],
+    "allergens": [
+      "Gluten",
+      "May contain dairy"
+    ],
+    "recipe": {
+      "summary": "Slow-cooked wheat and meat mashed into a creamy stew.",
+      "time": "2–3 h traditional / 45–60 min pressure cooker",
+      "steps": [
+        "Cook meat with onion and stock until very tender.",
+        "Add soaked cracked wheat; cook until very soft.",
+        "Beat/mash to a creamy texture.",
+        "Top with melted butter and paprika."
+      ]
+    },
+    "co2e": 2.2
+  },
+  "Nohut Yemeği": {
+    "name_en": "Chickpea Stew",
+    "name_tr": "Nohut Yemeği",
+    "name_ru": "Нут в томатном соусе",
+    "kcal": 420,
+    "nutrition": {
+      "protein_g": 18,
+      "carbs_g": 55,
+      "fat_g": 14,
+      "fiber_g": 12,
+      "sugar_g": 6,
+      "salt_g": 1.2
+    },
+    "ingredients": [
+      "Chickpeas",
+      "Onion",
+      "Tomato paste",
+      "Olive oil",
+      "Garlic",
+      "Water/stock",
+      "Salt",
+      "Pepper"
+    ],
+    "allergens": [
+      "Legumes"
+    ],
+    "recipe": {
+      "summary": "Tomato-based chickpea stew, often served with rice.",
+      "time": "40–60 min (with cooked chickpeas)",
+      "steps": [
+        "Sauté onion and garlic in oil.",
+        "Add tomato paste; cook 1 min.",
+        "Add cooked chickpeas and stock/water; simmer 20–30 min.",
+        "Season and serve."
+      ]
+    },
+    "co2e": 0.7
+  },
+  "Taze Fasulye": {
+    "name_en": "Green Beans in Olive Oil",
+    "name_tr": "Taze Fasulye",
+    "name_ru": "Зелёная фасоль тушёная",
+    "kcal": 230,
+    "nutrition": {
+      "protein_g": 6,
+      "carbs_g": 28,
+      "fat_g": 11,
+      "fiber_g": 9,
+      "sugar_g": 8,
+      "salt_g": 1.0
+    },
+    "ingredients": [
+      "Green beans",
+      "Onion",
+      "Tomato",
+      "Olive oil",
+      "Garlic",
+      "Salt",
+      "Pepper"
+    ],
+    "allergens": [],
+    "recipe": {
+      "summary": "Green beans stewed with tomato and olive oil.",
+      "time": "35–45 min",
+      "steps": [
+        "Sauté onion in olive oil; add garlic.",
+        "Add tomato and cook 3–5 min.",
+        "Add green beans with a splash of water; simmer covered until tender.",
+        "Season and serve."
+      ]
+    },
+    "co2e": 0.35
+  },
+  "Ev Usulü Patates": {
+    "name_en": "Home-Style Potatoes",
+    "name_tr": "Ev Usulü Patates",
+    "name_ru": "Картофель по-домашнему",
+    "kcal": 330,
+    "nutrition": {
+      "protein_g": 6,
+      "carbs_g": 45,
+      "fat_g": 14,
+      "fiber_g": 5,
+      "sugar_g": 3,
+      "salt_g": 1.1
+    },
+    "ingredients": [
+      "Potatoes",
+      "Onion",
+      "Tomato paste",
+      "Olive oil",
+      "Paprika",
+      "Salt",
+      "Pepper"
+    ],
+    "allergens": [],
+    "recipe": {
+      "summary": "Potatoes cooked in a light tomato sauce.",
+      "time": "35–45 min",
+      "steps": [
+        "Sauté onion in oil.",
+        "Add tomato paste and paprika.",
+        "Add diced potatoes; stir.",
+        "Add water/stock; simmer until tender.",
+        "Season and serve."
+      ]
+    },
+    "co2e": 0.4
+  },
+  "Bezelye Yemeği": {
+    "name_en": "Pea Stew",
+    "name_tr": "Bezelye Yemeği",
+    "name_ru": "Тушёный горошек",
+    "kcal": 310,
+    "nutrition": {
+      "protein_g": 12,
+      "carbs_g": 40,
+      "fat_g": 12,
+      "fiber_g": 10,
+      "sugar_g": 9,
+      "salt_g": 1.0
+    },
+    "ingredients": [
+      "Green peas",
+      "Carrot",
+      "Onion",
+      "Tomato paste",
+      "Olive oil",
+      "Salt",
+      "Pepper",
+      "Optional potato"
+    ],
+    "allergens": [
+      "Legumes (peas)"
+    ],
+    "recipe": {
+      "summary": "Pea stew with vegetables in tomato broth.",
+      "time": "30–40 min",
+      "steps": [
+        "Sauté onion in oil; add tomato paste.",
+        "Add carrot (and potato).",
+        "Add peas and water/stock; simmer until tender.",
+        "Season and serve."
+      ]
+    },
+    "co2e": 0.45
+  },
+  "Ispanak Kavurma": {
+    "name_en": "Sautéed Spinach",
+    "name_tr": "Ispanak Kavurma",
+    "name_ru": "Шпинат тушёный",
+    "kcal": 220,
+    "nutrition": {
+      "protein_g": 9,
+      "carbs_g": 14,
+      "fat_g": 14,
+      "fiber_g": 6,
+      "sugar_g": 3,
+      "salt_g": 1.0
+    },
+    "ingredients": [
+      "Spinach",
+      "Onion",
+      "Olive oil",
+      "Garlic",
+      "Salt",
+      "Pepper"
+    ],
+    "allergens": [],
+    "recipe": {
+      "summary": "Spinach sautéed with onion and garlic.",
+      "time": "15–20 min",
+      "steps": [
+        "Sauté onion in olive oil.",
+        "Add spinach in batches until wilted.",
+        "Season; add garlic at the end.",
+        "Serve warm."
+      ]
+    },
+    "co2e": 0.3
+  },
+  "Yoğurt": {
+    "name_en": "Plain Yogurt",
+    "name_tr": "Yoğurt",
+    "name_ru": "Йогурт",
+    "kcal": 120,
+    "nutrition": {
+      "protein_g": 6,
+      "carbs_g": 8,
+      "fat_g": 6,
+      "fiber_g": 0,
+      "sugar_g": 8,
+      "salt_g": 0.2
+    },
+    "ingredients": [
+      "Yogurt"
+    ],
+    "allergens": [
+      "Milk/dairy"
+    ],
+    "recipe": {
+      "summary": "Plain yogurt served as a side.",
+      "time": "Ready to serve",
+      "steps": [
+        "Serve chilled."
+      ]
+    },
+    "co2e": 0.35
+  },
+  "Açık büfe": {
+    "name_en": "Open Buffet (Salad Bar)",
+    "name_tr": "Açık büfe",
+    "name_ru": "Открытый буфет (салат-бар)",
+    "kcal": 150,
+    "nutrition": {
+      "protein_g": 4,
+      "carbs_g": 18,
+      "fat_g": 7,
+      "fiber_g": 4,
+      "sugar_g": 6,
+      "salt_g": 0.8
+    },
+    "ingredients": [
+      "Seasonal salad items (greens, tomato, cucumber, etc.)",
+      "Optional legumes/grains",
+      "Simple dressing"
+    ],
+    "allergens": [
+      "May contain gluten",
+      "May contain nuts",
+      "May contain dairy"
+    ],
+    "recipe": {
+      "summary": "Self-service buffet; values depend on selected items.",
+      "time": "Ready to serve",
+      "steps": [
+        "Choose items at the buffet and assemble your plate."
+      ]
+    },
+    "co2e": 0.25
+  },
+  "Portakal": {
+    "name_en": "Orange",
+    "name_tr": "Portakal",
+    "name_ru": "Апельсин",
+    "kcal": 80,
+    "nutrition": {
+      "protein_g": 1,
+      "carbs_g": 20,
+      "fat_g": 0,
+      "fiber_g": 3,
+      "sugar_g": 16,
+      "salt_g": 0.0
+    },
+    "ingredients": [
+      "Orange"
+    ],
+    "allergens": [],
+    "recipe": {
+      "summary": "Fresh orange.",
+      "time": "Ready to eat",
+      "steps": [
+        "Wash and eat, or peel and segment."
+      ]
+    },
+    "co2e": 0.1
+  },
+  "Mandalina": {
+    "name_en": "Mandarin",
+    "name_tr": "Mandalina",
+    "name_ru": "Мандарин",
+    "kcal": 60,
+    "nutrition": {
+      "protein_g": 1,
+      "carbs_g": 15,
+      "fat_g": 0,
+      "fiber_g": 2,
+      "sugar_g": 12,
+      "salt_g": 0.0
+    },
+    "ingredients": [
+      "Mandarin"
+    ],
+    "allergens": [],
+    "recipe": {
+      "summary": "Fresh mandarin.",
+      "time": "Ready to eat",
+      "steps": [
+        "Peel and eat."
+      ]
+    },
+    "co2e": 0.08
+  },
+  "Haşhaşlı Tatlı": {
+    "name_en": "Poppy Seed Dessert",
+    "name_tr": "Haşhaşlı Tatlı",
+    "name_ru": "Десерт с маком",
+    "kcal": 420,
+    "nutrition": {
+      "protein_g": 7,
+      "carbs_g": 55,
+      "fat_g": 20,
+      "fiber_g": 3,
+      "sugar_g": 32,
+      "salt_g": 0.4
+    },
+    "ingredients": [
+      "Flour/semolina base",
+      "Poppy seeds",
+      "Sugar syrup",
+      "Butter",
+      "Milk (optional)",
+      "Nuts (optional)"
+    ],
+    "allergens": [
+      "Gluten",
+      "May contain dairy",
+      "May contain nuts"
+    ],
+    "recipe": {
+      "summary": "Sweet dessert flavored with poppy seeds, usually syrup-based.",
+      "time": "45–60 min",
+      "steps": [
+        "Prepare base batter/dough with poppy seeds.",
+        "Bake until set and golden.",
+        "Pour warm sugar syrup over the dessert.",
+        "Rest to absorb; serve sliced."
+      ]
+    },
+    "co2e": 0.9
+  },
+  "Kazandibi": {
+    "name_en": "Kazandibi (Caramelized Milk Pudding)",
+    "name_tr": "Kazandibi",
+    "name_ru": "Казан-диби (карамельный молочный пудинг)",
+    "kcal": 360,
+    "nutrition": {
+      "protein_g": 8,
+      "carbs_g": 55,
+      "fat_g": 12,
+      "fiber_g": 0,
+      "sugar_g": 45,
+      "salt_g": 0.3
+    },
+    "ingredients": [
+      "Milk",
+      "Sugar",
+      "Rice flour/starch",
+      "Vanilla",
+      "Butter (for caramelized base)"
+    ],
+    "allergens": [
+      "Milk/dairy"
+    ],
+    "recipe": {
+      "summary": "Turkish milk pudding with a caramelized bottom layer.",
+      "time": "40–60 min + chilling",
+      "steps": [
+        "Cook milk with sugar and starch until thickened.",
+        "Pour into a pan with a thin caramelized layer.",
+        "Brown the bottom gently to form the signature crust.",
+        "Chill, then slice/roll to serve."
+      ]
+    },
+    "co2e": 0.95
+  },
+  "Kestaneli Yaş Pasta": {
+    "name_en": "Chestnut Cake (Layer Cake)",
+    "name_tr": "Kestaneli Yaş Pasta",
+    "name_ru": "Торт с каштанами",
+    "kcal": 520,
+    "nutrition": {
+      "protein_g": 7,
+      "carbs_g": 65,
+      "fat_g": 26,
+      "fiber_g": 2,
+      "sugar_g": 45,
+      "salt_g": 0.5
+    },
+    "ingredients": [
+      "Sponge cake layers",
+      "Chestnut puree/cream",
+      "Whipping cream",
+      "Sugar",
+      "Milk",
+      "Cocoa (optional)",
+      "Gelatin (optional)"
+    ],
+    "allergens": [
+      "Gluten",
+      "Milk/dairy",
+      "Egg",
+      "May contain nuts"
+    ],
+    "recipe": {
+      "summary": "Moist layer cake with chestnut cream and whipped cream.",
+      "time": "1–2 h + chilling",
+      "steps": [
+        "Bake or prepare sponge layers.",
+        "Whip cream; mix part with chestnut puree for filling.",
+        "Assemble layers with cream; cover and decorate.",
+        "Chill before slicing."
+      ]
+    },
+    "co2e": 1.2
+  },
+  "Tazefasulye": {
+    "name_en": "Green Beans in Olive Oil",
+    "name_tr": "Taze Fasulye",
+    "name_ru": "Зелёная фасоль тушёная",
+    "kcal": 230,
+    "nutrition": {
+      "protein_g": 6,
+      "carbs_g": 28,
+      "fat_g": 11,
+      "fiber_g": 9,
+      "sugar_g": 8,
+      "salt_g": 1.0
+    },
+    "ingredients": [
+      "Green beans",
+      "Onion",
+      "Tomato",
+      "Olive oil",
+      "Garlic",
+      "Salt",
+      "Pepper"
+    ],
+    "allergens": [],
+    "recipe": {
+      "summary": "Green beans stewed with tomato and olive oil.",
+      "time": "35–45 min",
+      "steps": [
+        "Sauté onion in olive oil; add garlic.",
+        "Add tomato and cook 3–5 min.",
+        "Add green beans with a splash of water; simmer covered until tender.",
+        "Season and serve."
+      ]
+    },
+    "co2e": 0.35
+  },
+  "Tel Şehriyeli bulgur Pilavı": {
+    "name_en": "Bulgur Pilaf with Vermicelli",
+    "name_tr": "Tel Şehriyeli Bulgur Pilavı",
+    "name_ru": "Булгур-плов с вермишелью",
+    "kcal": 310,
+    "nutrition": {
+      "protein_g": 7,
+      "carbs_g": 55,
+      "fat_g": 6,
+      "fiber_g": 6,
+      "sugar_g": 1,
+      "salt_g": 0.9
+    },
+    "ingredients": [
+      "Bulgur",
+      "Vermicelli",
+      "Oil/butter",
+      "Optional tomato paste",
+      "Stock/water",
+      "Salt",
+      "Pepper"
+    ],
+    "allergens": [
+      "Gluten",
+      "May contain dairy"
+    ],
+    "recipe": {
+      "summary": "Nutty bulgur pilaf with thin vermicelli.",
+      "time": "20–25 min",
+      "steps": [
+        "Toast vermicelli in oil/butter.",
+        "Add bulgur (and tomato paste if used); stir 1 min.",
+        "Add stock/water and salt; simmer covered 12–15 min.",
+        "Rest 5 min; fluff."
+      ]
+    },
+    "co2e": 0.35
+  },
+  "Mantar  Çorbası": {
+    "name_en": "Creamy Mushroom Soup",
+    "name_tr": "Mantar Çorbası",
+    "name_ru": "Грибной суп",
+    "kcal": 260,
+    "nutrition": {
+      "protein_g": 8,
+      "carbs_g": 20,
+      "fat_g": 16,
+      "fiber_g": 2,
+      "sugar_g": 5,
+      "salt_g": 1.2
+    },
+    "ingredients": [
+      "Mushrooms",
+      "Onion",
+      "Butter",
+      "Flour",
+      "Milk/cream",
+      "Stock",
+      "Salt",
+      "Black pepper",
+      "Parsley"
+    ],
+    "allergens": [
+      "Milk/dairy",
+      "Gluten"
+    ],
+    "recipe": {
+      "summary": "Velvety mushroom soup thickened with a light roux and milk.",
+      "time": "25–35 min",
+      "steps": [
+        "Sauté mushrooms and onion in butter until browned.",
+        "Stir in flour for 1 minute.",
+        "Whisk in stock, then milk/cream.",
+        "Simmer 10–15 minutes; blend partially if desired.",
+        "Season and finish with parsley."
+      ]
+    },
+    "co2e": 0.8
+  }
+}
